@@ -11,14 +11,12 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-
         </Grid.RowDefinitions>
         <Image Grid.Column="1" Grid.Row="1"/>
         <Button Content="Button" Grid.Column="1" HorizontalAlignment="Right" Margin="0" Grid.Row="2" VerticalAlignment="Top" Width="130" Height="63"/>
