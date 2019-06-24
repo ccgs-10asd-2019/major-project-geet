@@ -18,10 +18,11 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image Grid.Column="1" Grid.Row="1"/>
+
         <Button Content="Button" Grid.Column="1" HorizontalAlignment="Right" Margin="0" Grid.Row="2" VerticalAlignment="Top" Width="130" Height="63"/>
         <Button Content="Button" Grid.Column="1" HorizontalAlignment="Right" Margin="0" Grid.Row="2" VerticalAlignment="Bottom" Width="130" Height="63"/>
         <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalAlignment="Bottom" Width="130" Height="63"/>
         <Button Content="Button" Grid.Column="1" Margin="0,0,0,0" Grid.Row="2" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63"/>
+        <TextBlock Grid.Column="1" Margin="0,30,0,0" Grid.Row="1" TextWrapping="Wrap" Text="ASD Project" FontWeight="Bold" FontFamily="Bradley Hand ITC" FontSize="48" TextAlignment="Center" TextDecorations="{x:Null}"/>
     </Grid>
 </Window>
