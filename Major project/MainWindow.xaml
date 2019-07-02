@@ -20,6 +20,7 @@
         </ListBox>
         <TextBox HorizontalAlignment="Left" Height="48" Margin="97,862.714,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1224"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="1326,862.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Height="48"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="464,209,0,0" Grid.Row="1" VerticalAlignment="Top" Width="526" Height="270"/>
 
     </Grid>
 </Window>
