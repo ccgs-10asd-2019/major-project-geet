@@ -20,9 +20,24 @@ namespace Major_project
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        BackendConnect Backend = new BackendConnect();
+
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine(Backend.getMessages(1));
+        }
+    }
+
+    public class BackendConnect
+    {
+
+        int ip = 127.0.0.1;
+
+        public getMessages(int id)
+        {
+            return id;
         }
     }
 }
