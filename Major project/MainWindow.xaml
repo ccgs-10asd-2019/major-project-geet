@@ -16,9 +16,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFC9F7FF"/>
-        <ListBox HorizontalAlignment="Left" Height="848" Margin="97,9.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1387">
+        <ListBox HorizontalAlignment="Left" Height="848" Margin="175,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1309">
         </ListBox>
-        <TextBox HorizontalAlignment="Left" Height="48" Margin="97,862.714,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1224"/>
+        <TextBox HorizontalAlignment="Left" Height="48" Margin="175,863,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1146"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="1326,862.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Height="48"/>
 
     </Grid>
