@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,11 +34,14 @@ namespace Major_project
     public class BackendConnect
     {
 
-        int ip = 127.0.0.1;
+        public String server_ip = "http://127.0.0.1:3000/";
+        static HttpClient client = new HttpClient();
 
-        public getMessages(int id)
+        static async void getMessages(int id)
         {
-            return id;
+            String request = new String(server_ip + "getmessages/" + id);
+            var responseString = await client.GetStringAsync(request);
+            Console.WriteLine(responseString);
         }
     }
 }

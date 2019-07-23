@@ -15,13 +15,17 @@ function connectToDB(DB) {
 main_db = connectToDB('main')
 chats_db = connectToDB('chats')
 
+app.get('/', (req, res) => {
+  res.send("hey")
+})
+
 app.get('/getmessages/:chat_id', (req, res) => {
   
   let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
 
   chats_db.all(sql, [], (err, rows) => {
     if (err) {
-      res.send(null)
+      res.send(err)
     } else {
       res.send(rows)
     }
