@@ -28,6 +28,12 @@ namespace Major_project
         {
             InitializeComponent();
             Backend.getMessages(1);
+            //chat.Items.Add("yonk");
+        }
+
+        public static void addMessageToChat(String msg)
+        {
+            chat.Items.Add(msg);
         }
     }
 
@@ -40,11 +46,12 @@ namespace Major_project
 
         static HttpClient client = new HttpClient();
 
-        public static async void getMessages(int id)
+        public async void getMessages(int id)
         {
             String request = server + "getmessages/" + id.ToString();
-            var responseString = await client.GetStringAsync(request);
+            String responseString = await client.GetStringAsync(request);
             Console.WriteLine(responseString);
+            MainWindow.addMessageToChat(responseString);
         }
     }
 }
