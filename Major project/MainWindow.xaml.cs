@@ -27,19 +27,22 @@ namespace Major_project
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine(Backend.getMessages(1));
+            Backend.getMessages(1);
         }
     }
 
     public class BackendConnect
     {
+        static String ip = "127.0.0.1";
+        static String port = "3000";
+        static String protocol = "http";
+        static String server = protocol + "://" + ip + ":" + port + "/";
 
-        public String server_ip = "http://127.0.0.1:3000/";
         static HttpClient client = new HttpClient();
 
-        static async void getMessages(int id)
+        public static async void getMessages(int id)
         {
-            String request = new String(server_ip + "getmessages/" + id);
+            String request = server + "getmessages/" + id.ToString();
             var responseString = await client.GetStringAsync(request);
             Console.WriteLine(responseString);
         }
