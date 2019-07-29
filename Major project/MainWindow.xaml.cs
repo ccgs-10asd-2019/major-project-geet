@@ -1,24 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Major_project
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -27,13 +12,14 @@ namespace Major_project
         public MainWindow()
         {
             InitializeComponent();
-            Backend.getMessages(1);
-            //chat.Items.Add("yonk");
+            Console.WriteLine(Backend.retrieveMessages(1));
+            chat.Items.Add(Backend.retrieveMessages(1));
         }
 
         public static void addMessageToChat(String msg)
         {
-            chat.Items.Add(msg);
+            ///chat.Items.Add(msg);
+            Console.WriteLine(msg);
         }
     }
 
@@ -43,15 +29,21 @@ namespace Major_project
         static String port = "3000";
         static String protocol = "http";
         static String server = protocol + "://" + ip + ":" + port + "/";
+        String responseString;
 
         static HttpClient client = new HttpClient();
 
-        public async void getMessages(int id)
+        private async void getMessages(int id)
         {
-            String request = server + "getmessages/" + id.ToString();
-            String responseString = await client.GetStringAsync(request);
-            Console.WriteLine(responseString);
-            MainWindow.addMessageToChat(responseString);
+            String request = server + "getmessagess/" + id.ToString();
+            responseString = await client.GetStringAsync(request);
+        }
+
+        public String retrieveMessages(int id)
+        {
+            getMessages(1);
+            Console.WriteLine("yonk: " + responseString);
+            return responseString;
         }
     }
 }

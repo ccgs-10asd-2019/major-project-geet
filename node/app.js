@@ -33,4 +33,10 @@ app.get('/getmessages/:chat_id', (req, res) => {
 
 })
 
+app.get('/getmessagess/:chat_id', (req, res) => {
+
+  res.send(req.params.chat_id)
+
+})
+
 app.listen(port, () => console.log(`listening on port ${port}`))
