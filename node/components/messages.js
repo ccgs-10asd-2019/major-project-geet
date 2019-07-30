@@ -19,7 +19,7 @@ module.exports = function(app){
         //to recieve messages sent from client
       
       console.log(req.body)
-      res.send("thanks")
+      res.status(200).send("ok")
     
     })
 }
