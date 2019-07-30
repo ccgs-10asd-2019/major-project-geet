@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using System.Threading.Tasks;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Major_project
 {
@@ -25,6 +26,12 @@ namespace Major_project
         {
             //chat.Items.Add(msg);
             Console.WriteLine(msg);
+        }
+
+        private void push_send_button(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(message_textbox.Text);
+            Backend.sendmessage(message_textbox.Text);
         }
     }
 
@@ -60,6 +67,7 @@ namespace Major_project
 
         public class Message
         {
+            public int chat_id { get; set; }
             public int user_id { get; set; }
             public string message { get; set; } 
         }
@@ -87,26 +95,32 @@ namespace Major_project
                     if (HttpResponseMessage.StatusCode == HttpStatusCode.OK)
                     {
                         Response = HttpResponseMessage.Content.ReadAsStringAsync().Result;
+                        Console.WriteLine("good" + Response);
                     }
                     else
                     {
                         Response = "Some error occured." + HttpResponseMessage.StatusCode;
+                        Console.WriteLine("bad" + Response);
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
+            
             return Response;
         }
 
-        public bool sendmessage()
+        public bool sendmessage(String message)
         {
-            Message data = new Message() { user_id = 1, message = "yonk" };
+            Message data = new Message() {
+                chat_id = 1,
+                user_id = 1,
+                message = message
+            };
             String request = server + "message/1";
             string output = Post(data, request).Result;
-            Console.WriteLine(output);
             return true;
         }
     }
