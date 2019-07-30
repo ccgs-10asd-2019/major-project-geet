@@ -15,20 +15,6 @@ namespace Major_project
         public MainWindow()
         {
             InitializeComponent();
-
-            //var image = new Image();
-            var fullFilePath = @"http://127.0.0.1:3000/icon/1";
-
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-            bitmap.EndInit();
-
-            image.Source = bitmap;
-
-
-            Backend.send_message();
-            chat.Items.Add("yonk");
         }
 
         public static void addMessageToChat(String msg)
