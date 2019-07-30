@@ -8,7 +8,7 @@
         Title="MainWindow" Height="1000" Width="1500">
     <Grid Opacity="0.8">
         <Grid.Background>
-            <ImageBrush ImageSource="images/orange.jpg" TileMode="Tile"/>
+            <ImageBrush ImageSource="images/orange.jpg" TileMode="Tile" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Rectangle Fill="#FFC9F7FF"/>
-        <ListBox HorizontalAlignment="Left" Height="848" Margin="351,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1133">
+        <ListBox HorizontalAlignment="Left" Height="848" Margin="351,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1133" Background="#3FFFFFFF">
         </ListBox>
         <TextBox HorizontalAlignment="Left" Height="48" Margin="175,863,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1146"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="1326,862.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Height="48"/>
