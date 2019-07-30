@@ -47,7 +47,7 @@ module.exports = function(app){
     app.get('/icon/:chat_id', (req, res) => {
         //returns a chats icon
       
-      res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname })
+        res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname + '/../' })
     
     })
 
