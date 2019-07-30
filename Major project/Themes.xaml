@@ -34,8 +34,8 @@
             </Button.Background>
         </Button>
         <Button x:Name="Colour_Scheme" Content="Button" HorizontalAlignment="Left" Margin="312,49.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="186,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="312,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="backgroundB1" Content="Warm" HorizontalAlignment="Left" Margin="186,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="backgroundB2" Content="Cool" HorizontalAlignment="Left" Margin="312,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="76"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="186,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="74"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="312,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="76"/>
 

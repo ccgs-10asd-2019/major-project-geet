@@ -19,29 +19,5 @@ namespace Major_project
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {
-
-        BackendConnect Backend = new BackendConnect();
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            Console.WriteLine(Backend.getMessages(1));
-        }
-    }
-
-    public class BackendConnect
-    {
-
-        public String server_ip = "http://127.0.0.1:3000/";
-        static HttpClient client = new HttpClient();
-
-        static async void getMessages(int id)
-        {
-            String request = new String(server_ip + "getmessages/" + id);
-            var responseString = await client.GetStringAsync(request);
-            Console.WriteLine(responseString);
-        }
-    }
+   
 }
