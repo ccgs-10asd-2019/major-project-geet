@@ -16,10 +16,12 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Rectangle Fill="#FF813A47"/>
-        <ListBox HorizontalAlignment="Left" Height="848" Margin="351,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1133" Background="#3FFFFFFF">
+        <ListBox HorizontalAlignment="Left" Height="848" Margin="286,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1198" Background="#3FFFFFFF">
         </ListBox>
-        <TextBox HorizontalAlignment="Left" Height="48" Margin="351,863,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="970"/>
+        <TextBox HorizontalAlignment="Left" Height="48" Margin="286,863,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1035"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="1326,862.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="158" Height="48"/>
+        <ListBox HorizontalAlignment="Left" Height="577" Margin="0,334,0,0" Grid.Row="1" VerticalAlignment="Top" Width="246"/>
+        <ListBox HorizontalAlignment="Left" Height="319" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="246"/>
 
     </Grid>
 </Window>
