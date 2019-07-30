@@ -10,7 +10,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/blue.jpg" TileMode="Tile" Stretch="UniformToFill"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition />
