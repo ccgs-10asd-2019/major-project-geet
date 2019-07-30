@@ -107,5 +107,8 @@
   <ItemGroup>
     <Resource Include="ASD major project images\Buttons-PNG-Image-84305.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ASD major project images\colourfull background.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
