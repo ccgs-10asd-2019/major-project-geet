@@ -19,7 +19,7 @@ namespace Major_project
 
         public static void addMessageToChat(String msg)
         {
-            ///chat.Items.Add(msg);
+            //chat.Items.Add(msg);
             Console.WriteLine(msg);
         }
     }
