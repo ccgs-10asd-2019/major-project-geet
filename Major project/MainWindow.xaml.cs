@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Major_project
 {
@@ -12,13 +15,25 @@ namespace Major_project
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine(Backend.retrieveMessages(1));
-            chat.Items.Add(Backend.retrieveMessages(1));
+
+            //var image = new Image();
+            var fullFilePath = @"http://127.0.0.1:3000/icon/1";
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
+
+            image.Source = bitmap;
+
+
+            Backend.send_message();
+            chat.Items.Add("yonk");
         }
 
         public static void addMessageToChat(String msg)
         {
-            ///chat.Items.Add(msg);
+            //chat.Items.Add(msg);
             Console.WriteLine(msg);
         }
     }
@@ -33,15 +48,55 @@ namespace Major_project
 
         static HttpClient client = new HttpClient();
 
-        private async void getMessages(int id)
+        private async void get(String request)
         {
-            String request = server + "getmessagess/" + id.ToString();
             responseString = await client.GetStringAsync(request);
+            //client.AsyncWaitHandle.WaitOne();   
         }
 
-        public String retrieveMessages(int id)
+        private async void post(String request, Dictionary<string, string> post_data)
         {
-            getMessages(1);
+            //var values = new Dictionary<string, string>
+            //{
+            //   { "thing1", "hello" },
+            //   { "thing2", "world" }
+            //};
+
+            var content = new FormUrlEncodedContent(post_data);
+            var response = await client.PostAsync(request, content);
+            var responseString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseString);
+        }
+
+        public String return_get(String request)
+        {
+            get(request);
+            return responseString;
+        }
+
+        public String return_post(String request, Dictionary<string, string> post_data)
+        {
+            post(request, post_data);
+            return responseString;
+        }
+
+        public void send_message()
+        {
+            String request = server + "message/1";
+
+            var post_data = new Dictionary<string, string>
+            {
+               { "thing1", "hello" },
+               { "thing2", "world" }
+            };
+
+            post(request, post_data);
+        }
+
+        public String get_messages(int id)
+        {
+            String request = server + "server/messages/" + id.ToString();
+            return_get(request);
             Console.WriteLine("yonk: " + responseString);
             return responseString;
         }

@@ -12,6 +12,7 @@ function connectToDB(DB) {
   });
 }
 
+console.log("Time: " + new Date())
 main_db = connectToDB('main')
 chats_db = connectToDB('chats')
 
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
   res.send("hey")
 })
 
-app.get('/getmessages/:chat_id', (req, res) => {
+app.get('/messages/:chat_id', (req, res) => {
   
   let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
 
@@ -33,9 +34,30 @@ app.get('/getmessages/:chat_id', (req, res) => {
 
 })
 
-app.get('/getmessagess/:chat_id', (req, res) => {
+app.post('/message/:chat_id', (req, res) => {
+  
+  console.log(req.body)
+  res.send("thanks")
 
-  res.send(req.params.chat_id)
+})
+
+app.get('/info/:info/:chat_id', (req, res) => {
+  
+  let sql = 'SELECT `' + req.params.info + '` FROM `chats` WHERE "id"="' + req.params.chat_id + '"'
+
+  main_db.all(sql, [], (err, rows) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(rows[0])
+    }
+  })
+
+})
+
+app.get('/icon/:chat_id', (req, res) => {
+  
+  res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname })
 
 })
 
