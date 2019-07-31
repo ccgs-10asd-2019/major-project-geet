@@ -1,0 +1,15 @@
+﻿<Window x:Class="Major_project.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Major_project"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800">
+    <Grid>
+        <PasswordBox HorizontalAlignment="Left" Margin="297,283,0,0" VerticalAlignment="Top" Background="White" BorderThickness="3" Width="181" Password="2882837373"/>
+        <TextBlock HorizontalAlignment="Left" Margin="343,118,0,0" TextWrapping="Wrap" Text="Log-In" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="297,256,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="181" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3"/>
+
+    </Grid>
+</Window>
