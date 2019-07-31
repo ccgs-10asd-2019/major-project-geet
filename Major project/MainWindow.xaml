@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="750">
+        Title="MainWindow" Height="510" Width="760">
     <Grid Opacity="0.8">
         <Grid.Background>
             <ImageBrush ImageSource="images/blue.jpg" TileMode="Tile" Stretch="UniformToFill"/>
@@ -22,7 +22,9 @@
         <Button x:Name="send_button" Content="Button" HorizontalAlignment="Left" Margin="686,224.75,0,0" Grid.Row="2" VerticalAlignment="Top" Width="59" Height="24" Background="#FF172E64" Click="push_send_button"/>
        
         
-        <ListBox HorizontalAlignment="Left" Height="280" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2"/>
+        <ListBox HorizontalAlignment="Left" Height="280" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2">
+            <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White"/>
+        </ListBox>
         <ListBox HorizontalAlignment="Left" Height="160" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64"/>
 
     </Grid>
