@@ -8,7 +8,7 @@
         Title="Themes" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="images/background.png"/>
+            <ImageBrush ImageSource="ASD major project images/colourfull background.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
