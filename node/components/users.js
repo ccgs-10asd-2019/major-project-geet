@@ -26,7 +26,7 @@ module.exports = function(app){
     app.get('/user/register', (req, res) => {
         //register a new user
 
-        let username = "bob"
+        let username = "bob" //will become a post request that takes a username and probs password
 
         //create new user record
         let sql = 'INSERT INTO "main"."users" ("username") VALUES (?)'
@@ -35,13 +35,25 @@ module.exports = function(app){
 
         //get id of new user
         sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
-        db.main.get(sql, [], (err, result) => {
+        db.main.all(sql, [], (err, rows) => {
 
             //create table to store users chats
-            sql = 'CREATE TABLE "' + result.id + '" ( "chat" INTEGER UNIQUE )'
+            sql = 'CREATE TABLE "' + rows[0].id + '" ( "chat" INTEGER UNIQUE )'
             db.users_chats.run(sql, [])
 
-            res.send(result)
+            res.send(rows)
+        })
+    })
+
+    app.get('/user/login', (req, res) => {
+        //register a new user
+
+        let username = "bob" //will become a post request that takes a username and probs password
+
+        //get id of new user
+        sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
+        db.main.all(sql, [], (err, rows) => {
+            res.send(rows)
         })
     })
 }
