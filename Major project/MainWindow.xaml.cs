@@ -16,55 +16,83 @@ namespace Major_project
     {
 
         BackendConnect Backend = new BackendConnect();
+        Tools Tools = new Tools();
         
-
         public MainWindow()
         {
             InitializeComponent();
             //Backend.sendmessage();
-            Backend.get_messages(1);
+            GetMessages(1);
         }
 
-        public void addMessageToChat(String msg)
+        public void GetMessages(int id)
         {
-            chat.Items.Add(msg);
+            String request = BackendConnect.server + "messages/" + id.ToString();
+            var content = Backend.Get(request);
+
+            for (int i = 0; i < content.Count; i++)
+            {
+                String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                var ListUsers_Name = Backend.Get(Users_Name);
+                Users_Name = ListUsers_Name[0].Username;
+                chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+            }
         }
 
-        private void push_send_button(object sender, RoutedEventArgs e)
+        private void SendMessage(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine(message_textbox.Text);
-            Backend.sendmessage(message_textbox.Text);
+            Console.WriteLine(message_textbox.Text);
+            BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
+            {
+                Chat_id = 1,
+                User_id = 1,
+                Message = message_textbox.Text
+            };
+            String request = BackendConnect.server + "message/1";
+            string output = Backend.Post(data, request).Result;
+            Console.WriteLine("down");
+        }
+
+    }
+
+    public class Tools
+    {
+        public static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return origin.AddSeconds(timestamp);
         }
     }
 
     public class BackendConnect
     {
-        static String ip = "127.0.0.1";
-        static String port = "3000";
-        static String protocol = "http";
-        static String server = protocol + "://" + ip + ":" + port + "/";
+        static readonly string ip = "127.0.0.1";
+        static readonly string port = "3000";
+        static readonly string protocol = "http";
+        public static readonly string server = protocol + "://" + ip + ":" + port + "/";
 
         static HttpClient httpClient = new HttpClient();
         static JavaScriptSerializer jss = new JavaScriptSerializer();
 
-        public class send_message_class
+        public class Send_message_class
         {
-            public int chat_id { get; set; }
-            public int user_id { get; set; }
-            public string message { get; set; } 
+            public int Chat_id { get; set; }
+            public int User_id { get; set; }
+            public string Message { get; set; } 
         }
 
-        public class get_messages_class
+        public class Get_messages_class
         {
-            public int id { get; set; }
-            public int user_id { get; set; }
-            public int time_submitted { get; set; }
-            public string message { get; set; }
+            public int Id { get; set; }
+            public int User_id { get; set; }
+            public int Time_submitted { get; set; }
+            public string Message { get; set; }
+            public string Username { get; set; }
         }
 
-        public List<get_messages_class> Get(String request)
+        public List<Get_messages_class> Get(String request)
         {
-            List<get_messages_class> content = null;
+            List<Get_messages_class> content = null;
 
             try
             {
@@ -75,7 +103,7 @@ namespace Major_project
                 if (response.IsSuccessStatusCode)   
                 {
                     var json = response.Content.ReadAsStringAsync().Result;
-                    content = JsonConvert.DeserializeObject<List<get_messages_class>>(json);
+                    content = JsonConvert.DeserializeObject<List<Get_messages_class>>(json);
                 }
             }
             catch (Exception ex)
@@ -86,7 +114,7 @@ namespace Major_project
             return content;
         }
 
-        public async Task<string> Post(send_message_class data, String request)
+        public async Task<string> Post(Send_message_class data, String request)
         {
             string Response = "";
             try
@@ -121,29 +149,6 @@ namespace Major_project
             }
             Console.WriteLine("ass");
             return Response;
-        }
-
-        public bool sendmessage(String message)
-        {
-            send_message_class data = new send_message_class() {
-                chat_id = 1,
-                user_id = 1,
-                message = message
-            };
-            String request = server + "message/1";
-            string output = Post(data, request).Result;
-            return true;
-        }
-
-        public void get_messages(int id)
-        {
-            String request = server + "messages/" + id.ToString();
-            var content = Get(request);
-
-            for (int i = 0; i < content.Count; i++)
-            {
-                Console.WriteLine(content[i].time_submitted + " | " + content[i].user_id + ": " + content[i].message);
-            }
         }
     }
 }
