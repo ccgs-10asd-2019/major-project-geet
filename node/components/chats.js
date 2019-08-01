@@ -9,7 +9,7 @@ module.exports = function(app){
         if (err) {
             res.send(err)
         } else {
-            res.send(rows[0])
+            res.send(rows)
         }
     })
 
@@ -26,6 +26,17 @@ module.exports = function(app){
             } else {
                 res.send(rows)
             }
+        })
+    })
+
+    app.get('/chats/:user_id', (req, res) => {
+        //returns chats a user is in
+    
+        let sql = 'SELECT * FROM `' + req.params.user_id + '`'
+        
+        db.users_chats.all(sql, [], (err, rows) => {
+            if (err) { res.send(err) } 
+            else { res.send(rows) }
         })
     })
 
