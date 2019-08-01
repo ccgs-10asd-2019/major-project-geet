@@ -6,8 +6,7 @@ module.exports = {
             if (err) { 
                 console.error(err.message) //log error to console
                 db_fail = err.message //set db_fail to error, triggering "database is down"
-            } 
-            else { console.log('Connected to the ' + DB + ' database.'); } //log success of connecting to database
+            } else { console.log('Connected to the ' + DB + ' database.'); } //log success of connecting to database
         });
     }
 }

@@ -6,11 +6,8 @@ module.exports = function(app){
         let sql = 'SELECT `' + req.params.info + '` FROM `chats` WHERE "id"="' + req.params.chat_id + '"'
 
         db.main.all(sql, [], (err, rows) => {
-            if (err) {
-                res.send(err)
-            } else {
-                res.send(rows)
-            }
+            if (err) { res.send(err) } 
+            else { res.send(rows) }
         })
     })
 

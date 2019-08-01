@@ -6,13 +6,9 @@ module.exports = function(app){
       let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
     
       db.chat.all(sql, [], (err, rows) => {
-        if (err) {
-          res.send(err)
-        } else {
-          res.send(rows)
-        }
+        if (err) { res.send(err) } 
+        else { res.send(rows) }
       })
-    
     })
     
     app.post('/message/:chat_id', (req, res) => {
