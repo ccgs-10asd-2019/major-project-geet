@@ -21,8 +21,34 @@ namespace Major_project
         public MainWindow()
         {
             InitializeComponent();
-            //Backend.sendmessage();
-            GetMessages(1);
+
+            //Current_User current_User = new Current_User()
+            //{
+            //    Chat_id = 0,
+            //    User_id = 1,
+            //};
+            //GetChats(current_User.User_id);
+            //GetMessages(current_User.Chat_id);
+            //GetChats(1);
+            //GetMessages(1);
+        }
+
+        public class Current_User
+        {
+            public int Chat_id { get; set; }
+            public int User_id { get; set; }
+        }
+
+        public void GetChats(int id)
+        {
+            String request = BackendConnect.server + "chats/" + id.ToString();
+            var content = Backend.Get(request);
+            for (int i = 0; i < content.Count; i++)
+            {
+                request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                var ListChats = Backend.Get(request);
+                Server_list.Items.Add(ListChats[0].Name);
+            }
         }
 
         public void GetMessages(int id)
@@ -88,6 +114,8 @@ namespace Major_project
             public int Time_submitted { get; set; }
             public string Message { get; set; }
             public string Username { get; set; }
+            public string Chat { get; set; }
+            public string Name { get; set; }
         }
 
         public List<Get_messages_class> Get(String request)
