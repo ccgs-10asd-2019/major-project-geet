@@ -1,36 +1,28 @@
+//consts / imports
 const express = require('express')
 const app = express()
-const port = 3000
-app.use(express.json());
+const port = 3000 //server port
+app.use(express.json()); //adds json functionality
 
-const sqlite3 = require('sqlite3')
+const sqlite3 = require('sqlite3') //adds ability to manipulate sqlite db files
+const tools = require('./components/tools')
 
-function connectToDB(DB) {
-  return new sqlite3.Database('./db/'+DB+'.db', sqlite3.OPEN_READWRITE, (err) => {
-    if (err) { console.error(err.message); } 
-    else { console.log('Connected to the '+DB+' database.'); }
-  });
+//setup
+console.log("Time: " + new Date()) //log to console time of server start
+db = { //connect to db files
+    "main": tools.connectToDB('main'), //stores core lists, servers, users
+    "chat": tools.connectToDB('chats'), //stores all chat messages
+    "chat_users": tools.connectToDB('chat_users'), //stores users allowed to message in a chat
+    "users_chats": tools.connectToDB('users_chats'), //stores all the chats a user is in
 }
 
-main_db = connectToDB('main')
-chats_db = connectToDB('chats')
-
+//gets and posts
 app.get('/', (req, res) => {
-  res.send("hey")
+    res.send("all g") //all is good
 })
 
-app.get('/getmessages/:chat_id', (req, res) => {
-  
-  let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
+require('./components/messages')(app);
+require('./components/chats')(app);
+require('./components/users')(app);
 
-  chats_db.all(sql, [], (err, rows) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.send(rows)
-    }
-  })
-
-})
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+app.listen(port, () => console.log(`listening on port ${port}`));
