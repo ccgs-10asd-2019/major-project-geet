@@ -22,13 +22,14 @@ namespace Major_project
         {
             InitializeComponent();
 
-            //Current_User current_User = new Current_User()
-            //{
-            //    Chat_id = 0,
-            //    User_id = 1,
-            //};
-            //GetChats(current_User.User_id);
-            //GetMessages(current_User.Chat_id);
+            Current_User current_User = new Current_User()
+            {
+                Chat_id = 1,
+                User_id = 1,
+            };
+            Console.WriteLine(current_User.User_id);
+            GetChats(current_User.User_id);
+            GetMessages(current_User.Chat_id);
             //GetChats(1);
             //GetMessages(1);
         }
@@ -75,8 +76,7 @@ namespace Major_project
                 Message = message_textbox.Text
             };
             String request = BackendConnect.server + "message/1";
-            string output = Backend.Post(data, request).Result;
-            Console.WriteLine("down");
+            Backend.Post(data, request);
         }
 
     }
@@ -142,41 +142,19 @@ namespace Major_project
             return content;
         }
 
-        public async Task<string> Post(Send_message_class data, String request)
+        public void Post(Send_message_class data, String request)
         {
-            string Response = "";
             try
-            {
-                Console.WriteLine("started try");
-                HttpResponseMessage HttpResponseMessage = null;
-                Console.WriteLine("set http response to null");
-                
+            {                
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                Console.WriteLine("set header to json");
                 var myContent = jss.Serialize(data);
-                Console.WriteLine("initalise jss");
                 var httpContent = new StringContent(myContent, Encoding.UTF8, "application/json");
-                Console.WriteLine("set httpContent to json");
-                HttpResponseMessage = await httpClient.PostAsync(request, httpContent);
-                Console.WriteLine("sent post request");
-                if (HttpResponseMessage.StatusCode == HttpStatusCode.OK)
-                {
-                    Response = HttpResponseMessage.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine("good" + Response);
-                }
-                else
-                {
-                    Response = "Some error occured." + HttpResponseMessage.StatusCode;
-                    Console.WriteLine("bad" + Response);
-                }
+                httpClient.PostAsync(request, httpContent);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("error with try");
                 Console.WriteLine(ex);
             }
-            Console.WriteLine("ass");
-            return Response;
         }
     }
 }
