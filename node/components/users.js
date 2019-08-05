@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-    app.get('/info/users/:chat_id', (req, res) => {
+    app.get('/users/:chat_id', (req, res) => {
         //returns users in a chat
     
         let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
@@ -11,7 +11,7 @@ module.exports = function(app){
         })
     })
 
-    app.get('/info/user/:user_id', (req, res) => {
+    app.get('/user/:user_id', (req, res) => {
         //returns a username from a user_id
     
         let sql = 'SELECT `username` FROM `users` WHERE "id"="' + req.params.user_id + '"'
@@ -23,7 +23,7 @@ module.exports = function(app){
     
     })
 
-    app.get('/user/register', (req, res) => {
+    app.get('/user/auth/register', (req, res) => {
         //register a new user
 
         let username = "bob" //will become a post request that takes a username and probs password
@@ -45,7 +45,7 @@ module.exports = function(app){
         })
     })
 
-    app.get('/user/login', (req, res) => {
+    app.get('/user/auth/login', (req, res) => {
         //register a new user
 
         let username = "bob" //will become a post request that takes a username and probs password
