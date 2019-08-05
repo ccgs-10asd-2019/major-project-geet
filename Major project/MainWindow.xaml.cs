@@ -16,16 +16,18 @@ namespace Major_project
     {
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
-        
+
+        Current_User current_User = new Current_User()
+        {
+            Chat_id = 1,
+            User_id = Properties.Settings.Default.id,
+        };
+
         public MainWindow()
         {
             InitializeComponent();
 
-            Current_User current_User = new Current_User()
-            {
-                Chat_id = 1,
-                User_id = 1,
-            };
+            
             Console.WriteLine(current_User.User_id);
             GetChats(current_User.User_id);
             GetMessages(current_User.Chat_id);
@@ -41,41 +43,53 @@ namespace Major_project
 
         public void GetChats(int id)
         {
-            String request = BackendConnect.server + "chats/" + id.ToString();
-            var content = Backend.Get(request);
-            for (int i = 0; i < content.Count; i++)
+            if (id == 0)
             {
-                request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
-                var ListChats = Backend.Get(request);
-                Server_list.Items.Add(ListChats[0].Name);
+
+            }
+            else
+            {
+                String request = BackendConnect.server + "chats/" + id.ToString();
+                var content = Backend.Get(request);
+                for (int i = 0; i < content.Count; i++)
+                {
+                    request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                    var ListChats = Backend.Get(request);
+                    Server_list.Items.Add(ListChats[0].Name);
+                }
             }
         }
 
         public void GetMessages(int id)
         {
-            String request = BackendConnect.server + "messages/" + id.ToString();
-            var content = Backend.Get(request);
-
-            for (int i = 0; i < content.Count; i++)
+            if (id != 0)
             {
-                String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
-                var ListUsers_Name = Backend.Get(Users_Name);
-                Users_Name = ListUsers_Name[0].Username;
-                chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+                String request = BackendConnect.server + "messages/" + id.ToString();
+                var content = Backend.Get(request);
+
+                for (int i = 0; i < content.Count; i++)
+                {
+                    String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                    var ListUsers_Name = Backend.Get(Users_Name);
+                    Users_Name = ListUsers_Name[0].Username;
+                    chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+                }
             }
         }
 
-        private void SendMessage(object sender, RoutedEventArgs e)
+        private async void SendMessage(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(message_textbox.Text);
+            DateTime time = DateTime.UtcNow;
             BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
             {
-                Chat_id = 1,
-                User_id = 1,
-                Message = message_textbox.Text
-            };
-            String request = BackendConnect.server + "message/1";
-            Backend.Post(data, request);
+                Chat_id = current_User.Chat_id,
+                User_id = current_User.User_id,
+                Message = message_textbox.Text,
+                Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
+        };
+            String request = BackendConnect.server + "message";
+            var post = await Backend.Post(data, request);
+            Console.WriteLine(post);
         }
 
     }
@@ -97,13 +111,14 @@ namespace Major_project
         public static readonly string server = protocol + "://" + ip + ":" + port + "/";
 
         static HttpClient httpClient = new HttpClient();
-        static JavaScriptSerializer jss = new JavaScriptSerializer();
+        static readonly JavaScriptSerializer jss = new JavaScriptSerializer();
 
         public class Send_message_class
         {
             public int Chat_id { get; set; }
             public int User_id { get; set; }
             public string Message { get; set; } 
+            public long Current_time { get; set; }
         }
 
         public class Get_messages_class
@@ -141,19 +156,12 @@ namespace Major_project
             return content;
         }
 
-        public void Post(Send_message_class data, String request)
+        public async Task<string> Post(Send_message_class data, String request)
         {
-            try
-            {                
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var myContent = jss.Serialize(data);
-                var httpContent = new StringContent(myContent, Encoding.UTF8, "application/json");
-                httpClient.PostAsync(request, httpContent);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            var response = await httpClient.PostAsJsonAsync(request, data);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
         }
     }
 }
