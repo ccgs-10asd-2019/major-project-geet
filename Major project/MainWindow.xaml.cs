@@ -14,7 +14,6 @@ namespace Major_project
 {
     public partial class MainWindow : Window
     {
-
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
         
