@@ -27,12 +27,15 @@ namespace Major_project
         {
             InitializeComponent();
 
+            if (current_User.User_id == 0)
+            {
+                Login win2 = new Login();
+                win2.Show();
+                this.Close();
+            } else {
+                GetChats(current_User.User_id);
+            }
             
-            Console.WriteLine(current_User.User_id);
-            GetChats(current_User.User_id);
-            //GetMessages(current_User.Chat_id);
-            //GetChats(1);
-            //GetMessages(1);
         }
 
         public class Current_User
@@ -43,22 +46,13 @@ namespace Major_project
 
         public void GetChats(int id)
         {
-            if (id == 0)
+        string request = BackendConnect.server + "chats/" + id.ToString();
+        var content = Backend.Get(request);
+            for (int i = 0; i < content.Count; i++)
             {
-                Login win2 = new Login();
-                win2.Show();
-                this.Close();
-            }
-            else
-            {
-                String request = BackendConnect.server + "chats/" + id.ToString();
-                var content = Backend.Get(request);
-                for (int i = 0; i < content.Count; i++)
-                {
-                    request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
-                    var ListChats = Backend.Get(request);
-                    Server_list.Items.Add(ListChats[0].Name);
-                }
+                request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                var ListChats = Backend.Get(request);
+                Server_list.Items.Add(ListChats[0].Name);
             }
         }
 
@@ -91,7 +85,6 @@ namespace Major_project
         };
             String request = BackendConnect.server + "message";
             var post = await Backend.Post(data, request);
-            Console.WriteLine(post);
         }
 
     }
