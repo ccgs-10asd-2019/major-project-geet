@@ -7,6 +7,7 @@ namespace Major_project
     {
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
+        Login Login_Page = new Login();
 
         Current_User current_User = new Current_User()
         {
@@ -20,13 +21,23 @@ namespace Major_project
 
             if (current_User.User_id == 0)
             {
-                Login win2 = new Login();
-                win2.Show();
+                Login_Page.Show();
                 this.Close();
             } else {
                 GetChats(current_User.User_id);
             }
             
+        }
+
+        public void Loggedin()
+        {
+            current_User = new Current_User()
+            {
+                Chat_id = 0,
+                User_id = Properties.Settings.Default.id,
+            };
+            GetChats(current_User.User_id);
+            Console.WriteLine(current_User.User_id);
         }
 
         public class Current_User
@@ -73,7 +84,7 @@ namespace Major_project
                 User_id = current_User.User_id,
                 Message = message_textbox.Text,
                 Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
-        };
+            };
             String request = BackendConnect.server + "message";
             var post = await Backend.Post(data, request);
         }
