@@ -5,7 +5,7 @@ module.exports = function(app){
       
       let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
     
-      db.chats.all(sql, [], (err, rows) => {
+      db.chat.all(sql, [], (err, rows) => {
         if (err) { res.send(err) } 
         else { res.send(rows) }
       })
@@ -19,7 +19,7 @@ module.exports = function(app){
       let sql = 'INSERT INTO "' + req.body.Chat_id + '"("user_id","time_submitted","message") VALUES (?,?,?);'
       let params = [req.body.User_id, req.body.Current_time, req.body.Message]
 
-      db.chats.run(sql, params)
+      db.chat.run(sql, params)
       res.status(200).send("ok")
     
     })
