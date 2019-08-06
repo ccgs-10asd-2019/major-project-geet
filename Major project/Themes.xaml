@@ -30,7 +30,7 @@
                 <ImageBrush ImageSource="ASD major project images/Buttons-PNG-Image-84305.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="Colour2" Content="Button" HorizontalAlignment="Left" Margin="312,49.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Colour2"/>
+        <Button x:Name="Colour2" Content="Button" HorizontalAlignment="Left" Margin="312,49.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="Background1" Content="Button" HorizontalAlignment="Left" Margin="186,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74" Click="Background1_clicked"/>
         <Button x:Name="Background2" Content="Button" HorizontalAlignment="Left" Margin="312,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="76"/>
         <Button x:Name="Text1" Content="Button" HorizontalAlignment="Left" Margin="186,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="74"/>
