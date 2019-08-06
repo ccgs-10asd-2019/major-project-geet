@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="C:\User Program Files\major-project-geet\Major project\images\Blue background1.jpg"/>
         </Grid.Background>
-        <Border BorderBrush="#FFAF2424" BorderThickness="4" HorizontalAlignment="Center" Height="150" Margin="0,212,0,60.5" VerticalAlignment="Center" Width="300" CornerRadius="15" OpacityMask="#FFFFF2F2">
+        <Border BorderBrush="#FF39479E" BorderThickness="4" HorizontalAlignment="Center" Height="150" Margin="0,212,0,60.5" VerticalAlignment="Center" Width="300" CornerRadius="15" OpacityMask="#FFFFF2F2">
             <Border.Background>
                 <SolidColorBrush Color="#FF868783" Opacity="0.3"/>
             </Border.Background>
@@ -18,7 +18,7 @@
         <PasswordBox HorizontalAlignment="Center" Margin="0,269,0,119.5" VerticalAlignment="Center" Background="White" BorderThickness="3" Width="226" Password="2882837373" Height="34" FontSize="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="306,141,0,0" TextWrapping="Wrap" Text="(Project Title)" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
         <TextBox HorizontalAlignment="Center" Height="34" Margin="0,230,0,158.5" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" Width="226" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3" FontSize="20"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="284,308,0,0" VerticalAlignment="Top" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FF1454ED" BorderThickness="3" Foreground="#FF293287" Background="#FFF9EE80"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="284,308,0,0" VerticalAlignment="Top" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="#FFF9EE80"/>
 
     </Grid>
 </Window>
