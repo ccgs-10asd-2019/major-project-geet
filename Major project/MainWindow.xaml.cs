@@ -30,7 +30,7 @@ namespace Major_project
             
             Console.WriteLine(current_User.User_id);
             GetChats(current_User.User_id);
-            GetMessages(current_User.Chat_id);
+            //GetMessages(current_User.Chat_id);
             //GetChats(1);
             //GetMessages(1);
         }
@@ -45,7 +45,9 @@ namespace Major_project
         {
             if (id == 0)
             {
-
+                Login win2 = new Login();
+                win2.Show();
+                this.Close();
             }
             else
             {
