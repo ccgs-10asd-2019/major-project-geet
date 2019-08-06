@@ -10,7 +10,7 @@ namespace Major_project
 
         Current_User current_User = new Current_User()
         {
-            Chat_id = 1,
+            Chat_id = 0,
             User_id = Properties.Settings.Default.id,
         };
 
