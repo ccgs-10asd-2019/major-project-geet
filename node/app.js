@@ -11,7 +11,7 @@ const tools = require('./components/tools')
 console.log("Time: " + new Date()) //log to console time of server start
 db = { //connect to db files
     "main": tools.connectToDB('main'), //stores core lists, servers, users
-    "chat": tools.connectToDB('chats'), //stores all chat messages
+    "chats": tools.connectToDB('chats'), //stores all chat messages
     "chat_users": tools.connectToDB('chat_users'), //stores users allowed to message in a chat
     "users_chats": tools.connectToDB('users_chats'), //stores all the chats a user is in
 }
