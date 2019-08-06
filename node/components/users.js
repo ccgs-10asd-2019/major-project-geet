@@ -23,7 +23,7 @@ module.exports = function(app){
     
     })
 
-    app.get('/user/auth/register', (req, res) => {
+    app.get('/auth/register', (req, res) => {
         //register a new user
 
         let username = "bob" //will become a post request that takes a username and probs password
@@ -45,7 +45,7 @@ module.exports = function(app){
         })
     })
 
-    app.get('/user/auth/login', (req, res) => {
+    app.get('/auth/login', (req, res) => {
         //register a new user
 
         let username = "bob" //will become a post request that takes a username and probs password
