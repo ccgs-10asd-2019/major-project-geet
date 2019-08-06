@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
         Title="MainWindow" Height="520" Width="770">
-    <Grid Opacity="0.8">
+    <Grid Opacity="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.Background>
             <ImageBrush ImageSource="images/blue.jpg" TileMode="Tile" Stretch="UniformToFill"/>
         </Grid.Background>
