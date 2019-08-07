@@ -11,6 +11,6 @@
         <PasswordBox HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Center" Background="White" BorderThickness="3" Width="226" Password="" Height="34" FontSize="20"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,80,0,0" TextWrapping="Wrap" Text="(Project Title)" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
         <TextBox HorizontalAlignment="Center" Height="34" Margin="0,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="226" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3" FontSize="20"/>
-        <Button Content="Login" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White"/>
+        <Button Content="Login" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White"/>
     </Grid>
 </Window>
