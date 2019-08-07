@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="images/Bluebackground1.jpg"/>
         </Grid.Background>
-        <Border BorderBrush="#FF39479E" BorderThickness="4" HorizontalAlignment="Center" Height="150" Margin="0,212,0,60.5" VerticalAlignment="Center" Width="300" CornerRadius="15" OpacityMask="#FFFFF2F2">
+        <Border BorderBrush="#FF39479E" BorderThickness="4" HorizontalAlignment="Center" Height="150" Margin="0,155,0,0" VerticalAlignment="Center" Width="300" CornerRadius="15" OpacityMask="#FFFFF2F2">
             <Border.Background>
                 <SolidColorBrush Color="#FF868783" Opacity="0.3"/>
             </Border.Background>
