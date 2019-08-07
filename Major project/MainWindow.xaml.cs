@@ -7,7 +7,6 @@ namespace Major_project
     {
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
-        Login Login_Page = new Login();
 
         Current_User current_User = new Current_User()
         {
@@ -19,17 +18,24 @@ namespace Major_project
         {
             InitializeComponent();
 
-            if (current_User.User_id == 0)
-            {
-                Login_Page.Show();
-                this.Close();
-            } else {
-                GetChats(current_User.User_id);
-            }
+            LogIn();
             
         }
 
-        public void Loggedin()
+        public void LogIn()
+        {
+            if (current_User.User_id == 0)
+            {
+                Login Login_Page = new Login(this);
+                Login_Page.Show();
+            }
+            else
+            {
+                GetChats(current_User.User_id);
+            }
+        }
+
+        public void LoggedIn()
         {
             current_User = new Current_User()
             {
@@ -39,6 +45,7 @@ namespace Major_project
             GetChats(current_User.User_id);
             Console.WriteLine(current_User.User_id);
         }
+
 
         public class Current_User
         {
@@ -89,5 +96,13 @@ namespace Major_project
             var post = await Backend.Post(data, request);
         }
 
+        private void Logout_clicked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.id = 0;
+            Properties.Settings.Default.Save();
+            current_User.User_id = 0;
+            Server_list.Items.Clear();
+            LogIn();
+        }
     }
 }

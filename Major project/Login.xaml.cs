@@ -20,10 +20,12 @@ namespace Major_project
     public partial class Login : Window
     {
         BackendConnect Backend = new BackendConnect();
+        MainWindow mainWindow;
 
-        public Login()
+        public Login(MainWindow window)
         {
             InitializeComponent();
+            mainWindow = window;
         }
 
         public async Task<string> Auth(string username)
@@ -43,6 +45,9 @@ namespace Major_project
             if(user_id != "")
             {
                 Properties.Settings.Default.id = Int32.Parse(user_id);
+                Properties.Settings.Default.Save();
+                Console.WriteLine(Properties.Settings.Default.id);
+                mainWindow.LoggedIn();
                 this.Close();
             }
         }
