@@ -18,16 +18,34 @@ namespace Major_project
         {
             InitializeComponent();
 
-            if (current_User.User_id == 0)
-            {
-                Login win2 = new Login();
-                win2.Show();
-                this.Close();
-            } else {
-                GetChats(current_User.User_id);
-            }
+            LogIn();
             
         }
+
+        public void LogIn()
+        {
+            if (current_User.User_id == 0)
+            {
+                Login Login_Page = new Login(this);
+                Login_Page.Show();
+            }
+            else
+            {
+                GetChats(current_User.User_id);
+            }
+        }
+
+        public void LoggedIn()
+        {
+            current_User = new Current_User()
+            {
+                Chat_id = 0,
+                User_id = Properties.Settings.Default.id,
+            };
+            GetChats(current_User.User_id);
+            Console.WriteLine(current_User.User_id);
+        }
+
 
         public class Current_User
         {
@@ -73,10 +91,18 @@ namespace Major_project
                 User_id = current_User.User_id,
                 Message = message_textbox.Text,
                 Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
-        };
+            };
             String request = BackendConnect.server + "message";
             var post = await Backend.Post(data, request);
         }
 
+        private void Logout_clicked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.id = 0;
+            Properties.Settings.Default.Save();
+            current_User.User_id = 0;
+            Server_list.Items.Clear();
+            LogIn();
+        }
     }
 }

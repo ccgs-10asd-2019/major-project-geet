@@ -24,6 +24,7 @@ namespace Major_project
             public int User_id { get; set; }
             public string Message { get; set; } 
             public long Current_time { get; set; }
+            public string Username { get; set; }
         }
 
         public class Get_messages_class
