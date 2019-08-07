@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
-    <Grid>
+        Title="Login" Height="450" Width="400">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.Background>
             <ImageBrush ImageSource="images/Bluebackground1.jpg"/>
         </Grid.Background>
@@ -16,8 +16,8 @@
             </Border.Background>
         </Border>
         <PasswordBox HorizontalAlignment="Center" Margin="0,269,0,119.5" VerticalAlignment="Center" Background="White" BorderThickness="3" Width="226" Password="" Height="34" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" Margin="306,141,0,0" TextWrapping="Wrap" Text="(Project Title)" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
+        <TextBlock HorizontalAlignment="Left" Margin="110,116,0,0" TextWrapping="Wrap" Text="(Project Title)" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
         <TextBox HorizontalAlignment="Center" Height="34" Margin="0,230,0,158.5" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="226" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3" FontSize="20"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="284,308,0,0" VerticalAlignment="Top" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="#FFF9EE80"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="84,308,0,0" VerticalAlignment="Top" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="#FFF9EE80"/>
     </Grid>
 </Window>
