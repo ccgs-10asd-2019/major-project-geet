@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Major_project
 {
@@ -43,7 +44,6 @@ namespace Major_project
                 User_id = Properties.Settings.Default.id,
             };
             GetChats(current_User.User_id);
-            Console.WriteLine(current_User.User_id);
         }
 
 
@@ -61,8 +61,22 @@ namespace Major_project
             {
                 request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
                 var ListChats = Backend.Get(request);
-                Server_list.Items.Add(ListChats[0].Name);
+                //Server_list.Items.Add(ListChats[0].Name);
+
+                Button b = new Button();
+                b.Content = ListChats[0].Name;
+                b.Click += new RoutedEventHandler(chats_Click);
+                b.Tag = content[i].Chat.ToString();
+                Server_list.Items.Add(b);
             }
+        }
+
+        void chats_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            chat.Items.Clear();
+            current_User.Chat_id = Int32.Parse(b.Tag.ToString());
+            GetMessages(Int32.Parse(b.Tag.ToString()));
         }
 
         public void GetMessages(int id)
@@ -71,7 +85,7 @@ namespace Major_project
             {
                 String request = BackendConnect.server + "messages/" + id.ToString();
                 var content = Backend.Get(request);
-
+                Console.WriteLine(content);
                 for (int i = 0; i < content.Count; i++)
                 {
                     String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
@@ -81,6 +95,8 @@ namespace Major_project
                 }
             }
         }
+
+        
 
         private async void SendMessage(object sender, RoutedEventArgs e)
         {
