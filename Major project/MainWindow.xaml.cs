@@ -13,6 +13,7 @@ namespace Major_project
         {
             Chat_id = 0,
             User_id = Properties.Settings.Default.id,
+            Lastest_message = 0,
         };
 
         public MainWindow()
@@ -38,11 +39,7 @@ namespace Major_project
 
         public void LoggedIn()
         {
-            current_User = new Current_User()
-            {
-                Chat_id = 0,
-                User_id = Properties.Settings.Default.id,
-            };
+            current_User.User_id = Properties.Settings.Default.id;
             GetChats(current_User.User_id);
         }
 
@@ -51,6 +48,7 @@ namespace Major_project
         {
             public int Chat_id { get; set; }
             public int User_id { get; set; }
+            public int Lastest_message { get; set; }
         }
 
         public void GetChats(int id)
@@ -61,21 +59,21 @@ namespace Major_project
             {
                 request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
                 var ListChats = Backend.Get(request);
-                //Server_list.Items.Add(ListChats[0].Name);
 
                 Button b = new Button();
                 b.Content = ListChats[0].Name;
-                b.Click += new RoutedEventHandler(chats_Click);
+                b.Click += new RoutedEventHandler(Chats_Click);
                 b.Tag = content[i].Chat.ToString();
                 Server_list.Items.Add(b);
             }
         }
 
-        void chats_Click(object sender, RoutedEventArgs e)
+        void Chats_Click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
             chat.Items.Clear();
             current_User.Chat_id = Int32.Parse(b.Tag.ToString());
+            current_User.Lastest_message = 0;
             GetMessages(Int32.Parse(b.Tag.ToString()));
         }
 
@@ -83,9 +81,14 @@ namespace Major_project
         {
             if (id != 0)
             {
-                String request = BackendConnect.server + "messages/" + id.ToString();
+                String request = BackendConnect.server + "messages/" + id.ToString() + "/since/" + current_User.Lastest_message.ToString();
+                Console.WriteLine(request);
                 var content = Backend.Get(request);
-                Console.WriteLine(content);
+                Console.WriteLine(current_User.Lastest_message);
+                current_User.Lastest_message = content[content.Count - 1].Time_submitted;
+                Console.WriteLine(current_User.Lastest_message);
+                Console.WriteLine(content.Count);
+                Console.WriteLine(content[content.Count - 1].Time_submitted);
                 for (int i = 0; i < content.Count; i++)
                 {
                     String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
