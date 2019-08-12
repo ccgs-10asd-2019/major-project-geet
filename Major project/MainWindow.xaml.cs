@@ -55,16 +55,19 @@ namespace Major_project
         {
         string request = BackendConnect.server + "chats/" + id.ToString();
         var content = Backend.Get(request);
-            for (int i = 0; i < content.Count; i++)
+            if (content != null)
             {
-                request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
-                var ListChats = Backend.Get(request);
+                for (int i = 0; i < content.Count; i++)
+                {
+                    request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                    var ListChats = Backend.Get(request);
 
-                Button b = new Button();
-                b.Content = ListChats[0].Name;
-                b.Click += new RoutedEventHandler(Chats_Click);
-                b.Tag = content[i].Chat.ToString();
-                Server_list.Items.Add(b);
+                    Button b = new Button();
+                    b.Content = ListChats[0].Name;
+                    b.Click += new RoutedEventHandler(Chats_Click);
+                    b.Tag = content[i].Chat.ToString();
+                    Server_list.Items.Add(b);
+                }
             }
         }
 
@@ -101,7 +104,12 @@ namespace Major_project
 
                     for (int i = 0; i < content.Count; i++)
                     {
+                        Console.WriteLine(content[i].Time_submitted.ToString());
+                        Console.WriteLine(content[i].User_id);
+                        Console.WriteLine(content[i].Message);
+                        Console.WriteLine(content[i].Id);
                         String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                        Console.WriteLine(Users_Name);
                         var ListUsers_Name = Backend.Get(Users_Name);
                         Users_Name = ListUsers_Name[0].Username;
                         chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
