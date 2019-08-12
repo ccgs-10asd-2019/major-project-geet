@@ -132,6 +132,7 @@ namespace Major_project
             Properties.Settings.Default.Save();
             current_User.User_id = 0;
             Server_list.Items.Clear();
+            chat.Items.Clear();
             LogIn();
         }
     }
