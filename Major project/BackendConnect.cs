@@ -24,6 +24,7 @@ namespace Major_project
             public int User_id { get; set; }
             public string Message { get; set; } 
             public long Current_time { get; set; }
+            public string Username { get; set; }
         }
 
         public class Get_messages_class
@@ -50,7 +51,14 @@ namespace Major_project
                 if (response.IsSuccessStatusCode)   
                 {
                     var json = response.Content.ReadAsStringAsync().Result;
-                    content = JsonConvert.DeserializeObject<List<Get_messages_class>>(json);
+                    if (json != "[]")
+                    {
+                        content = JsonConvert.DeserializeObject<List<Get_messages_class>>(json);
+                    } else
+                    {
+                        content = null;
+                    }
+                            
                 }
             }
             catch (Exception ex)

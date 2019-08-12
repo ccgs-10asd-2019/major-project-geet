@@ -1,9 +1,9 @@
 module.exports = function(app){
 
-    app.get('/messages/:chat_id', (req, res) => {
+    app.get('/messages/:chat_id/since/:since', (req, res) => {
         //returns a list of all the messages in a chat
       
-      let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
+      let sql = 'SELECT * FROM `' + req.params.chat_id + '` WHERE "time_submitted">"' + req.params.since + '"'
     
       db.chat.all(sql, [], (err, rows) => {
         if (err) { res.send(err) } 

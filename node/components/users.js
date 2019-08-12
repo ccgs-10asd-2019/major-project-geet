@@ -45,15 +45,16 @@ module.exports = function(app){
         })
     })
 
-    app.get('/auth/login', (req, res) => {
+    app.post('/auth/login', (req, res) => {
         //register a new user
 
-        let username = "bob" //will become a post request that takes a username and probs password
+        let username = req.body.Username
 
         //get id of new user
         sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
-        db.main.all(sql, [], (err, rows) => {
-            res.send(rows)
+        db.main.get(sql, [], (err, result) => {
+            if (result == undefined) { res.send(null) } 
+            else { res.send(String(result.id)) }
         })
     })
 }
