@@ -11,24 +11,25 @@
             <ImageBrush ImageSource="images/blue.jpg" TileMode="Tile" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="66*" />
-            <RowDefinition Height="83*"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="196*" />
+            <RowDefinition Height="261*"/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="#FF813A47"/>
+        <Rectangle Fill="#FF813A47" Margin="159,5,20,5"/>
         <ListBox x:Name="chat" HorizontalAlignment="Left" Height="413" Margin="159,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586" Background="#66813A47" Grid.RowSpan="2" BorderBrush="#00ABADB3">
         </ListBox>
-        <TextBox x:Name="message_textbox" HorizontalAlignment="Left" Height="24" Margin="159,224.75,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="527" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral"/>
-        <Button x:Name="Send_button" Content="Button" HorizontalAlignment="Left" Margin="686,224.75,0,0" Grid.Row="2" VerticalAlignment="Top" Width="59" Height="24" Background="#FF172E64" Click="SendMessage" Foreground="White"/>
+        <TextBox x:Name="message_textbox" HorizontalAlignment="Left" Height="24" Margin="159,225,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="527" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral"/>
+        <Button x:Name="Send_button" Content="Button" HorizontalAlignment="Left" Margin="686,225,0,0" Grid.Row="2" VerticalAlignment="Top" Width="59" Height="24" Background="#FF172E64" Click="SendMessage" Foreground="White"/>
+        <ListBox x:Name="Server_list" HorizontalAlignment="Left" Height="254" Margin="10,193,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2">
 
-
-        <ListBox x:Name="Server_list" HorizontalAlignment="Left" Height="280" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2">
-            <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White"/>
         </ListBox>
-        <ListBox HorizontalAlignment="Left" Height="160" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64">
-            
+        <ListBox HorizontalAlignment="Left" Height="180" Margin="10,10,0,0" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2">
+
             <Button Content="Settings" Width="53" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
             <Button x:Name="logout_button" Content="Logout" Width="50" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="Logout_clicked"/>
         </ListBox>
+        <Rectangle Fill="#FF172E64" HorizontalAlignment="Left" Height="26" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123"/>
+        <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White" Margin="20,172,649,8" Grid.Row="1"/>
+        <Border BorderBrush="#FFABADAF" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123"/>
     </Grid>
 </Window>
