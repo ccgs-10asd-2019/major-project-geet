@@ -51,5 +51,11 @@ namespace Major_project
                 this.Close();
             }
         }
+
+        private void To_themes(object sender, RoutedEventArgs e)
+        {
+            var newForm = new Themes();
+            newForm.Show();
+        }
     }
 }

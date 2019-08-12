@@ -19,6 +19,7 @@ namespace Major_project
     /// </summary>
     public partial class Themes : Window
     {
+
         public Themes()
         {
             InitializeComponent();
@@ -52,7 +53,8 @@ namespace Major_project
         {
             var converter1 = new BrushConverter();
             var Background_set = (ImageBrush)converter1.ConvertFromString(Background);
-            ImageBrush ImageSource = Background_set;
+            //ImageBrush ImageSource = Background_set;
+            Grid1.Background = Background_set;
         }
     }
 }

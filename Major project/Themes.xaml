@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
         Title="Themes" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="Grid1">
         <Grid.Background>
             <ImageBrush ImageSource="ASD major project images/colourfull background.jpg"/>
         </Grid.Background>
