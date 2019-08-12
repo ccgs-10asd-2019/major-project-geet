@@ -75,6 +75,17 @@ namespace Major_project
             current_User.Chat_id = Int32.Parse(b.Tag.ToString());
             current_User.Lastest_message = 0;
             GetMessages(Int32.Parse(b.Tag.ToString()));
+
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += Auto_GetMessages;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+
+        }
+
+        private void Auto_GetMessages(object sender, EventArgs e)
+        {
+            GetMessages(current_User.Chat_id);
         }
 
         public void GetMessages(int id)
@@ -82,19 +93,19 @@ namespace Major_project
             if (id != 0)
             {
                 String request = BackendConnect.server + "messages/" + id.ToString() + "/since/" + current_User.Lastest_message.ToString();
-                Console.WriteLine(request);
                 var content = Backend.Get(request);
-                Console.WriteLine(current_User.Lastest_message);
-                current_User.Lastest_message = content[content.Count - 1].Time_submitted;
-                Console.WriteLine(current_User.Lastest_message);
-                Console.WriteLine(content.Count);
-                Console.WriteLine(content[content.Count - 1].Time_submitted);
-                for (int i = 0; i < content.Count; i++)
+
+                if (content != null)
                 {
-                    String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
-                    var ListUsers_Name = Backend.Get(Users_Name);
-                    Users_Name = ListUsers_Name[0].Username;
-                    chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+                    current_User.Lastest_message = content[content.Count - 1].Time_submitted;
+
+                    for (int i = 0; i < content.Count; i++)
+                    {
+                        String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                        var ListUsers_Name = Backend.Get(Users_Name);
+                        Users_Name = ListUsers_Name[0].Username;
+                        chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+                    }
                 }
             }
         }

@@ -51,7 +51,14 @@ namespace Major_project
                 if (response.IsSuccessStatusCode)   
                 {
                     var json = response.Content.ReadAsStringAsync().Result;
-                    content = JsonConvert.DeserializeObject<List<Get_messages_class>>(json);
+                    if (json != "[]")
+                    {
+                        content = JsonConvert.DeserializeObject<List<Get_messages_class>>(json);
+                    } else
+                    {
+                        content = null;
+                    }
+                            
                 }
             }
             catch (Exception ex)
