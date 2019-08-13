@@ -128,6 +128,7 @@ namespace Major_project
             };
             String request = BackendConnect.server + "message";
             var post = await Backend.Post(data, request);
+            message_textbox.Text = String.Empty;
         }
 
         private void Logout_clicked(object sender, RoutedEventArgs e)
