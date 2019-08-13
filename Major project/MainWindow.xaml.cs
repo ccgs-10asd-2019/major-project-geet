@@ -31,6 +31,7 @@ namespace Major_project
             {
                 Login Login_Page = new Login(this);
                 Login_Page.Show();
+                this.Hide();
             }
             else
             {
@@ -56,16 +57,19 @@ namespace Major_project
         {
         string request = BackendConnect.server + "chats/" + id.ToString();
         var content = Backend.Get(request);
-            for (int i = 0; i < content.Count; i++)
+            if (content != null)
             {
-                request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
-                var ListChats = Backend.Get(request);
+                for (int i = 0; i < content.Count; i++)
+                {
+                    request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                    var ListChats = Backend.Get(request);
 
-                Button b = new Button();
-                b.Content = ListChats[0].Name;
-                b.Click += new RoutedEventHandler(Chats_Click);
-                b.Tag = content[i].Chat.ToString();
-                Server_list.Items.Add(b);
+                    Button b = new Button();
+                    b.Content = ListChats[0].Name;
+                    b.Click += new RoutedEventHandler(Chats_Click);
+                    b.Tag = content[i].Chat.ToString();
+                    Server_list.Items.Add(b);
+                }
             }
         }
 
@@ -138,6 +142,7 @@ namespace Major_project
             Properties.Settings.Default.Save();
             current_User.User_id = 0;
             Server_list.Items.Clear();
+            chat.Items.Clear();
             LogIn();
         }
 
