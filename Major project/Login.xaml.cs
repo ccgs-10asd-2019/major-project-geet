@@ -46,8 +46,8 @@ namespace Major_project
             {
                 Properties.Settings.Default.id = Int32.Parse(user_id);
                 Properties.Settings.Default.Save();
-                Console.WriteLine(Properties.Settings.Default.id);
                 mainWindow.LoggedIn();
+                mainWindow.Show();
                 this.Close();
             }
         }

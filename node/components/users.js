@@ -18,7 +18,14 @@ module.exports = function(app){
 
         db.main.all(sql, [], (err, rows) => {
             if (err) { res.send(err) } 
-            else { res.send(rows) }
+            else { 
+                if (JSON.stringify(rows) != "[]") {
+                    res.send(rows) 
+                } else {
+                    res.send([{"username":"[deleted]"}])
+                }
+                
+            }
         })
     
     })
