@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 })
 
 require('./components/messages')(app);
-require('./components/chats')(app);
+require('./components/chats')(app, tools);
 require('./components/users')(app);
 
 app.listen(port, () => console.log(`listening on port ${port}`));

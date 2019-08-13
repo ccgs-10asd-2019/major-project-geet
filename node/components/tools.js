@@ -6,5 +6,5 @@ module.exports = {
             if (err) { console.error(err.message) } //log error to console  
             else { console.log('Connected to the ' + DB + ' database.'); } //log success of connecting to database
         });
-    }
+    },
 }

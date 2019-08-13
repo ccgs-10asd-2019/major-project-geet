@@ -20,7 +20,7 @@ module.exports = function(app){
       let params = [req.body.User_id, req.body.Current_time, req.body.Message]
 
       db.chat.run(sql, params)
-      res.status(200).send("ok")
+      res.send([true])
     
     })
 }

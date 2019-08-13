@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app, tools){
 
     app.get('/info/:info/:chat_id', (req, res) => {
         //returns name of chat
@@ -24,7 +24,70 @@ module.exports = function(app){
 
     app.get('/icon/:chat_id', (req, res) => {
         //returns a chats icon
-
         res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname + '/../' })
+    })
+
+    app.get('/new/chat', (req, res) => {
+        //create a new chat
+        
+        var sql = ``
+        var params = []
+
+        let chat_name = req.body.chat_name
+        let user_id = req.body.user_id
+
+        //add the chat to the main database
+        sql = `INSERT INTO "chats"("name") VALUES (?)`
+        params = [chat_name]
+
+        db.main.run(sql, params, function(err){
+            if (err) { 
+                res.send([false, err]) 
+            } 
+            else {
+
+                chat_id = this.lastID
+
+                //create a table to store users in a chat
+                sql = `CREATE TABLE "` + chat_id + `" (
+                    "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+                    "user_id"	INTEGER,
+                    "time_joined"	DATETIME,
+                    "role"	TEXT
+                )`
+
+                db.chat_users.run(sql, [], function(err){ 
+                    if (err) {
+                        res.send([false, err]) 
+                    } else {
+
+                        //add user to above table
+                        sql = `INSERT INTO "` + chat_id + `"("user_id","time_joined","role") VALUES (?,?,?);`
+                        params = [user_id, new Date(), 'owner']
+
+                        db.chat_users.run(sql, params, function(err){ if (err) { res.send([false, err]) }})
+                    }
+                })
+
+                //create a table to store the messages of the chat
+                sql = `CREATE TABLE "` + chat_id + `" (
+                    "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+                    "user_id"	INTEGER,
+                    "time_submitted"    INTEGER,
+                    "message"	TEXT 
+                )`
+
+                db.chat.run(sql, [], function(err){ if (err) { res.send([false, err]) }})
+
+                //add chat to the user that created it chats list
+                sql = `INSERT INTO "` + user_id + `"("chat") VALUES (?)`
+                params = [chat_id]
+
+                db.users_chats.run(sql, params, function(err){ if (err) { res.send([false, err]) }})
+                
+                res.send([true, { "id":chat_id }])
+
+            }
+        });
     })
 }

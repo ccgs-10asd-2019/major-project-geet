@@ -30,10 +30,10 @@ module.exports = function(app){
     
     })
 
-    app.get('/auth/register', (req, res) => {
+    app.post('/auth/register', (req, res) => {
         //register a new user
 
-        let username = "bob" //will become a post request that takes a username and probs password
+        let username = req.body.username
 
         //create new user record
         let sql = 'INSERT INTO "main"."users" ("username") VALUES (?)'
