@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Major_project
 {
@@ -112,7 +113,12 @@ namespace Major_project
 
         
 
-        private async void SendMessage(object sender, RoutedEventArgs e)
+        private void Button_SendMessage(object sender, RoutedEventArgs e)
+        {
+            SendMessage();
+        }
+
+        public async void SendMessage()
         {
             DateTime time = DateTime.UtcNow;
             BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
@@ -133,6 +139,17 @@ namespace Major_project
             current_User.User_id = 0;
             Server_list.Items.Clear();
             LogIn();
+        }
+
+        private void Enter_clicked(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Return)
+                {
+                    SendMessage();
+                    e.Handled = true;
+                }
+            }
         }
     }
 }
