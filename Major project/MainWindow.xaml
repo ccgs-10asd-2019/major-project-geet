@@ -29,7 +29,7 @@
             <Button x:Name="logout_button" Content="Logout" Width="50" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="Logout_clicked"/>
         </ListBox>
         <Rectangle Fill="#FF172E64" HorizontalAlignment="Left" Height="26" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123"/>
-        <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White" Margin="20,172,649,8" Grid.Row="1"/>
+        <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White" Margin="20,0,0,4" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <Border BorderBrush="#FFABADAF" BorderThickness="1" HorizontalAlignment="Left" Height="26" Margin="10,167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123"/>
     </Grid>
 </Window>
