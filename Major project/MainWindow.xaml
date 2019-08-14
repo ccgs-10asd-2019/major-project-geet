@@ -18,7 +18,7 @@
         <Rectangle Fill="#FF813A47" Margin="159,5,20,5"/>
         <ListBox x:Name="chat" HorizontalAlignment="Left" Height="413" Margin="159,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586" Background="#66813A47" Grid.RowSpan="2" BorderBrush="#00ABADB3">
         </ListBox>
-        <TextBox x:Name="message_textbox" HorizontalAlignment="Left" Height="24" Margin="159,225,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="527" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" PreviewKeyDown="Enter_clicked"/>
+        <TextBox x:Name="message_textbox" HorizontalAlignment="Left" Height="24" Margin="159,225,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="527" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" PreviewKeyDown="Enter_SendMessage"/>
         <Button x:Name="Send_button" Content="Button" HorizontalAlignment="Left" Margin="686,225,0,0" Grid.Row="2" VerticalAlignment="Top" Width="59" Height="24" Background="#FF172E64" Click="Button_SendMessage" Foreground="White"/>
         <ListBox x:Name="Server_list" HorizontalAlignment="Left" Height="254" Margin="10,193,0,0" Grid.Row="1" VerticalAlignment="Top" Width="123" Background="#FF172E64" Grid.RowSpan="2">
 

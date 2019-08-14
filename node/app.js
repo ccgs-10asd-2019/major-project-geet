@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.send("all g") //all is good
 })
 
-require('./components/messages')(app);
+require('./components/messages')(app, tools);
 require('./components/chats')(app, tools);
 require('./components/users')(app, tools);
 
