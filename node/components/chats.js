@@ -41,10 +41,7 @@ module.exports = function(app, tools){
         params = [chat_name]
 
         db.main.run(sql, params, function(err){
-            if (err) { 
-                res.send([{ "task": false, "content": err }])
-            } 
-            else {
+            if (tools.no_err(err, req, res)) { 
 
                 chat_id = this.lastID
 
@@ -57,15 +54,13 @@ module.exports = function(app, tools){
                 )`
 
                 db.chat_users.run(sql, [], function(err){ 
-                    if (err) {
-                        res.send([{ "task": false, "content": err }])
-                    } else {
+                    if (tools.no_err(err, req, res)) { 
 
                         //add user to above table
                         sql = `INSERT INTO "` + chat_id + `"("user_id","time_joined","role") VALUES (?,?,?);`
                         params = [user_id, new Date(), 'owner']
 
-                        db.chat_users.run(sql, params, function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
+                        db.chat_users.run(sql, params, function(err){ tools.no_err(err, req, res) })
                     }
                 })
 
@@ -77,15 +72,15 @@ module.exports = function(app, tools){
                     "message"	TEXT 
                 )`
 
-                db.chat.run(sql, [], function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
+                db.chat.run(sql, [], function(err){ tools.no_err(err, req, res) })
 
                 //add chat to the user that created it chats list
                 sql = `INSERT INTO "` + user_id + `"("chat") VALUES (?)`
                 params = [chat_id]
 
-                db.users_chats.run(sql, params, function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
+                db.users_chats.run(sql, params, function(err){ tools.no_err(err, req, res) })
                 
-                res.send([{ "task": true, "content": { "id": chat_id } }])
+                tools.return(res, { id: chat_id })
 
             }
         });

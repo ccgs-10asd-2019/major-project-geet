@@ -37,16 +37,17 @@ namespace Major_project
             };
             string request = BackendConnect.server + "auth/login";
             var content = await Backend.Post(data, request);
-            var user_id = content.Id;
-            if (user_id != null)
+            
+            try
             {
+                var user_id = content[0].Id;
                 Properties.Settings.Default.id = Int32.Parse(user_id);
                 Properties.Settings.Default.Save();
                 mainWindow.LoggedIn();
                 mainWindow.Show();
                 this.Close();
             }
-            else
+            catch
             {
                 login_error.Visibility = Visibility.Visible;
             }

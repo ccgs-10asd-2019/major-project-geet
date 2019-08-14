@@ -7,4 +7,20 @@ module.exports = {
             else { console.log('Connected to the ' + DB + ' database.'); } //log success of connecting to database
         });
     },
+    no_err: function (err, req, res) {
+        if (err) {
+            console.log(new Date(), req.url, err) 
+            let content = "[" + JSON.stringify(err) + "]"
+            res.send([{ "task": false, "content": content }]) 
+            return false
+        } else {
+            return true
+        }
+    },
+    return: function (res, result) {
+        let content = "[" + JSON.stringify(result) + "]"
+        console.log(result)
+        console.log(content)
+        res.send([{ "task": true, "content": content }]) 
+    }
 }

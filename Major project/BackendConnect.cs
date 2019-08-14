@@ -80,7 +80,7 @@ namespace Major_project
             return content;
         }
 
-        public async Task<Post_return> Post(Post_message_class data, String request)
+        public async Task<List<Post_return>> Post(Post_message_class data, String request)
         {
             var response = await httpClient.PostAsJsonAsync(request, data);
             response.EnsureSuccessStatusCode();
@@ -98,7 +98,7 @@ namespace Major_project
             {
                 content = JsonConvert.DeserializeObject<List<Post_return>>(check[0].Content);
             }
-            return content[0];
+            return content;
         }
     }
 }
