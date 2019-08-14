@@ -19,8 +19,8 @@
             <ColumnDefinition Width="53*"/>
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#FF813A47" Margin="150,0,0,0" Grid.RowSpan="3" Width="100" HorizontalAlignment="Left" RenderTransformOrigin="0.478,0.506"/>
-        <ListBox x:Name="chat" Margin="260,3,10,45" Background="#66813A47" Grid.RowSpan="3" BorderBrush="#00ABADB3" Grid.ColumnSpan="2"/>
+        <Rectangle Fill="#FF813A47" Margin="145,0,0,0" Grid.RowSpan="3" Width="110" HorizontalAlignment="Left" RenderTransformOrigin="0.478,0.506"/>
+        <ListBox x:Name="chat" Margin="260,3,10,40" Background="#66813A47" Grid.RowSpan="3" BorderBrush="#00ABADB3" Grid.ColumnSpan="2"/>
         <TextBox x:Name="message_textbox" Height="24" Margin="260,0,71,10" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" Grid.ColumnSpan="2"/>
         <Button x:Name="Send_button" Content="Send&#xD;&#xA;" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" VerticalAlignment="Bottom" Width="60" Height="24" Background="#FF172E64" Click="SendMessage" Foreground="White" Grid.Column="1"/>
         <ListBox x:Name="Server_list" HorizontalAlignment="Left" Margin="10,0,0,0.5" Grid.Row="2" Width="123" Background="#FF172E64"/>
@@ -30,7 +30,7 @@
         </ListBox>
         <Rectangle Fill="#FF172E64" HorizontalAlignment="Left" Height="26" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Bottom" Width="123" Stroke="#FFABADB3"/>
         <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White" Margin="20,3,0,0" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Button Content="Add user" Margin="150,10,0,0" VerticalAlignment="Top" Width="100" Height="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Left"/>
-        <Button Content="Remove user" HorizontalAlignment="Left" Margin="150,0,0,0" Grid.Row="1" Width="100" Height="20" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
+        <Button Content="Add user" Margin="145,10,0,0" VerticalAlignment="Top" Width="110" Height="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Left"/>
+        <Button Content="Remove user" HorizontalAlignment="Left" Margin="145,0,0,0" Grid.Row="1" Width="110" Height="20" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
     </Grid>
 </Window>
