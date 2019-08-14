@@ -30,9 +30,7 @@
         </ListBox>
         <Rectangle Fill="#FF172E64" HorizontalAlignment="Left" Height="26" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Bottom" Width="123" Stroke="#FFABADB3"/>
         <TextBlock TextWrapping="Wrap" Text="Server list" Height="19" Width="96" Foreground="White" Margin="20,3,0,0" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-
         <Button Content="Add user" Margin="150,10,0,0" VerticalAlignment="Top" Width="100" Height="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Left"/>
         <Button Content="Remove user" HorizontalAlignment="Left" Margin="150,0,0,0" Grid.Row="1" Width="100" Height="20" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
-
     </Grid>
 </Window>
