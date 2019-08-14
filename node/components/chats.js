@@ -27,7 +27,7 @@ module.exports = function(app, tools){
         res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname + '/../' })
     })
 
-    app.get('/new/chat', (req, res) => {
+    app.post('/new/chat', (req, res) => {
         //create a new chat
         
         var sql = ``
@@ -42,7 +42,7 @@ module.exports = function(app, tools){
 
         db.main.run(sql, params, function(err){
             if (err) { 
-                res.send([false, err]) 
+                res.send([{ "task": false, "content": err }])
             } 
             else {
 
@@ -58,14 +58,14 @@ module.exports = function(app, tools){
 
                 db.chat_users.run(sql, [], function(err){ 
                     if (err) {
-                        res.send([false, err]) 
+                        res.send([{ "task": false, "content": err }])
                     } else {
 
                         //add user to above table
                         sql = `INSERT INTO "` + chat_id + `"("user_id","time_joined","role") VALUES (?,?,?);`
                         params = [user_id, new Date(), 'owner']
 
-                        db.chat_users.run(sql, params, function(err){ if (err) { res.send([false, err]) }})
+                        db.chat_users.run(sql, params, function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
                     }
                 })
 
@@ -77,15 +77,15 @@ module.exports = function(app, tools){
                     "message"	TEXT 
                 )`
 
-                db.chat.run(sql, [], function(err){ if (err) { res.send([false, err]) }})
+                db.chat.run(sql, [], function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
 
                 //add chat to the user that created it chats list
                 sql = `INSERT INTO "` + user_id + `"("chat") VALUES (?)`
                 params = [chat_id]
 
-                db.users_chats.run(sql, params, function(err){ if (err) { res.send([false, err]) }})
+                db.users_chats.run(sql, params, function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
                 
-                res.send([true, { "id":chat_id }])
+                res.send([{ "task": true, "content": { "id": chat_id } }])
 
             }
         });

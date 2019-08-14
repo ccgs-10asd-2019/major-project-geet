@@ -37,31 +37,44 @@ module.exports = function(app){
 
         //create new user record
         let sql = 'INSERT INTO "main"."users" ("username") VALUES (?)'
-        let values = [username]
-        db.main.run(sql, values)
+        let params = [username]
+        db.main.run(sql, params, function(err){
+            if (err) { 
+                res.send([{ "task": false, "content": err }]) 
+            } else {
+                let user_id = this.lastID
 
-        //get id of new user
-        sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
-        db.main.all(sql, [], (err, rows) => {
+                //create table to store users chats
+                sql = 'CREATE TABLE "' + user_id + '" ( "chat" INTEGER UNIQUE )'
+                db.users_chats.run(sql, [], function(err){ if (err) { res.send([{ "task": false, "content": err }]) }})
 
-            //create table to store users chats
-            sql = 'CREATE TABLE "' + rows[0].id + '" ( "chat" INTEGER UNIQUE )'
-            db.users_chats.run(sql, [])
-
-            res.send(rows)
+                let content = '[{ "id": ' + user_id + ' }]'
+                res.send([{ "task": true, "content": content }])
+            }
         })
     })
 
     app.post('/auth/login', (req, res) => {
-        //register a new user
+        //login
 
         let username = req.body.Username
 
-        //get id of new user
+        //get id of user
         sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
         db.main.get(sql, [], (err, result) => {
-            if (result == undefined) { res.send(null) } 
-            else { res.send(String(result.id)) }
+            if (err) { 
+                res.send([{ "task": false, "content": err }])  
+            }
+            else if (result == undefined) 
+            { 
+                let content = '[{ "id": null }]'
+                res.send([{ "task": true, "content": content }]) 
+            } 
+            else 
+            { 
+                let content = "[" + JSON.stringify(result) + "]"
+                res.send([{ "task": true, "content": content }]) 
+            }
         })
     })
 }

@@ -25,30 +25,30 @@ namespace Major_project
         public Login(MainWindow window)
         {
             InitializeComponent();
+            login_error.Visibility = Visibility.Hidden;
             mainWindow = window;
-        }
-
-        public async Task<string> Auth(string username)
-        {
-            BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
-            {
-                Username = username
-            };
-            string request = BackendConnect.server + "auth/login";
-            var content = await Backend.Post(data, request);
-            return content;
         }
 
         private async void Send_login(object sender, RoutedEventArgs e)
         {
-            var user_id = await Auth(text_username.Text);
-            if(user_id != "")
+            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+            {
+                Username = text_username.Text
+            };
+            string request = BackendConnect.server + "auth/login";
+            var content = await Backend.Post(data, request);
+            var user_id = content.Id;
+            if (user_id != null)
             {
                 Properties.Settings.Default.id = Int32.Parse(user_id);
                 Properties.Settings.Default.Save();
                 mainWindow.LoggedIn();
                 mainWindow.Show();
                 this.Close();
+            }
+            else
+            {
+                login_error.Visibility = Visibility.Visible;
             }
         }
     }

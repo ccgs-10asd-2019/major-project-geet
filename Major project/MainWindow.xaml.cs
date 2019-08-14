@@ -125,7 +125,7 @@ namespace Major_project
         public async void SendMessage()
         {
             DateTime time = DateTime.UtcNow;
-            BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
+            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
             {
                 Chat_id = current_User.Chat_id,
                 User_id = current_User.User_id,
