@@ -42,7 +42,9 @@ namespace Major_project
         {
             public int Id { get; set; }
             public int User_id { get; set; }
-            public int Time_submitted { get; set; }
+            public long Time_submitted { get; set; }
+            public long Time_joined { get; set; }
+            public string Role { get; set; }
             public string Message { get; set; }
             public string Username { get; set; }
             public string Chat { get; set; }

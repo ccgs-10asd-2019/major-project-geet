@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Major_project
 {
@@ -14,7 +15,7 @@ namespace Major_project
         Current_User current_User = new Current_User()
         {
             Chat_id = 0,
-            User_id = Properties.Settings.Default.id,
+            User_id = 0,
             Lastest_message = 0,
         };
 
@@ -36,23 +37,31 @@ namespace Major_project
             }
             else
             {
-                GetChats(current_User.User_id);
+                LoggedIn();
             }
         }
 
         public void LoggedIn()
         {
             current_User.User_id = Properties.Settings.Default.id;
+
+            var request = BackendConnect.server + "user/" + current_User.User_id.ToString();
+            var Username = Backend.Get(request);
+
+            Username_TextBlock.Text = Username[0].Username;
+
             GetChats(current_User.User_id);
         }
 
-        private void Logout_clicked(object sender, RoutedEventArgs e)
+        public void Logout()
         {
             Properties.Settings.Default.id = 0;
             Properties.Settings.Default.Save();
             current_User.User_id = 0;
-            Server_list.Items.Clear();
-            chat.Items.Clear();
+            Chats_ListBox.Items.Clear();
+            Chat_ListBox.Items.Clear();
+            Chat_TextBlock.Text = "No Chat Selected";
+            Users_ListBox.Items.Clear();
             LogIn();
         }
 
@@ -61,7 +70,7 @@ namespace Major_project
         {
             public int Chat_id { get; set; }
             public int User_id { get; set; }
-            public int Lastest_message { get; set; }
+            public long Lastest_message { get; set; }
         }
 
         public void GetChats(int id)
@@ -75,11 +84,18 @@ namespace Major_project
                     request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
                     var ListChats = Backend.Get(request);
 
-                    Button b = new Button();
-                    b.Content = ListChats[0].Name;
+                    var converter = new System.Windows.Media.BrushConverter();
+
+                    Button b = new Button
+                    {
+                        Content = ListChats[0].Name,
+                        Background = (Brush)converter.ConvertFromString("transparent"),
+                        BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                        Foreground = (Brush)converter.ConvertFromString("white")
+                    };
                     b.Click += new RoutedEventHandler(Chats_Click);
                     b.Tag = content[i].Chat.ToString();
-                    Server_list.Items.Add(b);
+                    Chats_ListBox.Items.Add(b);
                 }
             }
         }
@@ -87,10 +103,14 @@ namespace Major_project
         void Chats_Click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
-            chat.Items.Clear();
+            Chat_TextBlock.Text = b.Content.ToString();
+            Chat_ListBox.Items.Clear();
             current_User.Chat_id = Int32.Parse(b.Tag.ToString());
             current_User.Lastest_message = 0;
             GetMessages();
+
+            Users_ListBox.Items.Clear();
+            GetUsersInAChat();
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += Auto_GetMessages;
@@ -107,12 +127,10 @@ namespace Major_project
         public void GetMessages()
         {
             var id = current_User.Chat_id;
-
             if (id != 0)
             {
                 String request = BackendConnect.server + "messages/" + id.ToString() + "/since/" + current_User.Lastest_message.ToString();
                 var content = Backend.Get(request);
-
                 if (content != null)
                 {
                     current_User.Lastest_message = content[content.Count - 1].Time_submitted;
@@ -122,7 +140,7 @@ namespace Major_project
                         String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
                         var ListUsers_Name = Backend.Get(Users_Name);
                         Users_Name = ListUsers_Name[0].Username;
-                        chat.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+                        Chat_ListBox.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
                     }
                 }
             }
@@ -151,14 +169,37 @@ namespace Major_project
             {
                 Chat_id = current_User.Chat_id,
                 User_id = current_User.User_id,
-                Message = message_textbox.Text,
+                Message = Message_TextBox.Text,
                 Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
             };
             String request = BackendConnect.server + "message";
             //var post = await Backend.Post(data, request);
             await Task.Run(async () => await Backend.Post(data, request));
-            message_textbox.Text = String.Empty;
+            Message_TextBox.Text = String.Empty;
             GetMessages();
+        }
+
+        private void Open_Settings(object sender, RoutedEventArgs e)
+        {
+            Settings Settings = new Settings(this);
+            Settings.Show();
+            this.Hide();
+        }
+
+        public void GetUsersInAChat()
+        {
+            String request = BackendConnect.server + "users/" +  current_User.Chat_id.ToString();
+            Console.WriteLine(request);
+            var content = Backend.Get(request);
+
+            for (int i = 0; i < content.Count; i++)
+            {
+                String user_request = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                var ListUsers_Name = Backend.Get(user_request);
+                var Users_Name = ListUsers_Name[0].Username;
+                var Users_Role = content[i].Role;
+                Users_ListBox.Items.Add("[" + Users_Role + "] " + Users_Name);
+            }
         }
     }
 }

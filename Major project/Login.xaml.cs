@@ -22,6 +22,8 @@ namespace Major_project
         BackendConnect Backend = new BackendConnect();
         MainWindow mainWindow;
 
+        public bool dontclose = true;
+
         public Login(MainWindow window)
         {
             InitializeComponent();
@@ -29,7 +31,23 @@ namespace Major_project
             mainWindow = window;
         }
 
-        private async void Send_login(object sender, RoutedEventArgs e)
+        private void Enter_Login(object sender, KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Return)
+                {
+                    Try_Login();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void Click_Login(object sender, RoutedEventArgs e)
+        {
+            Try_Login();
+        }
+
+        private async void Try_Login()
         {
             BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
             {
@@ -37,7 +55,7 @@ namespace Major_project
             };
             string request = BackendConnect.server + "auth/login";
             var content = await Backend.Post(data, request);
-            
+
             try
             {
                 var user_id = content[0].Id;
@@ -45,11 +63,20 @@ namespace Major_project
                 Properties.Settings.Default.Save();
                 mainWindow.LoggedIn();
                 mainWindow.Show();
+                dontclose = false;
                 this.Close();
             }
             catch
             {
                 login_error.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Closed_Login(object sender, EventArgs e)
+        {
+            if (dontclose)
+            {
+                Application.Current.Shutdown();
             }
         }
     }
