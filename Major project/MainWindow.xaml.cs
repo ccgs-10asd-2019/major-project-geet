@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -45,6 +46,16 @@ namespace Major_project
             GetChats(current_User.User_id);
         }
 
+        private void Logout_clicked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.id = 0;
+            Properties.Settings.Default.Save();
+            current_User.User_id = 0;
+            Server_list.Items.Clear();
+            chat.Items.Clear();
+            LogIn();
+        }
+
 
         public class Current_User
         {
@@ -79,7 +90,7 @@ namespace Major_project
             chat.Items.Clear();
             current_User.Chat_id = Int32.Parse(b.Tag.ToString());
             current_User.Lastest_message = 0;
-            GetMessages(Int32.Parse(b.Tag.ToString()));
+            GetMessages();
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += Auto_GetMessages;
@@ -90,11 +101,13 @@ namespace Major_project
 
         private void Auto_GetMessages(object sender, EventArgs e)
         {
-            GetMessages(current_User.Chat_id);
+            GetMessages();
         }
 
-        public void GetMessages(int id)
+        public void GetMessages()
         {
+            var id = current_User.Chat_id;
+
             if (id != 0)
             {
                 String request = BackendConnect.server + "messages/" + id.ToString() + "/since/" + current_User.Lastest_message.ToString();
@@ -115,11 +128,20 @@ namespace Major_project
             }
         }
 
-        
-
         private void Button_SendMessage(object sender, RoutedEventArgs e)
         {
             SendMessage();
+        }
+
+        private void Enter_SendMessage(object sender, KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Return)
+                {
+                    SendMessage();
+                    e.Handled = true;
+                }
+            }
         }
 
         public async void SendMessage()
@@ -133,29 +155,10 @@ namespace Major_project
                 Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
             };
             String request = BackendConnect.server + "message";
-            var post = await Backend.Post(data, request);
+            //var post = await Backend.Post(data, request);
+            await Task.Run(async () => await Backend.Post(data, request));
             message_textbox.Text = String.Empty;
-        }
-
-        private void Logout_clicked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.id = 0;
-            Properties.Settings.Default.Save();
-            current_User.User_id = 0;
-            Server_list.Items.Clear();
-            chat.Items.Clear();
-            LogIn();
-        }
-
-        private void Enter_clicked(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            {
-                if (e.Key == Key.Return)
-                {
-                    SendMessage();
-                    e.Handled = true;
-                }
-            }
+            GetMessages();
         }
     }
 }
