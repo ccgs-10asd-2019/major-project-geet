@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Major_project
 {
@@ -116,10 +117,15 @@ namespace Major_project
 
         
 
-        private async void SendMessage(object sender, RoutedEventArgs e)
+        private void Button_SendMessage(object sender, RoutedEventArgs e)
+        {
+            SendMessage();
+        }
+
+        public async void SendMessage()
         {
             DateTime time = DateTime.UtcNow;
-            BackendConnect.Send_message_class data = new BackendConnect.Send_message_class()
+            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
             {
                 Chat_id = current_User.Chat_id,
                 User_id = current_User.User_id,
@@ -128,6 +134,7 @@ namespace Major_project
             };
             String request = BackendConnect.server + "message";
             var post = await Backend.Post(data, request);
+            message_textbox.Text = String.Empty;
         }
 
         private void Logout_clicked(object sender, RoutedEventArgs e)
@@ -138,6 +145,17 @@ namespace Major_project
             Server_list.Items.Clear();
             chat.Items.Clear();
             LogIn();
+        }
+
+        private void Enter_clicked(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Return)
+                {
+                    SendMessage();
+                    e.Handled = true;
+                }
+            }
         }
     }
 }

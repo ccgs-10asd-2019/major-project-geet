@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
         Title="Login" Height="400" Width="350">
-   
+
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <PasswordBox HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Center" Background="White" BorderThickness="3" Width="226" Password="" Height="34" FontSize="20"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,80,0,0" TextWrapping="Wrap" Text="(Project Title)" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" FontFamily="Arial Black"/>
         <TextBox x:Name="text_username" HorizontalAlignment="Center" Height="34" Margin="0,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="226" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3" FontSize="20"/>
         <Button Content="Login" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White" Click="Send_login"/>
+        <TextBlock x:Name="login_error" Margin="10,131,0,0" TextWrapping="Wrap" Text="Username or Password is wrong" TextAlignment="Center" Width="324" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#FFFF0D0D"/>
     </Grid>
-   
+
 </Window>

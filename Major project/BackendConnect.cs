@@ -18,7 +18,18 @@ namespace Major_project
         static HttpClient httpClient = new HttpClient();
         static readonly JavaScriptSerializer jss = new JavaScriptSerializer();
 
-        public class Send_message_class
+        public class Post_check
+        {
+            public string Task { get; set; }
+            public string Content { get; set; }
+        }
+
+        public class Post_return
+        {
+            public string Id { get; set; }
+        }
+
+        public class Post_message_class
         {
             public int Chat_id { get; set; }
             public int User_id { get; set; }
@@ -69,11 +80,24 @@ namespace Major_project
             return content;
         }
 
-        public async Task<string> Post(Send_message_class data, String request)
+        public async Task<List<Post_return>> Post(Post_message_class data, String request)
         {
             var response = await httpClient.PostAsJsonAsync(request, data);
             response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
+            var json = await response.Content.ReadAsStringAsync();
+
+            var check = JsonConvert.DeserializeObject<List<Post_check>>(json);
+            List<Post_return> content;
+
+            if (check[0].Task == "false")
+            {
+                Console.WriteLine(check[0].Content);
+                content = JsonConvert.DeserializeObject<List<Post_return>>("[]");
+            }
+            else
+            {
+                content = JsonConvert.DeserializeObject<List<Post_return>>(check[0].Content);
+            }
             return content;
         }
     }

@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app, tools){
 
     app.get('/users/:chat_id', (req, res) => {
         //returns users in a chat
@@ -30,38 +30,43 @@ module.exports = function(app){
     
     })
 
-    app.get('/auth/register', (req, res) => {
+    app.post('/auth/register', (req, res) => {
         //register a new user
 
-        let username = "bob" //will become a post request that takes a username and probs password
+        let username = req.body.username
 
         //create new user record
         let sql = 'INSERT INTO "main"."users" ("username") VALUES (?)'
-        let values = [username]
-        db.main.run(sql, values)
+        let params = [username]
+        db.main.run(sql, params, function(err){
+            if (tools.no_err(err, req, res)) { 
+                let user_id = this.lastID
 
-        //get id of new user
-        sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
-        db.main.all(sql, [], (err, rows) => {
-
-            //create table to store users chats
-            sql = 'CREATE TABLE "' + rows[0].id + '" ( "chat" INTEGER UNIQUE )'
-            db.users_chats.run(sql, [])
-
-            res.send(rows)
+                //create table to store users chats
+                sql = 'CREATE TABLE "' + user_id + '" ( "chat" INTEGER UNIQUE )'
+                db.users_chats.run(sql, [], function(err){ 
+                    if (tools.no_err(err, req, res)) {
+                        tools.return(res, { id: user_id  })
+                    } 
+                })
+            }
         })
     })
 
     app.post('/auth/login', (req, res) => {
-        //register a new user
+        //login
 
         let username = req.body.Username
 
-        //get id of new user
+        //get id of user
         sql = 'SELECT id FROM `users` WHERE "username"="' + username + '"'
         db.main.get(sql, [], (err, result) => {
-            if (result == undefined) { res.send(null) } 
-            else { res.send(String(result.id)) }
+            if (tools.no_err(err, req, res)) { 
+                if (result == undefined) 
+                    { tools.return(res, { id: null }) } 
+                else 
+                    { tools.return(res, result) }
+            }
         })
     })
 }
