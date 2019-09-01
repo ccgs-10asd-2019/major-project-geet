@@ -65,11 +65,14 @@ module.exports = function(app, tools){
                 })
 
                 //create a table to store the messages of the chat
+
                 sql = `CREATE TABLE "` + chat_id + `" (
-                    "id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+                	"id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
                     "user_id"	INTEGER,
-                    "time_submitted"    INTEGER,
-                    "message"	TEXT 
+                    "time_submitted"	INTEGER,
+                    "message"	TEXT,
+                    "file_id"	INTEGER,
+                    "file_name"	TEXT
                 )`
 
                 db.chat.run(sql, [], function(err){ tools.no_err(err, req, res) })

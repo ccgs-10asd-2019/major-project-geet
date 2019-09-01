@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Major_project
 {
@@ -140,8 +144,28 @@ namespace Major_project
                         String Users_Name = BackendConnect.server + "user/" + content[i].User_id.ToString();
                         var ListUsers_Name = Backend.Get(Users_Name);
                         Users_Name = ListUsers_Name[0].Username;
-                        Chat_ListBox.Items.Add(Tools.ConvertFromUnixTimestamp(content[i].Time_submitted) + " | " + Users_Name + ": " + content[i].Message);
+
+                        var time = Tools.ConvertFromUnixTimestamp(content[i].Time_submitted);
+
+                        if (content[i].Message != null)
+                        {
+                            Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].Message);
+                        }
+                        else
+                        {
+                            //Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
+                            var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
+                            Uri uri = new Uri(Source, UriKind.Absolute);
+                            Image image = new Image();
+
+                            ImageSource imgSource = new BitmapImage(uri);
+                            image.Source = imgSource;
+                            image.Width = 100;
+
+                            Chat_ListBox.Items.Add(image);
+                        }
                     }
+                        
                 }
             }
         }
@@ -198,6 +222,29 @@ namespace Major_project
                 var Users_Name = ListUsers_Name[0].Username;
                 var Users_Role = content[i].Role;
                 Users_ListBox.Items.Add("[" + Users_Role + "] " + Users_Name);
+            }
+        }
+
+        private async void ImagePanel_Drop(object sender, DragEventArgs e)
+        {
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+
+                DateTime time = DateTime.UtcNow;
+                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                {
+                    Chat_id = current_User.Chat_id,
+                    User_id = current_User.User_id,
+                    Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds(),
+                };
+
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    await Task.Run(async () => await Backend.UploadFile(data, files[i]));
+                }
             }
         }
     }

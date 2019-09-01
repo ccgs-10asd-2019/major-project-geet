@@ -38,8 +38,10 @@
         </Border>
         <ListBox x:Name="Users_ListBox" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5,40,5,10" Grid.Row="1" Grid.Column="1"/>
 
+        <StackPanel x:Name="ImagePanel" Margin="5,10,10,5" Drop="ImagePanel_Drop" AllowDrop="true" Grid.Row="1" Grid.Column="2">
+            <ListBox x:Name="Chat_ListBox" Background="#66813A47" Grid.Column="2" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2" Height="390"/>
+        </StackPanel>
 
-        <ListBox x:Name="Chat_ListBox" Margin="5,10,10,5" Background="#66813A47" Grid.Column="2" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2"/>
         <TextBox x:Name="Message_TextBox" Margin="5,0,70,10" Height="24" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" Grid.Column="2" PreviewKeyDown="Enter_SendMessage" BorderBrush="Black"/>
         <Button x:Name="Send_Button" Margin="0,0,10,10" Content="Send" HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Bottom" Width="60" Height="24" Background="#FF172E64" Click="Button_SendMessage" Foreground="White" Grid.Column="2" BorderBrush="Black"/>
 

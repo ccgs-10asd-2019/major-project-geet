@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
+using System.Text;
 
 namespace Major_project
 {
@@ -36,6 +38,8 @@ namespace Major_project
             public string Message { get; set; } 
             public long Current_time { get; set; }
             public string Username { get; set; }
+            public string File_id { get; set; }
+            public string File_name { get; set; }
         }
 
         public class Get_messages_class
@@ -49,6 +53,8 @@ namespace Major_project
             public string Username { get; set; }
             public string Chat { get; set; }
             public string Name { get; set; }
+            public string File_id { get; set; }
+            public string File_name { get; set; }
         }
 
         public List<Get_messages_class> Get(String request)
@@ -101,6 +107,43 @@ namespace Major_project
                 content = JsonConvert.DeserializeObject<List<Post_return>>(check[0].Content);
             }
             return content;
+        }
+
+        async public Task<bool> UploadFile(Post_message_class data, string FilePath)
+        {
+
+            var filetype = MimeTypes.GetMimeType(Path.GetFileName(FilePath));
+            byte[] FileData = System.IO.File.ReadAllBytes(FilePath);
+
+            var requestContent = new MultipartFormDataContent();
+
+            var FileContent = new ByteArrayContent(FileData);
+            FileContent.Headers.ContentType =
+                MediaTypeHeaderValue.Parse(filetype);
+
+            requestContent.Add(FileContent, "file", Path.GetFileName(FilePath));
+
+            var response = await httpClient.PostAsync(server + "upload", requestContent);
+
+            try {
+                response.EnsureSuccessStatusCode();
+            } catch {
+                Console.WriteLine("file to big");
+                return false;
+            }
+
+            data.File_id = await response.Content.ReadAsStringAsync();
+            data.File_name = Path.GetFileName(FilePath);
+
+            if (data.File_id == "fail")
+            {
+                Console.WriteLine("server error");
+                return false;
+            }
+
+            await Post(data, server + "addfiletochat");
+
+            return true;
         }
     }
 }
