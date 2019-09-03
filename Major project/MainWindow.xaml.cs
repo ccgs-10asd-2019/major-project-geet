@@ -189,7 +189,6 @@ namespace Major_project
         public void GetUsersInAChat()
         {
             String request = BackendConnect.server + "users/" +  current_User.Chat_id.ToString();
-            Console.WriteLine(request);
             var content = Backend.Get(request);
 
             for (int i = 0; i < content.Count; i++)
