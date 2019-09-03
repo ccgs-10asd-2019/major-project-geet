@@ -33,6 +33,39 @@ module.exports = function(app, tools, check, upload, path, fs){
     }
   })
 
+  app.post('/delete', (req, res) => {
+    
+    user_id = req.body.User_id
+    chat_id = req.body.Chat_id
+    message_id = req.body.Message_id
+    
+    if(tools.no_err(null, req, res)) {
+
+      let sql = 'SELECT `role` FROM `' + chat_id + '` WHERE "id"="' + user_id + '"'
+      console.log(sql)
+
+      db.chat_users.get(sql, [], (err, result) => { 
+        if(tools.no_err(err, req, res)) {
+
+          if(result.role == 'owner' || result.role == 'admin') {
+            let sql = 'DELETE FROM `' + chat_id + '` WHERE "id"="' + message_id + '"'
+            console.log(sql)
+
+            db.chat.run(sql, [], function(err){ 
+              if(tools.no_err(err, req, res)) {
+                tools.return(res, { id: this.lastID  })
+              }
+            })
+          } else {
+            let result = { id: this.lastID  }
+            let content = "[" + JSON.stringify(result) + "]"
+            res.send([{ "task": false, "content": content }]) 
+          }
+        }
+      })
+    }
+  })
+
   app.get('/file/:chat_id/:file_id', (req, res) => {
 
     let sql = 'SELECT "file_name" FROM `' + req.params.chat_id + '` WHERE "file_id" = "' + req.params.file_id +'"'

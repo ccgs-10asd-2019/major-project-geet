@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
     res.send("all g") //all is good
 })
 
+app.get('/ping', (req, res) => {
+    res.send([{"pong":true}]) //all is good
+})
+
 require('./components/messages')(app, tools, check, upload, path, fs);
 require('./components/chats')(app, tools);
 require('./components/users')(app, tools);

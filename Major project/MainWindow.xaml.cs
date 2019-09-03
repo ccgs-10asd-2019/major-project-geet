@@ -149,18 +149,54 @@ namespace Major_project
 
                         if (content[i].Message != null)
                         {
-                            Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].Message);
+
+                            var converter = new System.Windows.Media.BrushConverter();
+
+                            Button Delete_button = new Button
+                            {
+                                Content = "[x]",
+                                Background = (Brush)converter.ConvertFromString("transparent"),
+                                BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                                Foreground = (Brush)converter.ConvertFromString("white")
+                            };
+                            Delete_button.Click += new RoutedEventHandler(Message_Click);
+                            Delete_button.Tag = content[i].Id;
+
+                            TextBlock Message = new TextBlock
+                            {
+                                Text = time + " | " + Users_Name + ": " + content[i].Message,
+                                Margin = new Thickness(20, 0, 0, 0)
+                            };
+
+                            Canvas all = new Canvas
+                            {
+                                Height = 25
+                            };
+
+                            all.Children.Add(Delete_button);
+                            all.Children.Add(Message);
+
+                            Chat_ListBox.Items.Add(all);
                         }
                         else
                         {
-                            //Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
+                            Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
                             var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
                             Uri uri = new Uri(Source, UriKind.Absolute);
-                            Image image = new Image();
-
                             ImageSource imgSource = new BitmapImage(uri);
-                            image.Source = imgSource;
-                            image.Width = 100;
+
+                            Image image = new Image
+                            {
+                                Source = imgSource,
+                                Width = 100
+                            };
+
+                            image.MouseLeftButtonUp += (s, e) =>
+                            {
+                                Image image_clicked = (Image)s;
+                                Image_Page image_Page = new Image_Page(image_clicked.Source);
+                                image_Page.Show();
+                            };
 
                             Chat_ListBox.Items.Add(image);
                         }
@@ -168,6 +204,24 @@ namespace Major_project
                         
                 }
             }
+        }
+
+        async void Message_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+            {
+                Chat_id = current_User.Chat_id,
+                User_id = current_User.User_id,
+                Message_id = Int32.Parse(b.Tag.ToString()),
+            };
+            String request = BackendConnect.server + "delete";
+
+            await Task.Run(async () => await Backend.Post(data, request));
+
+
+
         }
 
         private void Button_SendMessage(object sender, RoutedEventArgs e)

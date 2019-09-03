@@ -39,7 +39,14 @@
         <ListBox x:Name="Users_ListBox" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5,40,5,10" Grid.Row="1" Grid.Column="1"/>
 
         <StackPanel x:Name="ImagePanel" Margin="5,10,10,5" Drop="ImagePanel_Drop" AllowDrop="true" Grid.Row="1" Grid.Column="2">
-            <ListBox x:Name="Chat_ListBox" Background="#66813A47" Grid.Column="2" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2" Height="390"/>
+            <ListBox x:Name="Chat_ListBox" Background="#66813A47" Grid.Column="2" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2" Height="390">
+                <Canvas Height="25">
+                    <Button Content="[x]"/>
+                    <TextBlock Text="TextBlock" Margin="20,0,0,0"/>
+
+                </Canvas>
+
+            </ListBox>
         </StackPanel>
 
         <TextBox x:Name="Message_TextBox" Margin="5,0,70,10" Height="24" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" Grid.Column="2" PreviewKeyDown="Enter_SendMessage" BorderBrush="Black"/>

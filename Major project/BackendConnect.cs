@@ -35,6 +35,7 @@ namespace Major_project
         {
             public int Chat_id { get; set; }
             public int User_id { get; set; }
+            public int Message_id { get; set; }
             public string Message { get; set; } 
             public long Current_time { get; set; }
             public string Username { get; set; }
@@ -55,6 +56,7 @@ namespace Major_project
             public string Name { get; set; }
             public string File_id { get; set; }
             public string File_name { get; set; }
+            public bool Pong { get; set; }
         }
 
         public List<Get_messages_class> Get(String request)
