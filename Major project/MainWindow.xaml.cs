@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -181,14 +183,29 @@ namespace Major_project
                             else
                             {
 
-                                TextBlock Message = new TextBlock
-                                {
-                                    Text = time + " | " + Users_Name + ": " + content[i].File_name,
-                                    Margin = new Thickness(20, 0, 0, 0)
-                                };
+                            List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
+                            var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
 
-                                //Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
-                                var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
+                            Canvas all = new Canvas
+                            {
+                            };
+
+                            Button download_button = new Button
+                            {
+                                Content = time + " | " + Users_Name + ": " + content[i].File_name,
+                                Background = (Brush)converter.ConvertFromString("transparent"),
+                                BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                                Foreground = (Brush)converter.ConvertFromString("white"),
+                                Margin = new Thickness(20, 0, 0, 0)
+                            };
+                            download_button.Click += new RoutedEventHandler(Download_click);
+                            download_button.Tag = content[i];
+
+                            
+
+                            if (ImageExtensions.Contains(Path.GetExtension(content[i].File_name).ToUpperInvariant()))
+                            {
+                                all.Height = 125;
                                 Uri uri = new Uri(Source, UriKind.Absolute);
                                 ImageSource imgSource = new BitmapImage(uri);
 
@@ -206,16 +223,19 @@ namespace Major_project
                                     image_Page.Show();
                                 };
 
-                                Canvas all = new Canvas
-                                {
-                                    Height = 125
-                                };
+                                all.Children.Add(image);
+                            }
+                            else
+                            {
+                                all.Height = 25 ;
+                                
+                            }
 
                                 all.Children.Add(Delete_button);
-                                all.Children.Add(Message);
-                                all.Children.Add(image);
+                            all.Children.Add(download_button);
 
-                                Chat_ListBox.Items.Add(all);
+
+                            Chat_ListBox.Items.Add(all);
                             }
                         
                     }
@@ -241,6 +261,27 @@ namespace Major_project
             Chat_ListBox.Items.Clear();
             current_User.Lastest_message = 0;
             GetMessages();
+
+        }
+
+        void Download_click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            BackendConnect.Get_messages_class file = (BackendConnect.Get_messages_class)b.Tag;
+
+            SaveFileDialog dialog = new SaveFileDialog()
+            {
+                Filter = "All(*.*)|*",
+                FileName = file.File_name
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                WebClient Client = new WebClient();
+                var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + file.File_id; ;
+                Client.DownloadFile(Source, dialog.FileName);
+            }
 
         }
 
