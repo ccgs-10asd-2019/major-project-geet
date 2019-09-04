@@ -147,9 +147,6 @@ namespace Major_project
 
                         var time = Tools.ConvertFromUnixTimestamp(content[i].Time_submitted);
 
-                        if (content[i].Message != null)
-                        {
-
                             var converter = new System.Windows.Media.BrushConverter();
 
                             Button Delete_button = new Button
@@ -162,44 +159,65 @@ namespace Major_project
                             Delete_button.Click += new RoutedEventHandler(Message_Click);
                             Delete_button.Tag = content[i].Id;
 
-                            TextBlock Message = new TextBlock
+                            if (content[i].Message != null)
                             {
-                                Text = time + " | " + Users_Name + ": " + content[i].Message,
-                                Margin = new Thickness(20, 0, 0, 0)
-                            };
 
-                            Canvas all = new Canvas
+                                TextBlock Message = new TextBlock
+                                {
+                                    Text = time + " | " + Users_Name + ": " + content[i].Message,
+                                    Margin = new Thickness(20, 0, 0, 0)
+                                };
+
+                                Canvas all = new Canvas
+                                {
+                                    Height = 25
+                                };
+
+                                all.Children.Add(Delete_button);
+                                all.Children.Add(Message);
+
+                                Chat_ListBox.Items.Add(all);
+                            }
+                            else
                             {
-                                Height = 25
-                            };
 
-                            all.Children.Add(Delete_button);
-                            all.Children.Add(Message);
+                                TextBlock Message = new TextBlock
+                                {
+                                    Text = time + " | " + Users_Name + ": " + content[i].File_name,
+                                    Margin = new Thickness(20, 0, 0, 0)
+                                };
 
-                            Chat_ListBox.Items.Add(all);
-                        }
-                        else
-                        {
-                            Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
-                            var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
-                            Uri uri = new Uri(Source, UriKind.Absolute);
-                            ImageSource imgSource = new BitmapImage(uri);
+                                //Chat_ListBox.Items.Add(time + " | " + Users_Name + ": " + content[i].File_name);
+                                var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
+                                Uri uri = new Uri(Source, UriKind.Absolute);
+                                ImageSource imgSource = new BitmapImage(uri);
 
-                            Image image = new Image
-                            {
-                                Source = imgSource,
-                                Width = 100
-                            };
+                                Image image = new Image
+                                {
+                                    Source = imgSource,
+                                    Height = 100,
+                                    Margin = new Thickness(0, 20, 0, 0)
+                                };
 
-                            image.MouseLeftButtonUp += (s, e) =>
-                            {
-                                Image image_clicked = (Image)s;
-                                Image_Page image_Page = new Image_Page(image_clicked.Source);
-                                image_Page.Show();
-                            };
+                                image.MouseLeftButtonUp += (s, e) =>
+                                {
+                                    Image image_clicked = (Image)s;
+                                    Image_Page image_Page = new Image_Page(image_clicked.Source);
+                                    image_Page.Show();
+                                };
 
-                            Chat_ListBox.Items.Add(image);
-                        }
+                                Canvas all = new Canvas
+                                {
+                                    Height = 125
+                                };
+
+                                all.Children.Add(Delete_button);
+                                all.Children.Add(Message);
+                                all.Children.Add(image);
+
+                                Chat_ListBox.Items.Add(all);
+                            }
+                        
                     }
                         
                 }
@@ -220,7 +238,9 @@ namespace Major_project
 
             await Task.Run(async () => await Backend.Post(data, request));
 
-
+            Chat_ListBox.Items.Clear();
+            current_User.Lastest_message = 0;
+            GetMessages();
 
         }
 

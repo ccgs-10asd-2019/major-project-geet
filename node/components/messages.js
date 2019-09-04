@@ -48,12 +48,24 @@ module.exports = function(app, tools, check, upload, path, fs){
         if(tools.no_err(err, req, res)) {
 
           if(result.role == 'owner' || result.role == 'admin') {
-            let sql = 'DELETE FROM `' + chat_id + '` WHERE "id"="' + message_id + '"'
+            let sql = 'SELECT `file_id` FROM `' + chat_id + '` WHERE "id"="' + message_id + '"'
             console.log(sql)
 
-            db.chat.run(sql, [], function(err){ 
+            db.chat.get(sql, [], (err, result) => { 
               if(tools.no_err(err, req, res)) {
-                tools.return(res, { id: this.lastID  })
+
+                if(result.file_id != undefined) {
+                  fs.unlinkSync(path.join(__dirname, '../uploads/' + result.file_id))
+                }
+
+                let sql = 'DELETE FROM `' + chat_id + '` WHERE "id"="' + message_id + '"'
+                console.log(sql)
+
+                db.chat.run(sql, [], function(err){ 
+                  if(tools.no_err(err, req, res)) {
+                    tools.return(res, { id: this.lastID  })
+                  }
+                })
               }
             })
           } else {
