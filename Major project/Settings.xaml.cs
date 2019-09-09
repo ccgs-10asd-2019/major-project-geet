@@ -45,6 +45,7 @@ namespace Major_project
             this.Close();
             Themes Themes_Page = new Themes();
             Themes_Page.Show();
+            mainWindow.Hide();
         }
     }
 }
