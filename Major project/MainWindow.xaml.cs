@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Major_project
 {
@@ -203,7 +204,11 @@ namespace Major_project
 
         public void Change_colours()
         {
-            Console.WriteLine("it woooooooooorrrrrrrked");
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl)));
+            //this.BackgroundImageUrl = Properties.Settings.Default.BackgroundUrl;
+            var imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl, UriKind.Relative));
+            MainBackground.Background = imgBrush;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Major_project
             var Scheme1 = "#FF9900";
             var Scheme2 = "#3DD3E9";
             Change_colour(Scheme1, Scheme2);
-            (Application.Current.MainWindow as MainWindow).Change_colours();
         }
 
         private void Colour2_click(object sender, RoutedEventArgs e)
@@ -59,7 +58,8 @@ namespace Major_project
         private void Background3_clicked(object sender, RoutedEventArgs e)
         {
             this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
-            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg");
+            Properties.Settings.Default.BackgroundUrl = ("images/orange.jpg");
+            (Application.Current.MainWindow as MainWindow).Change_colours();
         }
 
         public void Change_colour(string Scheme1, string Scheme2)
@@ -69,6 +69,13 @@ namespace Major_project
             var brush2 = (Brush)converter.ConvertFromString(Scheme2);
             Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
+        }
+
+        private void Exit_themes(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            MainWindow mainwindow = new MainWindow();
+            mainwindow.Show();
         }
     }
 }
