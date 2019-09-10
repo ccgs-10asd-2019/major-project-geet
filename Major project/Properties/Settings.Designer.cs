@@ -34,5 +34,17 @@ namespace Major_project.Properties {
                 this["id"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string BackgroundUrl {
+            get {
+                return ((string)(this["BackgroundUrl"]));
+            }
+            set {
+                this["BackgroundUrl"] = value;
+            }
+        }
     }
 }
