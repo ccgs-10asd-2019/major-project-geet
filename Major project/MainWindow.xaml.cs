@@ -52,6 +52,9 @@ namespace Major_project
             Username_TextBlock.Text = Username[0].Username;
 
             GetChats(current_User.User_id);
+
+            // function to theme main page
+            Change_colours();
         }
 
         public void Logout()
@@ -149,6 +152,7 @@ namespace Major_project
 
         private void Button_SendMessage(object sender, RoutedEventArgs e)
         {
+            //MainBackground.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
             SendMessage();
         }
 
@@ -208,7 +212,9 @@ namespace Major_project
             //this.BackgroundImageUrl = Properties.Settings.Default.BackgroundUrl;
             var imgBrush = new ImageBrush();
             imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl, UriKind.Relative));
+            Console.WriteLine(Properties.Settings.Default.BackgroundUrl);
             MainBackground.Background = imgBrush;
+            //MainBackground.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
         }
     }
 }

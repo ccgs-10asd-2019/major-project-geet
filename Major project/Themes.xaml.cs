@@ -53,13 +53,16 @@ namespace Major_project
         private void Background2_clicked(object sender, RoutedEventArgs e)
         {
             this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\Bluebackground1.jpg")));
+            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\Bluebackground1.jpg");
+            Properties.Settings.Default.Save();
         }
 
         private void Background3_clicked(object sender, RoutedEventArgs e)
         {
             this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
-            Properties.Settings.Default.BackgroundUrl = ("images/orange.jpg");
-            (Application.Current.MainWindow as MainWindow).Change_colours();
+            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg");
+            Properties.Settings.Default.Save();
+            //(Application.Current.MainWindow as MainWindow).Change_colours();
         }
 
         public void Change_colour(string Scheme1, string Scheme2)
