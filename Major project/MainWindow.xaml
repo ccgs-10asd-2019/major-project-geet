@@ -16,9 +16,9 @@
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="35*"/>
-            <ColumnDefinition Width="35*"/>
-            <ColumnDefinition Width="133*"/>
+            <ColumnDefinition Width="132"/>
+            <ColumnDefinition Width="132"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Border x:Name="Upper_Blue_Border" Margin="10,10,5,5" BorderBrush="Black" BorderThickness="0" Background="#FF172E64" >
