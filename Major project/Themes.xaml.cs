@@ -40,14 +40,15 @@ namespace Major_project
 
         private void Colour3_click(object sender, RoutedEventArgs e)
         {
-            var Scheme1 = "#00060f";
-            var Scheme2 = "#6edeff";
-            Change_colour(Scheme1, Scheme2);
+            Properties.Settings.Default.Colour1 = "#00060f";
+            Properties.Settings.Default.Colour2 = "#6edeff";
         }
 
         private void Background1_clicked(object sender, RoutedEventArgs e)
         {
             this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\blue.jpg")));
+            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\blue.jpg");
+            Properties.Settings.Default.Save();
         }
 
         private void Background2_clicked(object sender, RoutedEventArgs e)
@@ -65,11 +66,11 @@ namespace Major_project
             //(Application.Current.MainWindow as MainWindow).Change_colours();
         }
 
-        public void Change_colour(string Scheme1, string Scheme2)
+        public void Change_colour()
         {
             var converter = new BrushConverter();
-            var brush1 = (Brush)converter.ConvertFromString(Scheme1);
-            var brush2 = (Brush)converter.ConvertFromString(Scheme2);
+            var brush1 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour1);
+            var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
             Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
         }

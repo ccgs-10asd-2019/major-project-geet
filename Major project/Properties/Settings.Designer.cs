@@ -46,5 +46,29 @@ namespace Major_project.Properties {
                 this["BackgroundUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Colour1 {
+            get {
+                return ((string)(this["Colour1"]));
+            }
+            set {
+                this["Colour1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string Colour2 {
+            get {
+                return ((string)(this["Colour2"]));
+            }
+            set {
+                this["Colour2"] = value;
+            }
+        }
     }
 }
