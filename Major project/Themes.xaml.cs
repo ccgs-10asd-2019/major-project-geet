@@ -26,16 +26,14 @@ namespace Major_project
 
         private void Colour1_click(object sender, RoutedEventArgs e)
         {
-            var Scheme1 = "#FF9900";
-            var Scheme2 = "#3DD3E9";
-            Change_colour(Scheme1, Scheme2);
+            Properties.Settings.Default.Colour2 = "#FF9900";
+            Properties.Settings.Default.Colour2 = "#3DD3E9";
         }
 
         private void Colour2_click(object sender, RoutedEventArgs e)
         {
-            var Scheme1 = "#00270d";
-            var Scheme2 = "#00ff04";
-            Change_colour(Scheme1, Scheme2);
+            Properties.Settings.Default.Colour2 = "#00270d";
+            Properties.Settings.Default.Colour2 = "#00ff04";
         }
 
         private void Colour3_click(object sender, RoutedEventArgs e)
@@ -73,6 +71,7 @@ namespace Major_project
             var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
             Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
+    
         }
 
         private void Exit_themes(object sender, RoutedEventArgs e)

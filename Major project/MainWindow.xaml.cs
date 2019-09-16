@@ -211,11 +211,16 @@ namespace Major_project
             //this.BackgroundImageUrl = Properties.Settings.Default.BackgroundUrl;
             var imgBrush = new ImageBrush();
             imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl, UriKind.Relative));
-            Console.WriteLine(Properties.Settings.Default.BackgroundUrl);
             MainBackground.Background = imgBrush;
+            var brush1_string = Properties.Settings.Default.Colour1;
+            var brush2_string = Properties.Settings.Default.Colour2;
             var converter = new BrushConverter();
-            var brush1 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour1);
-            var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
+            var brush1 = (Brush)converter.ConvertFromString("#FF9900");
+            var brush2 = (Brush)converter.ConvertFromString(brush2_string);
+            Chat_ListBox.Background = brush1;
+            //Message_TextBox.Background = brush1;
+            //Users_ListBox.Background = brush1;
+            //Lower_Red_Border.Background = brush1;
 
             //MainBackground.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
         }
