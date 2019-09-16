@@ -7,6 +7,7 @@ namespace Major_project
 {
     public partial class MainWindow : Window
     {
+        //Mr. Nolan adding a comment to demo something hi guys
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
 
