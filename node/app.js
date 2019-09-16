@@ -1,7 +1,7 @@
 //consts / imports
 const express = require('express')
 const app = express()
-const port = 3000 //server port
+const port = 4000 //server port
 app.use(express.json()); //adds json functionality
 const multer = require('multer');
 const upload = multer({
@@ -36,5 +36,6 @@ app.get('/ping', (req, res) => {
 require('./components/messages')(app, tools, check, upload, path, fs);
 require('./components/chats')(app, tools);
 require('./components/users')(app, tools);
+require('./components/collab')(app, tools);
 
 app.listen(port, () => console.log(`listening on port ${port}`));

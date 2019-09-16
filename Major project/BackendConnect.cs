@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using System.Collections.Specialized;
 
 namespace Major_project
 {
     public class BackendConnect
     {
         static readonly string ip = "127.0.0.1";
-        static readonly string port = "3000";
+        static readonly string port = "4000";
         static readonly string protocol = "http";
         public static readonly string server = protocol + "://" + ip + ":" + port + "/";
 
@@ -33,6 +34,7 @@ namespace Major_project
 
         public class Post_message_class
         {
+            public int Id { get; set; }
             public int Chat_id { get; set; }
             public int User_id { get; set; }
             public int Message_id { get; set; }
@@ -41,6 +43,9 @@ namespace Major_project
             public string Username { get; set; }
             public string File_id { get; set; }
             public string File_name { get; set; }
+            public string Collab { get; set; }
+            //public List<string> Collab { get; set; }
+            //public IEnumerable<string> Collab { get; set; }
         }
 
         public class Get_messages_class
@@ -57,6 +62,8 @@ namespace Major_project
             public string File_id { get; set; }
             public string File_name { get; set; }
             public bool Pong { get; set; }
+            public string Collab_lastedit { get; set; }
+            public string Collab { get; set; }
         }
 
         public List<Get_messages_class> Get(String request)

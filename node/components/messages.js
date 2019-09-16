@@ -4,6 +4,7 @@ module.exports = function(app, tools, check, upload, path, fs){
       //returns a list of all the messages in a chat
     
     let sql = 'SELECT * FROM `' + req.params.chat_id + '` WHERE "time_submitted">"' + req.params.since + '"'
+    console.log(sql)
   
     db.chat.all(sql, [], (err, rows) => {
       if (err) { res.send(err) } 
@@ -23,6 +24,7 @@ module.exports = function(app, tools, check, upload, path, fs){
     if(tools.no_err(null, req, res)) {
 
       let sql = 'INSERT INTO "' + req.body.Chat_id + '"("user_id","time_submitted","message") VALUES (?,?,?);'
+      console.log(sql)
       let params = [req.body.User_id, req.body.Current_time, req.body.Message]
 
       db.chat.run(sql, params, function(err){ 
@@ -55,6 +57,7 @@ module.exports = function(app, tools, check, upload, path, fs){
               if(tools.no_err(err, req, res)) {
 
                 if(result.file_id != undefined) {
+                  console.log(path.join(__dirname, '../uploads/' + result.file_id))
                   fs.unlinkSync(path.join(__dirname, '../uploads/' + result.file_id))
                 }
 
@@ -81,6 +84,8 @@ module.exports = function(app, tools, check, upload, path, fs){
   app.get('/file/:chat_id/:file_id', (req, res) => {
 
     let sql = 'SELECT "file_name" FROM `' + req.params.chat_id + '` WHERE "file_id" = "' + req.params.file_id +'"'
+    console.log(sql)
+
     db.chat.get(sql, [], (err, result) => { 
       if(tools.no_err(err, req, res)) {
         res.download(path.join(__dirname, '../uploads/' + req.params.file_id), result.file_name)
@@ -100,6 +105,7 @@ module.exports = function(app, tools, check, upload, path, fs){
     if(tools.no_err(null, req, res)) {
 
       let sql = 'INSERT INTO "' + req.body.Chat_id + '"("user_id","time_submitted","file_id","file_name") VALUES (?,?,?,?);'
+      console.log(sql)
       let params = [req.body.User_id, req.body.Current_time, req.body.File_id, req.body.File_name]
 
       db.chat.run(sql, params, function(err){ 

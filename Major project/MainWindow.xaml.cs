@@ -1,38 +1,55 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
-namespace Major_project
+﻿namespace Major_project
 {
+    using Microsoft.Win32;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
+    /// <summary>
+    /// Defines the <see cref="MainWindow" />
+    /// </summary>
     public partial class MainWindow : Window
     {
-        BackendConnect Backend = new BackendConnect();
-        Tools Tools = new Tools();
+        /// <summary>
+        /// Defines the Backend
+        /// </summary>
+        internal BackendConnect Backend = new BackendConnect();
 
-        Current_User current_User = new Current_User()
+        /// <summary>
+        /// Defines the Tools
+        /// </summary>
+        internal Tools Tools = new Tools();
+
+        /// <summary>
+        /// Defines the current_User
+        /// </summary>
+        internal Current_User current_User = new Current_User()
         {
             Chat_id = 0,
             User_id = 0,
             Lastest_message = 0,
         };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
             LogIn();
-            
         }
 
+        /// <summary>
+        /// The LogIn
+        /// </summary>
         public void LogIn()
         {
             if (current_User.User_id == 0)
@@ -47,6 +64,9 @@ namespace Major_project
             }
         }
 
+        /// <summary>
+        /// The LoggedIn
+        /// </summary>
         public void LoggedIn()
         {
             current_User.User_id = Properties.Settings.Default.id;
@@ -59,6 +79,9 @@ namespace Major_project
             GetChats(current_User.User_id);
         }
 
+        /// <summary>
+        /// The Logout
+        /// </summary>
         public void Logout()
         {
             Properties.Settings.Default.id = 0;
@@ -71,42 +94,70 @@ namespace Major_project
             LogIn();
         }
 
-
+        /// <summary>
+        /// Defines the <see cref="Current_User" />
+        /// </summary>
         public class Current_User
         {
+            /// <summary>
+            /// Gets or sets the Chat_id
+            /// </summary>
             public int Chat_id { get; set; }
+
+            /// <summary>
+            /// Gets or sets the User_id
+            /// </summary>
             public int User_id { get; set; }
+
+            /// <summary>
+            /// Gets or sets the Lastest_message
+            /// </summary>
             public long Lastest_message { get; set; }
         }
 
+        /// <summary>
+        /// The GetChats
+        /// </summary>
+        /// <param name="id">The id<see cref="int"/></param>
         public void GetChats(int id)
         {
-        string request = BackendConnect.server + "chats/" + id.ToString();
-        var content = Backend.Get(request);
+            string request = BackendConnect.server + "chats/" + id.ToString();
+            Console.WriteLine(request);
+            var content = Backend.Get(request);
             if (content != null)
             {
                 for (int i = 0; i < content.Count; i++)
                 {
                     request = BackendConnect.server + "info/name/" + content[i].Chat.ToString();
+                    Console.WriteLine(request);
                     var ListChats = Backend.Get(request);
 
-                    var converter = new System.Windows.Media.BrushConverter();
-
-                    Button b = new Button
+                    if (ListChats != null)
                     {
-                        Content = ListChats[0].Name,
-                        Background = (Brush)converter.ConvertFromString("transparent"),
-                        BorderBrush = (Brush)converter.ConvertFromString("transparent"),
-                        Foreground = (Brush)converter.ConvertFromString("white")
-                    };
-                    b.Click += new RoutedEventHandler(Chats_Click);
-                    b.Tag = content[i].Chat.ToString();
-                    Chats_ListBox.Items.Add(b);
+
+                        var converter = new System.Windows.Media.BrushConverter();
+
+                        Button b = new Button
+                        {
+                            Content = ListChats[0].Name,
+                            Background = (Brush)converter.ConvertFromString("transparent"),
+                            BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                            Foreground = (Brush)converter.ConvertFromString("white")
+                        };
+                        b.Click += new RoutedEventHandler(Chats_Click);
+                        b.Tag = content[i].Chat.ToString();
+                        Chats_ListBox.Items.Add(b);
+                    }
                 }
             }
         }
 
-        void Chats_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// The Chats_Click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
+        internal void Chats_Click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
             Chat_TextBlock.Text = b.Content.ToString();
@@ -122,14 +173,21 @@ namespace Major_project
             dispatcherTimer.Tick += Auto_GetMessages;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
-
         }
 
+        /// <summary>
+        /// The Auto_GetMessages
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void Auto_GetMessages(object sender, EventArgs e)
         {
             GetMessages();
         }
 
+        /// <summary>
+        /// The GetMessages
+        /// </summary>
         public void GetMessages()
         {
             var id = current_User.Chat_id;
@@ -149,39 +207,39 @@ namespace Major_project
 
                         var time = Tools.ConvertFromUnixTimestamp(content[i].Time_submitted);
 
-                            var converter = new System.Windows.Media.BrushConverter();
+                        var converter = new System.Windows.Media.BrushConverter();
 
-                            Button Delete_button = new Button
+                        Button Delete_button = new Button
+                        {
+                            Content = "[x]",
+                            Background = (Brush)converter.ConvertFromString("transparent"),
+                            BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                            Foreground = (Brush)converter.ConvertFromString("white")
+                        };
+                        Delete_button.Click += new RoutedEventHandler(Message_Click);
+                        Delete_button.Tag = content[i].Id;
+
+                        if (content[i].Message != null)
+                        {
+
+                            TextBlock Message = new TextBlock
                             {
-                                Content = "[x]",
-                                Background = (Brush)converter.ConvertFromString("transparent"),
-                                BorderBrush = (Brush)converter.ConvertFromString("transparent"),
-                                Foreground = (Brush)converter.ConvertFromString("white")
+                                Text = time + " | " + Users_Name + ": " + content[i].Message,
+                                Margin = new Thickness(20, 0, 0, 0)
                             };
-                            Delete_button.Click += new RoutedEventHandler(Message_Click);
-                            Delete_button.Tag = content[i].Id;
 
-                            if (content[i].Message != null)
+                            Canvas all = new Canvas
                             {
+                                Height = 25
+                            };
 
-                                TextBlock Message = new TextBlock
-                                {
-                                    Text = time + " | " + Users_Name + ": " + content[i].Message,
-                                    Margin = new Thickness(20, 0, 0, 0)
-                                };
+                            all.Children.Add(Delete_button);
+                            all.Children.Add(Message);
 
-                                Canvas all = new Canvas
-                                {
-                                    Height = 25
-                                };
-
-                                all.Children.Add(Delete_button);
-                                all.Children.Add(Message);
-
-                                Chat_ListBox.Items.Add(all);
-                            }
-                            else
-                            {
+                            Chat_ListBox.Items.Add(all);
+                        }
+                        else if(content[i].File_id != null)
+                        {
 
                             List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
                             var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + content[i].File_id;
@@ -201,7 +259,7 @@ namespace Major_project
                             download_button.Click += new RoutedEventHandler(Download_click);
                             download_button.Tag = content[i];
 
-                            
+
 
                             if (ImageExtensions.Contains(Path.GetExtension(content[i].File_name).ToUpperInvariant()))
                             {
@@ -227,24 +285,52 @@ namespace Major_project
                             }
                             else
                             {
-                                all.Height = 25 ;
-                                
+                                all.Height = 25;
+
                             }
 
-                                all.Children.Add(Delete_button);
+                            all.Children.Add(Delete_button);
                             all.Children.Add(download_button);
 
 
                             Chat_ListBox.Items.Add(all);
-                            }
-                        
+                        }
+                        else if (content[i].Collab != null)
+                        {
+                            
+                            Canvas all = new Canvas
+                            {
+                                Height = 25
+                            };
+
+                            Button Collab_button = new Button
+                            {
+                                Content = time + " | " + Users_Name + ": " + content[i].File_name,
+                                Background = (Brush)converter.ConvertFromString("transparent"),
+                                BorderBrush = (Brush)converter.ConvertFromString("transparent"),
+                                Foreground = (Brush)converter.ConvertFromString("white"),
+                                Margin = new Thickness(20, 0, 0, 0)
+                            };
+                            Collab_button.Click += new RoutedEventHandler(Collab_click);
+                            Collab_button.Tag = content[i];
+
+                            all.Children.Add(Delete_button);
+                            all.Children.Add(Collab_button);
+
+                            Chat_ListBox.Items.Add(all);
+                        }
                     }
-                        
+
                 }
             }
         }
 
-        async void Message_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// The Message_Click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
+        internal async void Message_Click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
 
@@ -261,10 +347,14 @@ namespace Major_project
             Chat_ListBox.Items.Clear();
             current_User.Lastest_message = 0;
             GetMessages();
-
         }
 
-        void Download_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// The Download_click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
+        internal void Download_click(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
 
@@ -282,14 +372,34 @@ namespace Major_project
                 var Source = BackendConnect.server + "file/" + current_User.Chat_id + '/' + file.File_id; ;
                 Client.DownloadFile(Source, dialog.FileName);
             }
+        }
+
+        internal void Collab_click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            BackendConnect.Get_messages_class file = (BackendConnect.Get_messages_class)b.Tag;
+
+            Collabspace collabspace_page = new Collabspace(current_User.Chat_id, file.Id);
+            collabspace_page.Show();
 
         }
 
+        /// <summary>
+        /// The Button_SendMessage
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
         private void Button_SendMessage(object sender, RoutedEventArgs e)
         {
             SendMessage();
         }
 
+        /// <summary>
+        /// The Enter_SendMessage
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="KeyEventArgs"/></param>
         private void Enter_SendMessage(object sender, KeyEventArgs e)
         {
             {
@@ -301,23 +411,34 @@ namespace Major_project
             }
         }
 
+        /// <summary>
+        /// The SendMessage
+        /// </summary>
         public async void SendMessage()
         {
-            DateTime time = DateTime.UtcNow;
-            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+            if (current_User.Chat_id != 0)
             {
-                Chat_id = current_User.Chat_id,
-                User_id = current_User.User_id,
-                Message = Message_TextBox.Text,
-                Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
-            };
-            String request = BackendConnect.server + "message";
-            //var post = await Backend.Post(data, request);
-            await Task.Run(async () => await Backend.Post(data, request));
-            Message_TextBox.Text = String.Empty;
-            GetMessages();
+                DateTime time = DateTime.UtcNow;
+                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                {
+                    Chat_id = current_User.Chat_id,
+                    User_id = current_User.User_id,
+                    Message = Message_TextBox.Text,
+                    Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds()
+                };
+                String request = BackendConnect.server + "message";
+                //var post = await Backend.Post(data, request);
+                await Task.Run(async () => await Backend.Post(data, request));
+                Message_TextBox.Text = String.Empty;
+                GetMessages();
+            }
         }
 
+        /// <summary>
+        /// The Open_Settings
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
         private void Open_Settings(object sender, RoutedEventArgs e)
         {
             Settings Settings = new Settings(this);
@@ -325,9 +446,12 @@ namespace Major_project
             this.Hide();
         }
 
+        /// <summary>
+        /// The GetUsersInAChat
+        /// </summary>
         public void GetUsersInAChat()
         {
-            String request = BackendConnect.server + "users/" +  current_User.Chat_id.ToString();
+            String request = BackendConnect.server + "users/" + current_User.Chat_id.ToString();
             var content = Backend.Get(request);
 
             for (int i = 0; i < content.Count; i++)
@@ -340,25 +464,32 @@ namespace Major_project
             }
         }
 
+        /// <summary>
+        /// The ImagePanel_Drop
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="DragEventArgs"/></param>
         private async void ImagePanel_Drop(object sender, DragEventArgs e)
         {
 
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-
-                DateTime time = DateTime.UtcNow;
-                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                if (current_User.Chat_id != 0)
                 {
-                    Chat_id = current_User.Chat_id,
-                    User_id = current_User.User_id,
-                    Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds(),
-                };
+                    DateTime time = DateTime.UtcNow;
+                    BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                    {
+                        Chat_id = current_User.Chat_id,
+                        User_id = current_User.User_id,
+                        Current_time = ((DateTimeOffset)time).ToUnixTimeSeconds(),
+                    };
 
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-                for (int i = 0; i < files.Length; i++)
-                {
-                    await Task.Run(async () => await Backend.UploadFile(data, files[i]));
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        await Task.Run(async () => await Backend.UploadFile(data, files[i]));
+                    }
                 }
             }
         }

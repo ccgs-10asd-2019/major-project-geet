@@ -71,7 +71,7 @@ namespace Major_project
                 string request = BackendConnect.server + "auth/login";
                 var content = await Backend.Post(data, request);
 
-                try
+                if(content[0].Id != null)
                 {
                     var user_id = content[0].Id;
                     Properties.Settings.Default.id = Int32.Parse(user_id);
@@ -81,7 +81,7 @@ namespace Major_project
                     dontclose = false;
                     this.Close();
                 }
-                catch
+                else
                 {
                     login_error.Text = "Username or Password is wrong";
                 }
