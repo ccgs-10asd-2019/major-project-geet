@@ -1,7 +1,7 @@
 //consts / imports
 const express = require('express')
 const app = express()
-const port = 4000 //server port
+const port = 3000 //server port
 app.use(express.json()); //adds json functionality
 const multer = require('multer');
 const upload = multer({

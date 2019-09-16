@@ -43,7 +43,7 @@ module.exports = function(app, tools, check, upload, path, fs){
     
     if(tools.no_err(null, req, res)) {
 
-      let sql = 'SELECT `role` FROM `' + chat_id + '` WHERE "id"="' + user_id + '"'
+      let sql = 'SELECT `role` FROM `' + chat_id + '` WHERE "user_id"="' + user_id + '"'
       console.log(sql)
 
       db.chat_users.get(sql, [], (err, result) => { 
