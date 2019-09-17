@@ -74,7 +74,8 @@ namespace Major_project
             var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
             Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
-    
+            Properties.Settings.Default.Save();
+
         }
 
         private void Exit_themes(object sender, RoutedEventArgs e)

@@ -215,10 +215,17 @@ namespace Major_project
             var converter = new BrushConverter();
             var brush1 = (Brush)converter.ConvertFromString(brush1_string);
             var brush2 = (Brush)converter.ConvertFromString(brush2_string);
-            Chat_ListBox.Background = brush1;
-            //Message_TextBox.Background = brush1;
-            //Users_ListBox.Background = brush1;
-            //Lower_Red_Border.Background = brush1;
+            Message_TextBox.Background = brush1;
+            Users_ListBox.Background = brush1;
+            Lower_Red_Border.Background = brush1;
+            Users_TextBlock.Background = brush1;
+            Upper_Red_Border.Background = brush1;
+            Send_Button.Background = brush2;
+            Chats_ListBox.Background = brush2;
+            Upper_Blue_Border.Background = brush2;
+            Lower_Blue_Border.Background = brush2;
+            Settings_Button.Background = brush2;
+            Chats_TextBlock.Background = brush2;
 
         }
     }
