@@ -26,13 +26,13 @@ namespace Major_project
 
         private void Colour1_click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Colour2 = "#FF9900";
+            Properties.Settings.Default.Colour1 = "#FF9900";
             Properties.Settings.Default.Colour2 = "#3DD3E9";
         }
 
         private void Colour2_click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Colour2 = "#00270d";
+            Properties.Settings.Default.Colour1 = "#00270d";
             Properties.Settings.Default.Colour2 = "#00ff04";
         }
 
