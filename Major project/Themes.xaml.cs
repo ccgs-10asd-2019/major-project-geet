@@ -28,18 +28,21 @@ namespace Major_project
         {
             Properties.Settings.Default.Colour1 = "#FF9900";
             Properties.Settings.Default.Colour2 = "#3DD3E9";
+            Change_colour();
         }
 
         private void Colour2_click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Colour1 = "#00270d";
             Properties.Settings.Default.Colour2 = "#00ff04";
+            Change_colour();
         }
 
         private void Colour3_click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Colour1 = "#00060f";
             Properties.Settings.Default.Colour2 = "#6edeff";
+            Change_colour();
         }
 
         private void Background1_clicked(object sender, RoutedEventArgs e)
