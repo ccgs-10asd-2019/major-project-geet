@@ -13,24 +13,25 @@ namespace Major_project
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
 
+        
+
         Current_User current_User = new Current_User()
         {
             Chat_id = 0,
-            User_id = 0,
+            User_id = Properties.Settings.Default.id,
             Lastest_message = 0,
         };
 
         public MainWindow()
         {
             InitializeComponent();
-
             LogIn();
             
         }
 
         public void LogIn()
         {
-            if (current_User.User_id == 0)
+            if (Properties.Settings.Default.id == 0)
             {
                 Login Login_Page = new Login(this);
                 Login_Page.Show();

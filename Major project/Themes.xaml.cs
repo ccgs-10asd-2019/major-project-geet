@@ -83,6 +83,7 @@ namespace Major_project
 
         private void Exit_themes(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine(Properties.Settings.Default.id);
             this.Close();
             MainWindow mainwindow = new MainWindow();
             mainwindow.Show();
