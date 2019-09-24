@@ -121,6 +121,7 @@ namespace Major_project
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
+            Scroll();
         }
 
         private void Auto_GetMessages(object sender, EventArgs e)
@@ -165,6 +166,8 @@ namespace Major_project
                     e.Handled = true;
                 }
             }
+
+            Scroll();
         }
 
         public async void SendMessage()
@@ -182,6 +185,8 @@ namespace Major_project
             await Task.Run(async () => await Backend.Post(data, request));
             Message_TextBox.Text = String.Empty;
             GetMessages();
+
+            Scroll();
         }
 
         private void Open_Settings(object sender, RoutedEventArgs e)
@@ -227,7 +232,12 @@ namespace Major_project
             Lower_Blue_Border.Background = brush2;
             Settings_Button.Background = brush2;
             Chats_TextBlock.Background = brush2;
+        }
 
+        private void Scroll()
+        {
+            Chat_ListBox.SelectedIndex = Chat_ListBox.Items.Count - 1;
+            Chat_ListBox.ScrollIntoView(Chat_ListBox.SelectedItem);
         }
     }
 }

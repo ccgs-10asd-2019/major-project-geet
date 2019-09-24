@@ -16,9 +16,9 @@
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="35*"/>
-            <ColumnDefinition Width="35*"/>
-            <ColumnDefinition Width="133*"/>
+            <ColumnDefinition Width="132"/>
+            <ColumnDefinition Width="132"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Border x:Name="Upper_Blue_Border" Margin="10,10,5,5" BorderBrush="Black" BorderThickness="0" Background="#FF172E64" >
@@ -27,21 +27,24 @@
         <Border x:Name="Lower_Blue_Border" Margin="10,5,5,10" BorderBrush="Black" BorderThickness="0" Background="#FF172E64" Grid.RowSpan="2" Grid.Row="1">
             <TextBlock x:Name="Chats_TextBlock" Margin="0,5,0,0" TextWrapping="Wrap" Text="Chats" TextAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         </Border>
-        <ListBox x:Name="Chats_ListBox" Margin="10,35,5,0" Width="112" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" />
-        <Button x:Name="Settings_Button" Margin="10,0,5,10" Content="Settings" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="2" Click="Open_Settings"/>
+        <ListBox x:Name="Chats_ListBox" Margin="12,35,8,17.5" Width="112" Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="1" />
+
+        <Button x:Name="Settings_Button" Margin="10,0,5,10" Content="Settings" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="2" Click="Open_Settings" FontSize="10"/>
 
         <Border x:Name="Lower_Red_Border" Margin="5,10,5,5" BorderBrush="Black" BorderThickness="0" Background="#FF813A47" Grid.Column="1">
             <TextBlock x:Name="Chat_TextBlock" TextWrapping="Wrap" Text="No Chat Selected" TextAlignment="Center" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
         </Border>
-        <Border x:Name="Upper_Red_Border" Margin="5,5,5,10" BorderBrush="Black" BorderThickness="0" Background="#FF813A47" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1">
+        <Border x:Name="Upper_Red_Border" Margin="5,5,5,10.5" BorderBrush="Black" BorderThickness="0" Background="#FF813A47" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1">
             <TextBlock x:Name="Users_TextBlock" Margin="0,5,0,0" TextWrapping="Wrap" Text="Users" TextAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         </Border>
         <ListBox x:Name="Users_ListBox" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="5,40,5,10" Grid.Row="1" Grid.Column="1"/>
 
 
         <ListBox x:Name="Chat_ListBox" Margin="5,10,10,5" Background="#66813A47" Grid.Column="2" BorderBrush="{x:Null}" Foreground="White" Grid.RowSpan="2"/>
-        <TextBox x:Name="Message_TextBox" Margin="5,0,70,10" Height="24" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" Grid.Column="2" PreviewKeyDown="Enter_SendMessage" BorderBrush="Black"/>
-        <Button x:Name="Send_Button" Margin="0,0,10,10" Content="Send" HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Bottom" Width="60" Height="24" Background="#FF172E64" Click="Button_SendMessage" Foreground="White" Grid.Column="2" BorderBrush="Black"/>
+        <TextBox x:Name="Message_TextBox" Margin="5,1,70,0" Height="24" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Background="#B2813747" Foreground="White" FontFamily="STIXGeneral" Grid.Column="2" PreviewKeyDown="Enter_SendMessage" BorderBrush="Black"/>
+        <Button x:Name="Send_Button" Margin="0,1,10,0" Content="Send" HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Top" Width="60" Height="24" Background="#FF172E64" Click="Button_SendMessage" Foreground="White" Grid.Column="2" BorderBrush="Black"/>
+        <Button x:Name="Add_Chat" Margin="10,0,5,32.5" Content="Add Chat" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="1" FontSize="10" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+        <Button x:Name="Add_User" Margin="5,0.5,5,9.5" Content="Add User" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Row="2" FontSize="10" Grid.Column="1"/>
 
     </Grid>
 </Window>
