@@ -13,7 +13,8 @@ module.exports = function(app, tools){
     })
 
     app.post('/collab/:line/:chat_id/:id', (req, res) => {
-    
+        //take collab updates
+        
         console.log(req.body.Collab)
         console.log(req.body.Chat_id)
         console.log(req.body.Id)
