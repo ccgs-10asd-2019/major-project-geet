@@ -5,5 +5,14 @@
     <Setting Name="id" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="BackgroundUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Colour1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF9900</Value>
+    </Setting>
+    <Setting Name="Colour2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#3DD3E9</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

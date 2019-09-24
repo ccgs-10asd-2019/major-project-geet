@@ -10,8 +10,8 @@ namespace Major_project
 {
     public class BackendConnect
     {
-        static readonly string ip = "127.0.0.1";
-        static readonly string port = "3000";
+        static readonly string ip ="127.0.0.1"; //"10.60.252.14"; 
+        static readonly string port = "3000"; //"4000";
         static readonly string protocol = "http";
         public static readonly string server = protocol + "://" + ip + ":" + port + "/";
 

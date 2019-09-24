@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Major_project
 {
@@ -12,24 +13,25 @@ namespace Major_project
         BackendConnect Backend = new BackendConnect();
         Tools Tools = new Tools();
 
+        
+
         Current_User current_User = new Current_User()
         {
             Chat_id = 0,
-            User_id = 0,
+            User_id = Properties.Settings.Default.id,
             Lastest_message = 0,
         };
 
         public MainWindow()
         {
             InitializeComponent();
-
             LogIn();
             
         }
 
         public void LogIn()
         {
-            if (current_User.User_id == 0)
+            if (Properties.Settings.Default.id == 0)
             {
                 Login Login_Page = new Login(this);
                 Login_Page.Show();
@@ -51,6 +53,8 @@ namespace Major_project
             Username_TextBlock.Text = Username[0].Username;
 
             GetChats(current_User.User_id);
+
+            Change_themes();
         }
 
         public void Logout()
@@ -149,6 +153,7 @@ namespace Major_project
 
         private void Button_SendMessage(object sender, RoutedEventArgs e)
         {
+            //MainBackground.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
             SendMessage();
         }
 
@@ -204,6 +209,29 @@ namespace Major_project
                 var Users_Role = content[i].Role;
                 Users_ListBox.Items.Add("[" + Users_Role + "] " + Users_Name);
             }
+        }
+
+        public void Change_themes()
+        {
+            var imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl, UriKind.Relative));
+            MainBackground.Background = imgBrush;
+            var brush1_string = Properties.Settings.Default.Colour1;
+            var brush2_string = Properties.Settings.Default.Colour2;
+            var converter = new BrushConverter();
+            var brush1 = (Brush)converter.ConvertFromString(brush1_string);
+            var brush2 = (Brush)converter.ConvertFromString(brush2_string);
+            Message_TextBox.Background = brush1;
+            Users_ListBox.Background = brush1;
+            Lower_Red_Border.Background = brush1;
+            Users_TextBlock.Background = brush1;
+            Upper_Red_Border.Background = brush1;
+            Send_Button.Background = brush2;
+            Chats_ListBox.Background = brush2;
+            Upper_Blue_Border.Background = brush2;
+            Lower_Blue_Border.Background = brush2;
+            Settings_Button.Background = brush2;
+            Chats_TextBlock.Background = brush2;
         }
 
         private void Scroll()

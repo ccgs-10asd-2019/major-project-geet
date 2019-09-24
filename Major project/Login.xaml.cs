@@ -56,8 +56,8 @@ namespace Major_project
             string request = BackendConnect.server + "auth/login";
             var content = await Backend.Post(data, request);
 
-            try
-            {
+            //try
+            //{
                 var user_id = content[0].Id;
                 Properties.Settings.Default.id = Int32.Parse(user_id);
                 Properties.Settings.Default.Save();
@@ -65,11 +65,11 @@ namespace Major_project
                 mainWindow.Show();
                 dontclose = false;
                 this.Close();
-            }
-            catch
-            {
-                login_error.Visibility = Visibility.Visible;
-            }
+            //}
+            //catch
+            //{
+            //    login_error.Visibility = Visibility.Visible;
+            //}
         }
 
         private void Closed_Login(object sender, EventArgs e)

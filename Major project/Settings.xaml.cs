@@ -39,5 +39,13 @@ namespace Major_project
             this.Close();
             mainWindow.Logout();
         }
+
+        private void To_themes(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Themes Themes_Page = new Themes();
+            Themes_Page.Show();
+            mainWindow.Hide();
+        }
     }
 }
