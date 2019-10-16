@@ -14,5 +14,8 @@
     <Setting Name="Colour2" Type="System.String" Scope="User">
       <Value Profile="(Default)">#3DD3E9</Value>
     </Setting>
+    <Setting Name="TextColour" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#ffffff</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

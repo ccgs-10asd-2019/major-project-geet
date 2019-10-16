@@ -17,19 +17,19 @@
             <RowDefinition Height="178"/>
         </Grid.RowDefinitions>
         <Rectangle x:Name="header_block" Fill="#FF6AC2FF" HorizontalAlignment="Left" Height="66" Stroke="Black" VerticalAlignment="Top" Width="795" Grid.ColumnSpan="2" StrokeThickness="3"/>
-        <TextBlock HorizontalAlignment="Left" Margin="38,10,0,0" TextWrapping="Wrap" Text="Themes" VerticalAlignment="Top" Height="46" Width="145" FontSize="36" FontFamily="Segoe UI Semibold"/>
+        <TextBlock x:Name="Themes_title" HorizontalAlignment="Left" Margin="38,10,0,0" TextWrapping="Wrap" Text="Themes" VerticalAlignment="Top" Height="46" Width="145" FontSize="36" FontFamily="Segoe UI Semibold"/>
         <Rectangle x:Name="Rectangle1" Fill="#FFFF9A3E" HorizontalAlignment="Left" Height="356" Margin="0,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="121" Grid.RowSpan="3" StrokeThickness="3"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Colour scheme" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Background" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Grid.RowSpan="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,70,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Text fonts" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <TextBlock x:Name="Colour_scheme_text" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Colour scheme" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <TextBlock x:Name="Background_text" HorizontalAlignment="Left" Margin="10,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Background" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Grid.RowSpan="2"/>
+        <TextBlock x:Name="Text_font_text" HorizontalAlignment="Left" Margin="10,70,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Text fonts" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
         <Button x:Name="Background1" Content="Button" HorizontalAlignment="Left" Margin="186,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74" Click="Background1_clicked"/>
         <Button x:Name="Background2" Content="Button" HorizontalAlignment="Left" Margin="312,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="76" Click="Background2_clicked"/>
-        <Button x:Name="Text1" Content="Button" HorizontalAlignment="Left" Margin="186,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="74"/>
-        <Button x:Name="Text2" Content="Button" HorizontalAlignment="Left" Margin="312,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="Text1" Content="Button" HorizontalAlignment="Left" Margin="186,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="74" Click="Text_colour1"/>
+        <Button x:Name="Text2" Content="Button" HorizontalAlignment="Left" Margin="312,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="76" Click="Text_Colour2"/>
         <Button x:Name="Colour2" Content="Button" HorizontalAlignment="Left" Margin="312,48.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Colour2_click"/>
         <Button x:Name="Colour3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="35.5,48.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Colour3_click"/>
         <Button x:Name="Background3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="35.5,150.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Background3_clicked"/>
-        <Button x:Name="Text3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="35.5,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Text3" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="35.5,68.5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Text_colour3"/>
         <Button x:Name="Colour1" Content="Button" HorizontalAlignment="Left" Margin="185,49,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Colour1_click"/>
         <Button Content="Exit" Grid.Column="1" HorizontalAlignment="Left" Margin="312.5,10,0,0" VerticalAlignment="Top" Width="75" Height="47" Click="Exit_themes"/>
 
