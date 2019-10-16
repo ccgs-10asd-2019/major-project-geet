@@ -225,6 +225,8 @@ namespace Major_project
             Chats_TextBlock.Foreground = TextColour;
             Users_TextBlock.Foreground = TextColour;
             Settings_Button.Foreground = TextColour;
+            Add_Chat.Foreground = TextColour;
+            Add_User.Foreground = TextColour;
             Send_Button.Foreground = TextColour;
             Message_TextBox.Background = brush1;
             Users_ListBox.Background = brush1;
