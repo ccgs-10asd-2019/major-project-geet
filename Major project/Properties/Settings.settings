@@ -14,5 +14,8 @@
     <Setting Name="BackgroundUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">pack://application:,,,/Major project;component/images/blue.jpg</Value>
     </Setting>
+    <Setting Name="TextColour" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#ffffff</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

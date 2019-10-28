@@ -70,5 +70,17 @@ namespace Major_project.Properties {
                 this["BackgroundUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#ffffff")]
+        public string TextColour {
+            get {
+                return ((string)(this["TextColour"]));
+            }
+            set {
+                this["TextColour"] = value;
+            }
+        }
     }
 }
