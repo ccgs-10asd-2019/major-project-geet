@@ -22,34 +22,77 @@ namespace Major_project
         BackendConnect Backend = new BackendConnect();
         MainWindow mainWindow;
 
+        public bool dontclose = true;
+
         public Login(MainWindow window)
         {
             InitializeComponent();
-            login_error.Visibility = Visibility.Hidden;
             mainWindow = window;
+
+            
         }
 
-        private async void Send_login(object sender, RoutedEventArgs e)
+        public bool CheckConnectionToServer()
         {
-            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+            if (Backend.Get(BackendConnect.server + "ping") == null)
             {
-                Username = text_username.Text
-            };
-            string request = BackendConnect.server + "auth/login";
-            var content = await Backend.Post(data, request);
-            
-            try
+                login_error.Text = "Can't connect to server :(";
+                return false;
+            } else
             {
-                var user_id = content[0].Id;
-                Properties.Settings.Default.id = Int32.Parse(user_id);
-                Properties.Settings.Default.Save();
-                mainWindow.LoggedIn();
-                mainWindow.Show();
-                this.Close();
+                return true;
             }
-            catch
+        }
+
+        private void Enter_Login(object sender, KeyEventArgs e)
+        {
             {
-                login_error.Visibility = Visibility.Visible;
+                if (e.Key == Key.Return)
+                {
+                    Try_Login();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void Click_Login(object sender, RoutedEventArgs e)
+        {
+            Try_Login();
+        }
+
+        private async void Try_Login()
+        {
+            if (CheckConnectionToServer())
+            {
+                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                {
+                    Username = text_username.Text
+                };
+                string request = BackendConnect.server + "auth/login";
+                var content = await Backend.Post(data, request);
+                
+                if(content[0].Id != null)
+                {
+                    var user_id = content[0].Id;
+                    Properties.Settings.Default.id = Int32.Parse(user_id);
+                    Properties.Settings.Default.Save();
+                    mainWindow.LoggedIn();
+                    mainWindow.Show();
+                    dontclose = false;
+                    this.Close();
+                }
+                else
+                {
+                    login_error.Text = "Username or Password is wrong";
+                }
+            }
+        }
+
+        private void Closed_Login(object sender, EventArgs e)
+        {
+            if (dontclose)
+            {
+                Application.Current.Shutdown();
             }
         }
     }

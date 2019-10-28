@@ -1,11 +1,19 @@
 //consts / imports
 const express = require('express')
 const app = express()
-const port = 3000 //server port
+const port = 4000 //server port
 app.use(express.json()); //adds json functionality
-
-const sqlite3 = require('sqlite3') //adds ability to manipulate sqlite db files
+const multer = require('multer');
+const upload = multer({
+    dest: "./uploads",
+    limits: {
+        fileSize: 10 * 1024 * 1024,
+    },
+  });
+const { check } = require('express-validator');
 const tools = require('./components/tools')
+const path = require("path");
+const fs = require("fs");
 
 //setup
 console.log("Time: " + new Date()) //log to console time of server start
@@ -21,8 +29,13 @@ app.get('/', (req, res) => {
     res.send("all g") //all is good
 })
 
-require('./components/messages')(app);
+app.get('/ping', (req, res) => {
+    res.send([{"pong":true}]) //all is good
+})
+
+require('./components/messages')(app, tools, check, upload, path, fs);
 require('./components/chats')(app, tools);
 require('./components/users')(app, tools);
+require('./components/collab')(app, tools);
 
 app.listen(port, () => console.log(`listening on port ${port}`));

@@ -25,13 +25,49 @@ namespace Major_project.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int id {
             get {
                 return ((int)(this["id"]));
             }
             set {
                 this["id"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF9900")]
+        public string Colour1 {
+            get {
+                return ((string)(this["Colour1"]));
+            }
+            set {
+                this["Colour1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#3DD3E9")]
+        public string Colour2 {
+            get {
+                return ((string)(this["Colour2"]));
+            }
+            set {
+                this["Colour2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pack://application:,,,/Major project;component/images/blue.jpg")]
+        public string BackgroundUrl {
+            get {
+                return ((string)(this["BackgroundUrl"]));
+            }
+            set {
+                this["BackgroundUrl"] = value;
             }
         }
     }
