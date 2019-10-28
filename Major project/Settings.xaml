@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         
         Title="Settings" Height="400" Width="350" Closed="Close_Settings">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-    <Button Content="Logout" Margin="0,0,0,0" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Logout_Clicked"/>
+        <Button Content="Logout" Margin="0,0,0,0" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Logout_Clicked"/>
+
+        <Button Content="Themes" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White" Click="To_themes"/>
+    </Grid>
 
 </Window>

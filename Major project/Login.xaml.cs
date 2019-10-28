@@ -70,7 +70,7 @@ namespace Major_project
                 };
                 string request = BackendConnect.server + "auth/login";
                 var content = await Backend.Post(data, request);
-
+                
                 if(content[0].Id != null)
                 {
                     var user_id = content[0].Id;
