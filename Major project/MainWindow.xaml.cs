@@ -18,6 +18,8 @@
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Mr. Nolan adding a comment to demo something hi guys
+
         /// <summary>
         /// Defines the Backend
         /// </summary>
