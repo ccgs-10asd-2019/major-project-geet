@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,14 +49,14 @@ namespace Major_project
 
         private void Background1_clicked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\blue.jpg");
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/blue.jpg");
             Properties.Settings.Default.Save();
             Change_theme_page();
         }
 
         private void Background2_clicked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\Bluebackground1.jpg");
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/Bluebackground1.jpg");
             Properties.Settings.Default.Save();
             Change_theme_page();
         }
@@ -63,7 +64,7 @@ namespace Major_project
         private void Background3_clicked(object sender, RoutedEventArgs e)
         {
             //this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
-            Properties.Settings.Default.BackgroundUrl = (@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg");
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/orange.jpg");
             Properties.Settings.Default.Save();
             Change_theme_page();
             //(Application.Current.MainWindow as MainWindow).Change_colours();
