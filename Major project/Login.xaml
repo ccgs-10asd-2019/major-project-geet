@@ -8,7 +8,7 @@
         Title="Login" Height="400" Width="350" Closed="Closed_Login">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Image x:Name="Background1" Margin="0,-423,-1089,0.5" Source="jmJBVMU[1].jpg" Stretch="Fill"/>
+        <Image x:Name="Background1" Margin="0,-423,-1089,0.5" Source="C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\BlueMovingBackground1.jpg" Stretch="Fill"/>
 
         <TextBlock x:Name="login_error" Margin="10,165,0,0" TextWrapping="Wrap" Text="Username or Password is wrong" TextAlignment="Center" Width="324" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#FFFF0D0D"/>
 
