@@ -101,6 +101,52 @@ namespace Major_project
             }
         }
 
+        /*
+        private void Enter_Register(object sender, KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Return)
+                {
+                    Try_Register();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void Click_Register(object sender, RoutedEventArgs e)
+        {
+            Try_Register();
+        }
+
+        private async void Try_Register()
+        {
+            if (CheckConnectionToServer())
+            {
+                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                {
+                    Username = text_username.Text
+                };
+                string request = BackendConnect.server + "auth/login";
+                var content = await Backend.Post(data, request);
+
+                if(content[0].Id != null)
+                {
+                    var user_id = content[0].Id;
+                    Properties.Settings.Default.id = Int32.Parse(user_id);
+                    Properties.Settings.Default.Save();
+                    mainWindow.LoggedIn();
+                    mainWindow.Show();
+                    dontclose = false;
+                    this.Close();
+                }
+                else
+                {
+                    login_error.Text = "Username or Password is wrong";
+                }
+            }
+        }
+        */
+
         private void Closed_Login(object sender, EventArgs e)
         {
             if (dontclose)
