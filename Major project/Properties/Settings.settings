@@ -3,16 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="id" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="BackgroundUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="Colour1" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF9900</Value>
     </Setting>
     <Setting Name="Colour2" Type="System.String" Scope="User">
       <Value Profile="(Default)">#3DD3E9</Value>
+    </Setting>
+    <Setting Name="BackgroundUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pack://application:,,,/Major project;component/images/blue.jpg</Value>
     </Setting>
     <Setting Name="TextColour" Type="System.String" Scope="User">
       <Value Profile="(Default)">#ffffff</Value>

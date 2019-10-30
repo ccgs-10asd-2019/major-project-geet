@@ -14,6 +14,8 @@
 
         <TextBox x:Name="text_username" HorizontalAlignment="Center" Height="34" Margin="0,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="226" Padding="3,0,0,0" BorderBrush="#FFABADB3" BorderThickness="3" FontSize="20" PreviewKeyDown="Enter_Login"/>
 
+        <TextBlock x:Name="login_error" Margin="10,131,0,0" TextWrapping="Wrap" TextAlignment="Center" Width="324" Height="24" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#FFFF0D0D"/>
+
         <PasswordBox HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Center" Background="White" BorderThickness="3" Width="226" Password="" Height="34" FontSize="20" PreviewKeyDown="Enter_Login"/>
 
         <Button Content="Login" HorizontalAlignment="Center" Margin="0,250,115,0" VerticalAlignment="Center" Width="110" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFECAC22" BorderThickness="3" Foreground="#FF293287" Background="White" Click="Click_Login"/>

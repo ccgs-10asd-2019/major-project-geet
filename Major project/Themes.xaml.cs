@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,17 +51,17 @@ namespace Major_project
 
         private void Background1_clicked(object sender, RoutedEventArgs e)
         {
-            BackgroundChange(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\blue.jpg", 1);
+            BackgroundChange("pack://application:,,,/Major project;component/images/blue.jpg", 1);
         }
 
         private void Background2_clicked(object sender, RoutedEventArgs e)
         {
-            BackgroundChange(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\Bluebackground1.jpg", 2);
+            BackgroundChange("pack://application:,,,/Major project;component/images/Bluebackground1.jpg", 2);
         }
 
         private void Background3_clicked(object sender, RoutedEventArgs e)
         {
-            BackgroundChange(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg", 3);
+            BackgroundChange("pack://application:,,,/Major project;component/images/orange.jpg", 3);
         }
 
         private void BackgroundChange(string BackGroundUrl, int BackgroundNum)
