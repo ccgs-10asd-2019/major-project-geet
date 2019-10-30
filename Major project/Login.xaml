@@ -20,7 +20,7 @@
         <Border BorderBrush="#FF16CFFF" BorderThickness="4" HorizontalAlignment="Center" Height="145" Margin="0,10,0,0" VerticalAlignment="Top" Width="226" CornerRadius="10" Padding="0" Background="#FF323E49">
             <Image Margin="-22,-20,-23,-25" Source="images/WebanterLogo3.png"/>
         </Border>
-        <Button Content="Register" HorizontalAlignment="Center" Margin="115,250,0,0" VerticalAlignment="Center" Width="110" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFECAC22" BorderThickness="3" Foreground="#FF293287" Background="White" Click="Click_Login"/>
+        <Button x:Name="Register_Button" Content="Register" HorizontalAlignment="Center" Margin="115,250,0,0" VerticalAlignment="Center" Width="110" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFECAC22" BorderThickness="3" Foreground="#FF293287" Background="White" Click="Register_click"/>
     </Grid>
 
 </Window>

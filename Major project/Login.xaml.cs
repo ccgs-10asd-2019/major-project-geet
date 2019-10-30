@@ -102,17 +102,6 @@ namespace Major_project
         }
 
         /*
-        private void Enter_Register(object sender, KeyEventArgs e)
-        {
-            {
-                if (e.Key == Key.Return)
-                {
-                    Try_Register();
-                    e.Handled = true;
-                }
-            }
-        }
-
         private void Click_Register(object sender, RoutedEventArgs e)
         {
             Try_Register();
@@ -152,6 +141,14 @@ namespace Major_project
             if (dontclose)
             {
                 Application.Current.Shutdown();
+            }
+        }
+
+        private async void Register_click(object sender, RoutedEventArgs e)
+        {
+            if(CheckConnectionToServer())
+            {
+
             }
         }
     }
