@@ -94,16 +94,16 @@ namespace Major_project
 
         public void Change_theme_page()
         {
-            if (Properties.Settings.Default.ColourNum == 1)
-            {
-                Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
-                Colour1.BorderBrush = Brushes.Red;
-            }
-            else
-            {
-                Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
-                Colour1.BorderBrush = Brushes.Red;
-            }
+            //if (Properties.Settings.Default.ColourNum == 1)
+            //{
+            //    Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
+            //    Colour1.BorderBrush = Brushes.Red;
+            //}
+            //else
+            //{
+              //  Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
+            //    Colour1.BorderBrush = Brushes.Red;
+            //}
 
             this.Background = new ImageBrush(new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl)));
             var converter = new BrushConverter();
