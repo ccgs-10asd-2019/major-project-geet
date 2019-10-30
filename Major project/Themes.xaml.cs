@@ -28,46 +28,48 @@ namespace Major_project
 
         private void Colour1_click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Colour1 = "#FF9900";
-            Properties.Settings.Default.Colour2 = "#3DD3E9";
-            Change_theme_page();
+            ColourChange("#FF9900", "#3DD3E9", 1);
         }
 
         private void Colour2_click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Colour1 = "#00270d";
-            Properties.Settings.Default.Colour2 = "#00ff04";
-            Change_theme_page();
+            ColourChange("#00270d", "#00ff04", 2);
         }
 
         private void Colour3_click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Colour1 = "#00060f";
-            Properties.Settings.Default.Colour2 = "#6edeff";
+            ColourChange("#00060f", "#6edeff", 3);
+        }
+
+        public void ColourChange(string Colour1, string Colour2, int ColourNum)
+        {
+            Properties.Settings.Default.Colour1 = Colour1;
+            Properties.Settings.Default.Colour2 = Colour2;
+            Properties.Settings.Default.ColourNum = ColourNum;
             Change_theme_page();
         }
 
         private void Background1_clicked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/blue.jpg");
-            Properties.Settings.Default.Save();
-            Change_theme_page();
+            BackgroundChange("pack://application:,,,/Major project;component/images/blue.jpg", 1);
         }
 
         private void Background2_clicked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/Bluebackground1.jpg");
-            Properties.Settings.Default.Save();
-            Change_theme_page();
+            BackgroundChange("pack://application:,,,/Major project;component/images/Bluebackground1.jpg", 2);
         }
 
         private void Background3_clicked(object sender, RoutedEventArgs e)
         {
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
-            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/orange.jpg");
+            BackgroundChange("pack://application:,,,/Major project;component/images/orange.jpg", 3);
+        }
+
+        private void BackgroundChange(string BackGroundUrl, int BackgroundNum)
+        {
+            Properties.Settings.Default.BackgroundNum = BackgroundNum;
+            Properties.Settings.Default.BackgroundUrl = (BackGroundUrl);
             Properties.Settings.Default.Save();
             Change_theme_page();
-            //(Application.Current.MainWindow as MainWindow).Change_colours();
         }
 
         private void Text_colour1(object sender, RoutedEventArgs e)
@@ -93,6 +95,17 @@ namespace Major_project
 
         public void Change_theme_page()
         {
+            //if (Properties.Settings.Default.ColourNum == 1)
+            //{
+            //    Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
+            //    Colour1.BorderBrush = Brushes.Red;
+            //}
+            //else
+            //{
+              //  Colour1.BorderThickness = new Thickness(4, 4, 4, 4);
+            //    Colour1.BorderBrush = Brushes.Red;
+            //}
+
             this.Background = new ImageBrush(new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl)));
             var converter = new BrushConverter();
             var brush1 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour1);

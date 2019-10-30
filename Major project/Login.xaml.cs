@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -28,8 +29,20 @@ namespace Major_project
         {
             InitializeComponent();
             mainWindow = window;
+            MoveTo1(Background1, -1200, 625);
+        }
 
-            
+        public static void MoveTo1(Image target, double newX, double newY)
+        {
+            Vector offset = VisualTreeHelper.GetOffset(target);
+            var top = offset.Y;
+            var left = offset.X;
+            TranslateTransform trans = new TranslateTransform();
+            target.RenderTransform = trans;
+            DoubleAnimation anim1 = new DoubleAnimation(0, newY - top, TimeSpan.FromSeconds(80));
+            DoubleAnimation anim2 = new DoubleAnimation(0, newX - left, TimeSpan.FromSeconds(80));
+            trans.BeginAnimation(TranslateTransform.YProperty, anim1);
+            trans.BeginAnimation(TranslateTransform.XProperty, anim2);
         }
 
         public bool CheckConnectionToServer()

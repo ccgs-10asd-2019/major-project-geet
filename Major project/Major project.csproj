@@ -146,5 +146,17 @@
     <Resource Include="images\Bluebackground1.jpg" />
     <Resource Include="images\orange.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\BlueMovingBackground1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\WebanterLogo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\WebanterLogo3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\WaterDopletsBackground.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

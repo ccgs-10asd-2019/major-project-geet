@@ -8,10 +8,12 @@
         
         Title="Settings" Height="400" Width="350" Closed="Close_Settings">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/Bluebackground1.jpg"/>
+        </Grid.Background>
 
-        <Button Content="Logout" Margin="0,0,0,0" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Logout_Clicked"/>
-
-        <Button Content="Themes" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White" Click="To_themes"/>
+        <Button Content="Themes" HorizontalAlignment="Center" Margin="60,269,59,69.5" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White" Click="To_themes"/>
+        <Button Content="Log Out" HorizontalAlignment="Center" Margin="60,230,59,108.5" VerticalAlignment="Center" Width="226" Height="34" FontSize="18" FontFamily="Segoe UI Semibold" BorderBrush="#FFED1414" BorderThickness="3" Foreground="#FF293287" Background="White" Click="Logout_Clicked"/>
     </Grid>
 
 </Window>

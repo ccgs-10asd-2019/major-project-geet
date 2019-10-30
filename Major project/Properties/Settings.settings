@@ -17,5 +17,14 @@
     <Setting Name="TextColour" Type="System.String" Scope="User">
       <Value Profile="(Default)">#ffffff</Value>
     </Setting>
+    <Setting Name="ColourNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="BackgroundNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="TextNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

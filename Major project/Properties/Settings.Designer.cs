@@ -82,5 +82,41 @@ namespace Major_project.Properties {
                 this["TextColour"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ColourNum {
+            get {
+                return ((int)(this["ColourNum"]));
+            }
+            set {
+                this["ColourNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int BackgroundNum {
+            get {
+                return ((int)(this["BackgroundNum"]));
+            }
+            set {
+                this["BackgroundNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int TextNum {
+            get {
+                return ((int)(this["TextNum"]));
+            }
+            set {
+                this["TextNum"] = value;
+            }
+        }
     }
 }
