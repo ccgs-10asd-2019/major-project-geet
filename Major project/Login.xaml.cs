@@ -102,11 +102,6 @@ namespace Major_project
         }
 
         /*
-        private void Click_Register(object sender, RoutedEventArgs e)
-        {
-            Try_Register();
-        }
-
         private async void Try_Register()
         {
             if (CheckConnectionToServer())
@@ -144,12 +139,9 @@ namespace Major_project
             }
         }
 
-        private async void Register_click(object sender, RoutedEventArgs e)
+        private async void Register_click()
         {
-            if(CheckConnectionToServer())
-            {
 
-            }
         }
     }
 }
