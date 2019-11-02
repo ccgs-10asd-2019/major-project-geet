@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="375.862">
-    <Grid x:Name="BackgroundGrid" Margin="0,0,-5,-0.5">
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="31,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="314" BorderThickness="4" FontFamily="Dubai Medium" FontSize="20"/>
-        <ListBox HorizontalAlignment="Left" Height="308" Margin="31,93,0,0" VerticalAlignment="Top" Width="314" BorderBrush="White" BorderThickness="4"/>
+    <Grid x:Name="BackgroundGrid" Margin="0,0,-5,-0.5" Background="#FFE7520D">
+        <TextBox HorizontalAlignment="Left" Height="41" Margin="31,26,0,0" TextWrapping="Wrap" Text="Search for people here..." VerticalAlignment="Top" Width="314" BorderThickness="4" FontFamily="Dubai Medium" FontSize="20" BorderBrush="#FF19169E" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+        <ListBox HorizontalAlignment="Left" Height="308" Margin="31,93,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF19169E" BorderThickness="4" Background="#FFCDFFFA"/>
 
     </Grid>
 </Window>
