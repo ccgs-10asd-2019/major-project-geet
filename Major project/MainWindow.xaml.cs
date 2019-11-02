@@ -541,5 +541,11 @@
             Chat_ListBox.SelectedIndex = Chat_ListBox.Items.Count - 1;
             Chat_ListBox.ScrollIntoView(Chat_ListBox.SelectedItem);
         }
+
+        private void Search_for_Users(object sender, RoutedEventArgs e)
+        {
+            Search_Users Search_Users1 = new Search_Users();
+            Search_Users1.Show();
+        }
     }
 }
