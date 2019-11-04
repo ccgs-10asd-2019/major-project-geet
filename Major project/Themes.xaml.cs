@@ -30,6 +30,8 @@ namespace Major_project
         {
             Properties.Settings.Default.Colour1 = "#813A47";
             Properties.Settings.Default.Colour2 = "#172E64";
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/blue.jpg");
+            Properties.Settings.Default.Save();
             Change_theme_page();
         }
 
@@ -37,6 +39,8 @@ namespace Major_project
         {
             Properties.Settings.Default.Colour1 = "#1c1d1e";
             Properties.Settings.Default.Colour2 = "#424445";
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/black.jpg");
+            Properties.Settings.Default.Save();
             Change_theme_page();
         }
 
@@ -44,20 +48,6 @@ namespace Major_project
         {
             Properties.Settings.Default.Colour1 = "#00060f";
             Properties.Settings.Default.Colour2 = "#6edeff";
-            Change_theme_page();
-        }
-
-        private void Background1_clicked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/blue.jpg");
-            Properties.Settings.Default.Save();
-            Change_theme_page();
-        }
-
-        private void DarkBackground_clicked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/black.jpg");
-            Properties.Settings.Default.Save();
             Change_theme_page();
         }
 
