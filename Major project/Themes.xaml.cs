@@ -51,7 +51,6 @@ namespace Major_project
             Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/orange.jpg");
             Properties.Settings.Default.Save();
             Change_theme_page();
-            Change_theme_page();
         }
 
         private void Text_colour1(object sender, RoutedEventArgs e)
