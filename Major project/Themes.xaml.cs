@@ -48,16 +48,10 @@ namespace Major_project
         {
             Properties.Settings.Default.Colour1 = "#00060f";
             Properties.Settings.Default.Colour2 = "#6edeff";
-            Change_theme_page();
-        }
-
-        private void Background3_clicked(object sender, RoutedEventArgs e)
-        {
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(@"C:\User Program Files\ccgs-10asd-2019\major-project-geet\Major project\images\orange.jpg")));
             Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/orange.jpg");
             Properties.Settings.Default.Save();
             Change_theme_page();
-            //(Application.Current.MainWindow as MainWindow).Change_colours();
+            Change_theme_page();
         }
 
         private void Text_colour1(object sender, RoutedEventArgs e)
