@@ -138,10 +138,5 @@ namespace Major_project
                 Application.Current.Shutdown();
             }
         }
-
-        private async void Register_click()
-        {
-
-        }
     }
 }
