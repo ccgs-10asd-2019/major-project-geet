@@ -81,12 +81,8 @@ namespace Major_project
             var brush1 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour1);
             var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
             var TextColourBrush = (Brush)converter.ConvertFromString(Properties.Settings.Default.TextColour);
-            Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
             Themes_title.Foreground = TextColourBrush;
-            Background_text.Foreground = TextColourBrush;
-            Text_font_text.Foreground = TextColourBrush;
-            Colour_scheme_text.Foreground = TextColourBrush;
             Properties.Settings.Default.Save();
 
         }
