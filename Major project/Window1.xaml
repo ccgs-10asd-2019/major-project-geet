@@ -1,0 +1,14 @@
+﻿<Window x:Name="Search_Users1" x:Class="Major_project.Search_Users"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Major_project"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="375.862">
+    <Grid x:Name="BackgroundGrid" Margin="0,0,-5,-0.5" Background="#FFE7520D">
+        <TextBox HorizontalAlignment="Left" Height="41" Margin="31,26,0,0" TextWrapping="Wrap" Text="Search for people here..." VerticalAlignment="Top" Width="314" BorderThickness="4" FontFamily="Dubai Medium" FontSize="20" BorderBrush="#FF19169E" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+        <ListBox HorizontalAlignment="Left" Height="308" Margin="31,93,0,0" VerticalAlignment="Top" Width="314" BorderBrush="#FF19169E" BorderThickness="4" Background="#FFCDFFFA"/>
+
+    </Grid>
+</Window>
