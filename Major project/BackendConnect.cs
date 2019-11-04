@@ -41,6 +41,7 @@ namespace Major_project
             public string Message { get; set; } 
             public long Current_time { get; set; }
             public string Username { get; set; }
+            public string Password { get; set; }
             public string File_id { get; set; }
             public string File_name { get; set; }
             public string Collab { get; set; }
