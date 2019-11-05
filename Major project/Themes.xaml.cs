@@ -69,7 +69,7 @@ namespace Major_project
 
         private void Text_colour3(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.TextColour = ("#ff0000");
+            Properties.Settings.Default.TextColour = ("#ffffff");
             Properties.Settings.Default.Save();
             Change_theme_page();
         }
