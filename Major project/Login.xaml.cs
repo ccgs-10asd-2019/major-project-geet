@@ -73,18 +73,53 @@ namespace Major_project
             Try_Login();
         }
 
+        private void Click_Register(object sender, RoutedEventArgs e)
+        {
+            Try_Register();
+        }
+
         private async void Try_Login()
         {
             if (CheckConnectionToServer())
             {
                 BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
                 {
-                    Username = text_username.Text
+                    Username = text_username.Text,
+                    Password = text_password.Password
                 };
                 string request = BackendConnect.server + "auth/login";
                 var content = await Backend.Post(data, request);
                 
                 if(content[0].Id != null)
+                {
+                    var user_id = content[0].Id;
+                    Properties.Settings.Default.id = Int32.Parse(user_id);
+                    Properties.Settings.Default.Save();
+                    mainWindow.LoggedIn();
+                    mainWindow.Show();
+                    dontclose = false;
+                    this.Close();
+                }
+                else
+                {
+                    login_error.Text = "Username or Password is wrong";
+                }
+            }
+        }
+
+        private async void Try_Register()
+        {
+            if (CheckConnectionToServer())
+            {
+                BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+                {
+                    Username = text_username.Text,
+                    Password = text_password.Password
+                };
+                string request = BackendConnect.server + "auth/Register";
+                var content = await Backend.Post(data, request);
+
+                if (content[0].Id != null)
                 {
                     var user_id = content[0].Id;
                     Properties.Settings.Default.id = Int32.Parse(user_id);
@@ -108,5 +143,7 @@ namespace Major_project
                 Application.Current.Shutdown();
             }
         }
+
+        
     }
 }

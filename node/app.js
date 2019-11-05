@@ -14,6 +14,7 @@ const { check } = require('express-validator');
 const tools = require('./components/tools')
 const path = require("path");
 const fs = require("fs");
+const crypto = require('crypto');
 
 //setup
 console.log("Time: " + new Date()) //log to console time of server start
@@ -35,7 +36,7 @@ app.get('/ping', (req, res) => {
 
 require('./components/messages')(app, tools, check, upload, path, fs);
 require('./components/chats')(app, tools);
-require('./components/users')(app, tools);
+require('./components/users')(app, tools, crypto);
 require('./components/collab')(app, tools);
 
 app.listen(port, () => console.log(`listening on port ${port}`));
