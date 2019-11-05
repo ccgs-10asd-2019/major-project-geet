@@ -130,5 +130,17 @@ namespace Major_project.Properties {
                 this["SearchOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NameChatOn {
+            get {
+                return ((bool)(this["NameChatOn"]));
+            }
+            set {
+                this["NameChatOn"] = value;
+            }
+        }
     }
 }

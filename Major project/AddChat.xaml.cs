@@ -31,5 +31,12 @@ namespace Major_project
             imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl));
             BackgroundGrid.Background = imgBrush;
         }
+
+        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox txtBox = sender as TextBox;
+            if (txtBox.Text == "Name your chat here...")
+                txtBox.Text = string.Empty;
+        }
     }
 }

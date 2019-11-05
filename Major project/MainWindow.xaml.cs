@@ -551,5 +551,14 @@
                 Search_Users1.Show();
             }
         }
+
+        private void Add_Chat_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.NameChatOn == false)
+            {
+                AddChat Add_chat1 = new AddChat();
+                Add_chat1.Show();
+            }
+        }
     }
 }
