@@ -118,5 +118,17 @@ namespace Major_project.Properties {
                 this["TextNum"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SearchOn {
+            get {
+                return ((bool)(this["SearchOn"]));
+            }
+            set {
+                this["SearchOn"] = value;
+            }
+        }
     }
 }

@@ -27,6 +27,7 @@ namespace Major_project
 
         private void SetUp()
         {
+            Properties.Settings.Default.SearchOn = true;
             var imgBrush = new ImageBrush();
             imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl));
             BackgroundGrid.Background = imgBrush;

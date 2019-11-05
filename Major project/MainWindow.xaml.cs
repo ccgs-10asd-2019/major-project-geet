@@ -72,6 +72,7 @@
         public void LoggedIn()
         {
             current_User.User_id = Properties.Settings.Default.id;
+            Properties.Settings.Default.SearchOn = false;
 
             var request = BackendConnect.server + "user/" + current_User.User_id.ToString();
             var Username = Backend.Get(request);
@@ -544,8 +545,11 @@
 
         private void Search_for_Users(object sender, RoutedEventArgs e)
         {
-            Search_Users Search_Users1 = new Search_Users();
-            Search_Users1.Show();
+            if (Properties.Settings.Default.SearchOn == false)
+            {
+                Search_Users Search_Users1 = new Search_Users();
+                Search_Users1.Show();
+            }
         }
     }
 }
