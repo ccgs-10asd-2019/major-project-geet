@@ -42,7 +42,7 @@ module.exports = function (app, tools, crypto) {
         //register a new user
 
         const username = req.body.Username
-        const pass = saltHashPassword(req.body.Password);
+        const pass = saltHashPassword(JSON.stringify(req.body.Password));
 
         if (!(username && pass)) {
             tools.return(res, {
