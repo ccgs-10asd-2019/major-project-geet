@@ -3,7 +3,9 @@ module.exports = function (app, tools, crypto) {
     app.get('/users/:chat_id', (req, res) => {
         //returns users in a chat
 
-        let sql = 'SELECT * FROM `' + req.params.chat_id + '`'
+        const chat_id = JSON.stringify(req.params.chat_id)
+
+        let sql = 'SELECT * FROM `' + chat_id + '`'
         console.log(sql)
 
         db.chat_users.all(sql, [], (err, rows) => {
@@ -18,7 +20,9 @@ module.exports = function (app, tools, crypto) {
     app.get('/user/:user_id', (req, res) => {
         //returns a username from a user_id
 
-        let sql = 'SELECT `username` FROM `users` WHERE "id"="' + req.params.user_id + '"'
+        const user_id = JSON.stringify(req.params.user_id)
+
+        let sql = 'SELECT `username` FROM `users` WHERE "id"="' + user_id + '"'
         console.log(sql)
 
         db.main.all(sql, [], (err, rows) => {
@@ -41,7 +45,7 @@ module.exports = function (app, tools, crypto) {
     app.post('/auth/register', (req, res) => {
         //register a new user
 
-        const username = req.body.Username
+        const username = JSON.stringify(req.body.Username)
         const pass = saltHashPassword(JSON.stringify(req.body.Password));
 
         if (!(username && pass)) {
@@ -75,8 +79,8 @@ module.exports = function (app, tools, crypto) {
     app.post('/auth/login', (req, res) => {
         //login
 
-        const username = req.body.Username
-        const password = req.body.Password
+        const username = JSON.stringify(req.body.Username)
+        const password = JSON.stringify(req.body.Password)
 
         if (!(username && password)) {
             tools.return(res, {
