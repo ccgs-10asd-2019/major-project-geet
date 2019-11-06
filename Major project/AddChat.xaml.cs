@@ -15,19 +15,19 @@ using System.Windows.Shapes;
 namespace Major_project
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for AddChat.xaml
     /// </summary>
-    public partial class Search_Users : Window
+    public partial class AddChat : Window
     {
-        public Search_Users()
+        public AddChat()
         {
             InitializeComponent();
-            SetUp();
+            StartUpAddChat();
         }
 
-        private void SetUp()
+        private void StartUpAddChat()
         {
-            Properties.Settings.Default.SearchOn = true;
+            Properties.Settings.Default.NameChatOn = true;
             var imgBrush = new ImageBrush();
             imgBrush.ImageSource = new BitmapImage(new Uri(Properties.Settings.Default.BackgroundUrl));
             BackgroundGrid.Background = imgBrush;
@@ -36,7 +36,7 @@ namespace Major_project
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            if (txtBox.Text == "Search for people here...")
+            if (txtBox.Text == "Name your chat here...")
                 txtBox.Text = string.Empty;
         }
     }

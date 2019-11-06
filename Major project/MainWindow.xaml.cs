@@ -72,6 +72,8 @@
         public void LoggedIn()
         {
             current_User.User_id = Properties.Settings.Default.id;
+            Properties.Settings.Default.SearchOn = false;
+            Properties.Settings.Default.NameChatOn = false;
 
             var request = BackendConnect.server + "user/" + current_User.User_id.ToString();
             var Username = Backend.Get(request);
@@ -544,8 +546,20 @@
 
         private void Search_for_Users(object sender, RoutedEventArgs e)
         {
-            Search_Users Search_Users1 = new Search_Users();
-            Search_Users1.Show();
+            if (Properties.Settings.Default.SearchOn == false)
+            {
+                Search_Users Search_Users1 = new Search_Users();
+                Search_Users1.Show();
+            }
+        }
+
+        private void Add_Chat_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.NameChatOn == false)
+            {
+                AddChat Add_chat1 = new AddChat();
+                Add_chat1.Show();
+            }
         }
     }
 }

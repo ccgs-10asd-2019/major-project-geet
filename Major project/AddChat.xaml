@@ -1,0 +1,13 @@
+﻿<Window x:Class="Major_project.AddChat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Major_project"
+        mc:Ignorable="d"
+        Title="AddChat" Height="119.166" Width="574.299">
+    <Grid x:Name="BackgroundGrid" HorizontalAlignment="Center" Width="574" Margin="0,0,-4.5,-1.5" VerticalAlignment="Center" Height="93">
+        <Button Content="Confirm" HorizontalAlignment="Center" Margin="462,22,9,21" VerticalAlignment="Center" Width="92" Height="50" BorderBrush="#FFF10E0E" BorderThickness="3" Background="#FFFFD841" FontSize="20" FontWeight="Bold"/>
+        <TextBox x:Name="NameChat" HorizontalAlignment="Center" Height="50" Margin="10,0,107,0" TextWrapping="Wrap" Text="Name your chat here..." VerticalAlignment="Center" Width="448" RenderTransformOrigin="0.5,0.574" BorderThickness="4" FontSize="30" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+    </Grid>
+</Window>
