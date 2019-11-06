@@ -29,7 +29,7 @@ namespace Major_project
         {
             InitializeComponent();
             mainWindow = window;
-            MoveTo1(Background1, -1200, 625);
+            MoveTo1(Background1, -858, 256);
         }
 
         public static void MoveTo1(Image target, double newX, double newY)
