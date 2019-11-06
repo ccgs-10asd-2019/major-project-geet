@@ -90,15 +90,22 @@ namespace Major_project
                 string request = BackendConnect.server + "auth/login";
                 var content = await Backend.Post(data, request);
                 
-                if(content[0].Id != null)
+                if(content != null)
                 {
-                    var user_id = content[0].Id;
-                    Properties.Settings.Default.id = Int32.Parse(user_id);
-                    Properties.Settings.Default.Save();
-                    mainWindow.LoggedIn();
-                    mainWindow.Show();
-                    dontclose = false;
-                    this.Close();
+                    if (content[0].Id != null)
+                    {
+                        var user_id = content[0].Id;
+                        Properties.Settings.Default.id = Int32.Parse(user_id);
+                        Properties.Settings.Default.Save();
+                        mainWindow.LoggedIn();
+                        mainWindow.Show();
+                        dontclose = false;
+                        this.Close();
+                    }
+                    else
+                    {
+                        login_error.Text = "Username or Password is wrong";
+                    }
                 }
                 else
                 {
@@ -119,15 +126,22 @@ namespace Major_project
                 string request = BackendConnect.server + "auth/Register";
                 var content = await Backend.Post(data, request);
 
-                if (content[0].Id != null)
+                if (content != null)
                 {
-                    var user_id = content[0].Id;
-                    Properties.Settings.Default.id = Int32.Parse(user_id);
-                    Properties.Settings.Default.Save();
-                    mainWindow.LoggedIn();
-                    mainWindow.Show();
-                    dontclose = false;
-                    this.Close();
+                    if (content[0].Id != null)
+                    {
+                        var user_id = content[0].Id;
+                        Properties.Settings.Default.id = Int32.Parse(user_id);
+                        Properties.Settings.Default.Save();
+                        mainWindow.LoggedIn();
+                        mainWindow.Show();
+                        dontclose = false;
+                        this.Close();
+                    }
+                    else
+                    {
+                        login_error.Text = "Username or Password is wrong";
+                    }
                 }
                 else
                 {

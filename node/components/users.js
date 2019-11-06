@@ -22,7 +22,7 @@ module.exports = function (app, tools, crypto) {
 
         const user_id = JSON.stringify(req.params.user_id)
 
-        let sql = 'SELECT `username` FROM `users` WHERE "id"="' + user_id + '"'
+        let sql = 'SELECT `username` FROM `users` WHERE "id"=' + user_id
         console.log(sql)
 
         db.main.all(sql, [], (err, rows) => {
@@ -45,7 +45,7 @@ module.exports = function (app, tools, crypto) {
     app.post('/auth/register', (req, res) => {
         //register a new user
 
-        const username = JSON.stringify(req.body.Username)
+        const username = req.body.Username
         const pass = saltHashPassword(JSON.stringify(req.body.Password));
 
         if (!(username && pass)) {
@@ -58,12 +58,13 @@ module.exports = function (app, tools, crypto) {
         let sql = 'INSERT INTO "main"."users" ("username", "password", "salt") VALUES (?, ?, ?)'
         console.log(sql)
         let params = [username, pass.password, pass.salt]
+        console.log(params)
         db.main.run(sql, params, function (err) {
             if (tools.no_err(err, req, res)) {
                 let user_id = this.lastID
 
                 //create table to store users chats
-                sql = 'CREATE TABLE "' + user_id + '" ( "chat" INTEGER UNIQUE )'
+                sql = 'CREATE TABLE `' + user_id + '` ( "chat" INTEGER UNIQUE )'
                 console.log(sql)
 
                 db.users_chats.run(sql, [], function (err) {
@@ -89,7 +90,7 @@ module.exports = function (app, tools, crypto) {
         }
 
         //get id of user
-        sql = 'SELECT * FROM `users` WHERE "username"="' + username + '"'
+        sql = 'SELECT * FROM `users` WHERE "username"=' + username
         console.log(sql)
         db.main.get(sql, [], (err, result) => {
             if (tools.no_err(err, req, res)) {
@@ -99,6 +100,8 @@ module.exports = function (app, tools, crypto) {
                     })
                 } else {
                     let sha = sha512(password, result.salt)
+                    console.log(sha)
+                    console.log(result)
                     if (sha.password === result.password) {
                         let id = result.id
                         tools.return(res, {id})

@@ -26,6 +26,7 @@ module.exports = {
         }
     },
     return: function (res, result) {
+        console.log(result)
         let content = "[" + JSON.stringify(result) + "]"
         res.send([{ "task": true, "content": content }]) 
     }

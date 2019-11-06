@@ -76,13 +76,21 @@
             Properties.Settings.Default.NameChatOn = false;
 
             var request = BackendConnect.server + "user/" + current_User.User_id.ToString();
-            var Username = Backend.Get(request);
+            var User = Backend.Get(request);
 
-            Username_TextBlock.Text = Username[0].Username;
+            if (User != null)
+            {
+                Username_TextBlock.Text = User[0].Username;
 
-            GetChats(current_User.User_id);
+                GetChats(current_User.User_id);
 
-            Change_themes();
+                Change_themes();
+            } else
+            {
+                Logout();
+            };
+
+            
         }
 
         /// <summary>
