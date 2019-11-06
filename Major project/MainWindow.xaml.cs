@@ -73,6 +73,7 @@
         {
             current_User.User_id = Properties.Settings.Default.id;
             Properties.Settings.Default.SearchOn = false;
+            Properties.Settings.Default.NameChatOn = false;
 
             var request = BackendConnect.server + "user/" + current_User.User_id.ToString();
             var Username = Backend.Get(request);
