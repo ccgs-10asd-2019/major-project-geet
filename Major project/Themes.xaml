@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Major_project"
         mc:Ignorable="d"
-        Title="Themes" Height="450" Width="400">
+        Title="Themes" Height="400" Width="350">
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,13 +17,11 @@
         <Rectangle x:Name="header_block" Fill="#FF6AC2FF" Height="66" Stroke="Black" Grid.ColumnSpan="2" StrokeThickness="3" VerticalAlignment="Top"/>
         <TextBlock x:Name="Themes_title" HorizontalAlignment="Left" Margin="38,10,0,0" TextWrapping="Wrap" Text="Themes" VerticalAlignment="Top" Height="46" Width="145" FontSize="36" FontFamily="Segoe UI Semibold"/>
 
-        <Button x:Name="Dark_Scheme" Content="Dark" HorizontalAlignment="Left" Margin="312,48.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="DarkScheme_click"/>
-        <Button x:Name="Colour3" Content="Blue + Black" HorizontalAlignment="Left" Margin="185,89,0,-19.5" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Colour3_click"/>
-        <Button x:Name="Blue_Red" Content="Blue + Red" HorizontalAlignment="Left" Margin="185,49,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="BlueRed_click"/>
+        <Button x:Name="Dark_Scheme" Content="Dark" HorizontalAlignment="Left" Margin="51,180,0,-117.5" Grid.Row="1" VerticalAlignment="Top" Width="91" Click="DarkScheme_click" Height="35"/>
+        <Button x:Name="Colour3" Content="Blue + Black" HorizontalAlignment="Left" Margin="51,114,0,-56.5" Grid.Row="1" VerticalAlignment="Top" Width="91" Click="Colour3_click" Height="35"/>
+        <Button x:Name="Blue_Red" Content="Blue + Red" HorizontalAlignment="Left" Margin="51,46,0,0" Grid.Row="1" VerticalAlignment="Top" Width="91" Click="BlueRed_click" Height="35"/>
 
-        <Button x:Name="Text3" Content="Button" HorizontalAlignment="Left" Margin="108,257,0,-186.5" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Text_colour3"/>
-
-        <Button Content="Exit" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="75" Height="47" Click="Exit_themes"/>
+        <Button Content="Exit" HorizontalAlignment="Right" Margin="0,10,10,25" VerticalAlignment="Center" Width="74" Height="33" Click="Exit_themes"/>
 
     </Grid>
 </Window>
