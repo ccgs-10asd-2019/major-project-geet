@@ -1,4 +1,4 @@
-module.exports = function(app, tools){
+module.exports = function (app, tools) {
 
     app.get('/info/:info/:chat_id', (req, res) => {
         //returns name of chat
@@ -7,32 +7,68 @@ module.exports = function(app, tools){
         console.log(sql)
 
         db.main.all(sql, [], (err, rows) => {
-            if (err) { res.send(err) }
-            else { res.send(rows) }
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(rows)
+            }
         })
     })
 
 
     app.get('/chats/:user_id', (req, res) => {
         //returns chats a user is in
-    
+
         let sql = 'SELECT * FROM `' + req.params.user_id + '`'
         console.log(sql)
-        
+
         db.users_chats.all(sql, [], (err, rows) => {
-            if (err) { res.send(err) } 
-            else { res.send(rows) }
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(rows)
+            }
         })
     })
 
     app.get('/icon/:chat_id', (req, res) => {
         //returns a chats icon
-        res.sendFile("server_data/" + req.params.chat_id + "/icon.png", { root: __dirname + '/../' })
+        res.sendFile("server_data/" + req.params.chat_id + "/icon.png", {
+            root: __dirname + '/../'
+        })
+    })
+
+    app.post('/chat/user/add', (req, res) => {
+
+        const chat_id = req.body.Chat_id
+        const user_id = req.body.User_id
+
+        sql = `INSERT INTO "` + chat_id + `"("user_id","time_joined","role") VALUES (?,?,?);`
+        console.log(sql)
+        params = [user_id, new Date(), 'user']
+        console.log(params)
+
+        db.chat_users.run(sql, params, function (err) {
+            tools.no_err(err, req, res)
+        })
+
+        //add chat to the user that created it chats list
+        sql = `INSERT INTO "` + user_id + `"("chat") VALUES (?)`
+        console.log(sql)
+        params = [chat_id]
+
+        db.users_chats.run(sql, params, function (err) {
+            tools.no_err(err, req, res)
+        })
+
+        tools.return(res, {
+            id: chat_id
+        })
     })
 
     app.post('/new/chat', (req, res) => {
         //create a new chat
-        
+
         var sql = ``
         var params = []
 
@@ -40,7 +76,9 @@ module.exports = function(app, tools){
         let user_id = req.body.User_id
 
         if (!(chat_name || user_id)) {
-            tools.return(res, { id: 0 })
+            tools.return(res, {
+                id: 0
+            })
         }
 
         //add the chat to the main database
@@ -48,8 +86,8 @@ module.exports = function(app, tools){
         console.log(sql)
         params = [chat_name]
 
-        db.main.run(sql, params, function(err){
-            if (tools.no_err(err, req, res)) { 
+        db.main.run(sql, params, function (err) {
+            if (tools.no_err(err, req, res)) {
 
                 chat_id = this.lastID
 
@@ -62,15 +100,17 @@ module.exports = function(app, tools){
                 )`
                 console.log(sql)
 
-                db.chat_users.run(sql, [], function(err){ 
-                    if (tools.no_err(err, req, res)) { 
+                db.chat_users.run(sql, [], function (err) {
+                    if (tools.no_err(err, req, res)) {
 
                         //add user to above table
                         sql = `INSERT INTO "` + chat_id + `"("user_id","time_joined","role") VALUES (?,?,?);`
                         console.log(sql)
                         params = [user_id, new Date(), 'owner']
 
-                        db.chat_users.run(sql, params, function(err){ tools.no_err(err, req, res) })
+                        db.chat_users.run(sql, params, function (err) {
+                            tools.no_err(err, req, res)
+                        })
                     }
                 })
 
@@ -88,16 +128,22 @@ module.exports = function(app, tools){
                 )`
                 console.log(sql)
 
-                db.chat.run(sql, [], function(err){ tools.no_err(err, req, res) })
+                db.chat.run(sql, [], function (err) {
+                    tools.no_err(err, req, res)
+                })
 
                 //add chat to the user that created it chats list
                 sql = `INSERT INTO "` + user_id + `"("chat") VALUES (?)`
                 console.log(sql)
                 params = [chat_id]
 
-                db.users_chats.run(sql, params, function(err){ tools.no_err(err, req, res) })
-                
-                tools.return(res, { id: chat_id })
+                db.users_chats.run(sql, params, function (err) {
+                    tools.no_err(err, req, res)
+                })
+
+                tools.return(res, {
+                    id: chat_id
+                })
 
             }
         });

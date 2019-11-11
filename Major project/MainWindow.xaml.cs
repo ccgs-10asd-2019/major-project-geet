@@ -476,16 +476,21 @@
         public void GetUsersInAChat()
         {
             String request = BackendConnect.server + "users/" + current_User.Chat_id.ToString();
+            Console.WriteLine(request);
             var content = Backend.Get(request);
 
-            for (int i = 0; i < content.Count; i++)
+            if (content != null)
             {
-                String user_request = BackendConnect.server + "user/" + content[i].User_id.ToString();
-                var ListUsers_Name = Backend.Get(user_request);
-                var Users_Name = ListUsers_Name[0].Username;
-                var Users_Role = content[i].Role;
-                Users_ListBox.Items.Add("[" + Users_Role + "] " + Users_Name);
+                for (int i = 0; i < content.Count; i++)
+                {
+                    String user_request = BackendConnect.server + "user/" + content[i].User_id.ToString();
+                    var ListUsers_Name = Backend.Get(user_request);
+                    var Users_Name = ListUsers_Name[0].Username;
+                    var Users_Role = content[i].Role;
+                    Users_ListBox.Items.Add("[" + Users_Role + "] " + Users_Name);
+                }
             }
+            
         }
 
         /// <summary>
@@ -557,7 +562,7 @@
         {
             if (current_User.Chat_id != 0)
             {
-                Search_Users Search_Users1 = new Search_Users();
+                Search_Users Search_Users1 = new Search_Users(current_User.Chat_id);
                 Search_Users1.Show();
             }
         }

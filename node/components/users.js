@@ -5,13 +5,31 @@ module.exports = function (app, tools, crypto) {
 
         const chat_id = JSON.stringify(req.params.chat_id)
 
-        let sql = 'SELECT * FROM ' + chat_id
+        let sql = 'SELECT `user_id`,`id` FROM ' + chat_id
         console.log(sql)
 
         db.chat_users.all(sql, [], (err, rows) => {
             if (err) {
                 res.send(err)
             } else {
+                res.send(rows)
+            }
+        })
+    })
+
+    app.get('/users/search/:user_id', (req, res) => {
+        //returns users in a chat
+
+        const user_id =  JSON.stringify(req.params.user_id)
+
+        let sql = 'SELECT `username`,`id` FROM `users` WHERE "username"=' + user_id
+        console.log(sql)
+
+        db.main.all(sql, [], (err, rows) => {
+            if (err) {
+                res.send(err)
+            } else {
+                console.log(rows)
                 res.send(rows)
             }
         })
