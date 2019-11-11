@@ -19,6 +19,9 @@ namespace Major_project
     /// </summary>
     public partial class AddChat : Window
     {
+
+        internal BackendConnect Backend = new BackendConnect();
+
         public AddChat()
         {
             InitializeComponent();
@@ -39,5 +42,24 @@ namespace Major_project
             if (txtBox.Text == "Name your chat here...")
                 txtBox.Text = string.Empty;
         }
+
+        private async void create_chat(object sender, RoutedEventArgs e)
+        {
+
+            var User_id = Properties.Settings.Default.id;
+
+            DateTime time = DateTime.UtcNow;
+            BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
+            {
+                User_id = User_id,
+                Chat_name = NameChat.Text,
+            };
+
+            String request = BackendConnect.server + "new/chat";
+
+            await Task.Run(async () => await Backend.Post(data, request));
+
+        }
     }
-}
+}   
+

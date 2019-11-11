@@ -554,10 +554,13 @@
 
         private void Search_for_Users(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.SearchOn == false)
+            if (current_User.Chat_id != 0)
             {
-                Search_Users Search_Users1 = new Search_Users();
-                Search_Users1.Show();
+                if (Properties.Settings.Default.SearchOn == false)
+                {
+                    Search_Users Search_Users1 = new Search_Users();
+                    Search_Users1.Show();
+                }
             }
         }
 

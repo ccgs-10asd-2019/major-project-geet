@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddChat" Height="119.166" Width="574.299">
     <Grid x:Name="BackgroundGrid" HorizontalAlignment="Center" Width="574" Margin="0,0,-4.5,-1.5" VerticalAlignment="Center" Height="93">
-        <Button Content="Confirm" HorizontalAlignment="Center" Margin="462,22,9,21" VerticalAlignment="Center" Width="92" Height="50" BorderBrush="#FFF10E0E" BorderThickness="3" Background="#FFFFD841" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Confirm" HorizontalAlignment="Center" Margin="462,22,9,21" VerticalAlignment="Center" Width="92" Height="50" BorderBrush="#FFF10E0E" BorderThickness="3" Background="#FFFFD841" FontSize="20" FontWeight="Bold" Click="create_chat"/>
         <TextBox x:Name="NameChat" HorizontalAlignment="Center" Height="50" Margin="10,0,107,0" TextWrapping="Wrap" Text="Name your chat here..." VerticalAlignment="Center" Width="448" RenderTransformOrigin="0.5,0.574" BorderThickness="4" FontSize="30" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
     </Grid>
 </Window>
