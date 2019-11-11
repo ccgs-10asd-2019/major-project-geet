@@ -158,6 +158,11 @@ namespace Major_project
             }
         }
 
-        
+        private void Username_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox txtBox = sender as TextBox;
+            if (txtBox.Text == "Enter Username Here...")
+                txtBox.Text = string.Empty;
+        }
     }
 }
