@@ -118,10 +118,26 @@ namespace Major_project
         {
             if (CheckConnectionToServer())
             {
+
+                var Username = text_username.Text;
+                var Password = text_password.Password;
+
+                if (Username == "" || Password == "")
+                {
+                    login_error.Text = "Please fill out both fields";
+                    return;
+                }
+
+                if (Password.Length < 6)
+                {
+                    login_error.Text = "Please Make your password more than 6 characters";
+                    return;
+                }
+
                 BackendConnect.Post_message_class data = new BackendConnect.Post_message_class()
                 {
-                    Username = text_username.Text,
-                    Password = text_password.Password
+                    Username = Username,
+                    Password = Password
                 };
                 string request = BackendConnect.server + "auth/Register";
                 var content = await Backend.Post(data, request);

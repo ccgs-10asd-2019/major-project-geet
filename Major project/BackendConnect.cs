@@ -45,6 +45,7 @@ namespace Major_project
             public string File_id { get; set; }
             public string File_name { get; set; }
             public string Collab { get; set; }
+            public string Chat_name { get; internal set; }
             //public List<string> Collab { get; set; }
             //public IEnumerable<string> Collab { get; set; }
         }
