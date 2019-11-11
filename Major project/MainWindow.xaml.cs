@@ -557,11 +557,8 @@
         {
             if (current_User.Chat_id != 0)
             {
-                if (Properties.Settings.Default.SearchOn == false)
-                {
-                    Search_Users Search_Users1 = new Search_Users();
-                    Search_Users1.Show();
-                }
+                Search_Users Search_Users1 = new Search_Users();
+                Search_Users1.Show();
             }
         }
 
