@@ -26,42 +26,31 @@ namespace Major_project
             Change_theme_page();
         }
 
-        private void Colour1_click(object sender, RoutedEventArgs e)
+        private void BlueRed_click(object sender, RoutedEventArgs e)
         {
-            ColourChange("#FF9900", "#3DD3E9", 1);
+            Properties.Settings.Default.Colour1 = "#813A47";
+            Properties.Settings.Default.Colour2 = "#172E64";
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/blue.jpg");
+            Properties.Settings.Default.Save();
+            Change_theme_page();
         }
 
-        private void Colour2_click(object sender, RoutedEventArgs e)
+        private void DarkScheme_click(object sender, RoutedEventArgs e)
         {
-            ColourChange("#00270d", "#00ff04", 2);
+            Properties.Settings.Default.Colour1 = "#1c1d1e";
+            Properties.Settings.Default.Colour2 = "#424445";
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/black.jpg");
+            Properties.Settings.Default.Save();
+            Change_theme_page();
         }
 
         private void Colour3_click(object sender, RoutedEventArgs e)
         {
-            ColourChange("#00060f", "#6edeff", 3);
-        }
-
-        public void ColourChange(string Colour1, string Colour2, int ColourNum)
-        {
-            Properties.Settings.Default.Colour1 = Colour1;
-            Properties.Settings.Default.Colour2 = Colour2;
-            Properties.Settings.Default.ColourNum = ColourNum;
+            Properties.Settings.Default.Colour1 = "#00060f";
+            Properties.Settings.Default.Colour2 = "#6edeff";
+            Properties.Settings.Default.BackgroundUrl = ("pack://application:,,,/Major project;component/images/orange.jpg");
+            Properties.Settings.Default.Save();
             Change_theme_page();
-        }
-
-        private void Background1_clicked(object sender, RoutedEventArgs e)
-        {
-            BackgroundChange("pack://application:,,,/Major project;component/images/blue.jpg", 1);
-        }
-
-        private void Background2_clicked(object sender, RoutedEventArgs e)
-        {
-            BackgroundChange("pack://application:,,,/Major project;component/images/Bluebackground1.jpg", 2);
-        }
-
-        private void Background3_clicked(object sender, RoutedEventArgs e)
-        {
-            BackgroundChange("pack://application:,,,/Major project;component/images/orange.jpg", 3);
         }
 
         private void BackgroundChange(string BackGroundUrl, int BackgroundNum)
@@ -111,12 +100,8 @@ namespace Major_project
             var brush1 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour1);
             var brush2 = (Brush)converter.ConvertFromString(Properties.Settings.Default.Colour2);
             var TextColourBrush = (Brush)converter.ConvertFromString(Properties.Settings.Default.TextColour);
-            Rectangle1.Fill = brush1;
             header_block.Fill = brush2;
             Themes_title.Foreground = TextColourBrush;
-            Background_text.Foreground = TextColourBrush;
-            Text_font_text.Foreground = TextColourBrush;
-            Colour_scheme_text.Foreground = TextColourBrush;
             Properties.Settings.Default.Save();
 
         }
