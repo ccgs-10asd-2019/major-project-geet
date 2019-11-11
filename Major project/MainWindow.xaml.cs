@@ -135,6 +135,7 @@
         /// <param name="id">The id<see cref="int"/></param>
         public void GetChats(int id)
         {
+            Chats_ListBox.Items.Clear();
             string request = BackendConnect.server + "chats/" + id.ToString();
             Console.WriteLine(request);
             var content = Backend.Get(request);
@@ -568,8 +569,9 @@
         {
             if (Properties.Settings.Default.NameChatOn == false)
             {
-                AddChat Add_chat1 = new AddChat();
+                AddChat Add_chat1 = new AddChat(this);
                 Add_chat1.Show();
+                //this.Hide();
             }
         }
     }
