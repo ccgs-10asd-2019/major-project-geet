@@ -103,7 +103,7 @@ namespace Major_project
             header_block.Fill = brush2;
             Themes_title.Foreground = TextColourBrush;
             Properties.Settings.Default.Save();
-
+            Properties.Settings.Default.TextColour = ("#ffffff");
         }
 
         private void Exit_themes(object sender, RoutedEventArgs e)
