@@ -36,8 +36,12 @@ module.exports = function(app, tools){
         var sql = ``
         var params = []
 
-        let chat_name = req.body.chat_name
-        let user_id = req.body.user_id
+        let chat_name = req.body.Chat_name
+        let user_id = req.body.User_id
+
+        if (!(chat_name || user_id)) {
+            tools.return(res, { id: 0 })
+        }
 
         //add the chat to the main database
         sql = `INSERT INTO "chats"("name") VALUES (?)`

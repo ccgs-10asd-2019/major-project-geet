@@ -21,11 +21,13 @@ namespace Major_project
     {
 
         internal BackendConnect Backend = new BackendConnect();
+        MainWindow mainWindow;
 
-        public AddChat()
+        public AddChat(MainWindow window)
         {
             InitializeComponent();
             StartUpAddChat();
+            mainWindow = window;
         }
 
         private void StartUpAddChat()
@@ -59,7 +61,11 @@ namespace Major_project
 
             await Task.Run(async () => await Backend.Post(data, request));
 
+            this.Close();
+            mainWindow.GetChats(User_id);
         }
+
     }
+    
 }   
 

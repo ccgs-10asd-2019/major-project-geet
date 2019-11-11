@@ -5,7 +5,7 @@ module.exports = function (app, tools, crypto) {
 
         const chat_id = JSON.stringify(req.params.chat_id)
 
-        let sql = 'SELECT * FROM `' + chat_id + '`'
+        let sql = 'SELECT * FROM ' + chat_id
         console.log(sql)
 
         db.chat_users.all(sql, [], (err, rows) => {
